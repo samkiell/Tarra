@@ -33,39 +33,39 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
   return (
     <div className="w-full">
       <div className="mb-8 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-stone-900">Waitlist Master List</h1>
-        <div className="text-sm text-stone-500">
-          Total Users: <span className="font-bold text-stone-900">{users.length}</span>
+        <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
+        <div className="text-sm text-stone-500 dark:text-stone-400">
+          Total Users: <span className="font-bold text-stone-900 dark:text-stone-100 transition-colors">{users.length}</span>
         </div>
       </div>
 
-      <div className="border border-stone-200 rounded-lg overflow-hidden bg-white shadow-sm">
+      <div className="border border-stone-200 dark:border-stone-800 rounded-lg overflow-hidden bg-white dark:bg-stone-900 shadow-sm transition-colors">
         <table className="w-full text-left">
-          <thead className="bg-stone-50 border-b border-stone-200">
+          <thead className="bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800">
             <tr>
-              <th className="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">User</th>
-              <th className="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider">Contact</th>
-              <th className="px-6 py-4 text-xs font-bold text-stone-500 uppercase tracking-wider text-right">Referral Count</th>
+              <th className="px-6 py-4 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider transition-colors">User</th>
+              <th className="px-6 py-4 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider transition-colors">Contact</th>
+              <th className="px-6 py-4 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider text-right transition-colors">Referral Count</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-stone-100">
+          <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
             {users.map((user) => (
-              <tr key={user.id} className="hover:bg-stone-50 transition-colors">
+              <tr key={user.id} className="hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors">
                 <td className="px-6 py-4">
-                  <div className="text-sm font-bold text-stone-900">{user.full_name}</div>
-                  <div className="text-xs text-stone-400 font-mono">{user.id}</div>
+                  <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors">{user.full_name}</div>
+                  <div className="text-xs text-stone-400 dark:text-stone-500 font-mono transition-colors">{user.id}</div>
                 </td>
                 <td className="px-6 py-4">
-                  <div className="text-sm text-stone-600">{user.email}</div>
-                  <div className="text-sm text-stone-500">{user.phone_number}</div>
+                  <div className="text-sm text-stone-600 dark:text-stone-300 transition-colors">{user.email}</div>
+                  <div className="text-sm text-stone-500 dark:text-stone-400 transition-colors">{user.phone_number}</div>
                 </td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-6 py-4 text-right transition-colors">
                   <button
                     onClick={() => setSelectedUser(user)}
                     className={`inline-flex items-center px-3 py-1 rounded text-sm font-bold transition-all ${
                       user.referral_count > 0 
-                        ? "bg-stone-900 text-white hover:bg-stone-800 underline decoration-stone-500 underline-offset-4" 
-                        : "bg-stone-100 text-stone-400 cursor-default"
+                        ? "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-white underline decoration-stone-500 underline-offset-4" 
+                        : "bg-stone-100 dark:bg-stone-800 text-stone-400 dark:text-stone-500 cursor-default"
                     }`}
                     disabled={user.referral_count === 0}
                   >

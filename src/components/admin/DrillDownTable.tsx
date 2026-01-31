@@ -25,35 +25,35 @@ interface DrillDownTableProps {
  */
 const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col">
-        <div className="px-6 py-4 border-b border-stone-200 flex justify-between items-center bg-stone-50">
-          <h2 className="text-lg font-bold text-stone-900">
+    <div className="fixed inset-0 bg-stone-900/60 dark:bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all">
+      <div className="bg-white dark:bg-stone-900 rounded-lg shadow-xl w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col border border-stone-200 dark:border-stone-800 transition-colors">
+        <div className="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-stone-50 dark:bg-stone-800/30 transition-colors">
+          <h2 className="text-lg font-bold text-stone-900 dark:text-stone-50">
             Referrals for {referrerName}
           </h2>
           <button 
             onClick={onClose}
-            className="text-stone-400 hover:text-stone-900 font-bold"
+            className="text-stone-400 hover:text-stone-900 dark:hover:text-stone-200 font-bold transition-colors"
           >
             ✕ Close
           </button>
         </div>
         
-        <div className="overflow-auto p-6">
+        <div className="overflow-auto p-6 scrollbar-thin scrollbar-thumb-stone-200 dark:scrollbar-thumb-stone-800">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b-2 border-stone-100">
-                <th className="py-2 text-xs font-bold text-stone-500 uppercase">First Name</th>
-                <th className="py-2 text-xs font-bold text-stone-500 uppercase">Phone Number</th>
-                <th className="py-2 text-xs font-bold text-stone-500 uppercase text-right">Date Referred</th>
+              <tr className="border-b-2 border-stone-100 dark:border-stone-800">
+                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase transition-colors">First Name</th>
+                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase transition-colors">Phone Number</th>
+                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase text-right transition-colors">Date Referred</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-stone-50 dark:divide-stone-800">
               {referrals.map((ref, idx) => (
-                <tr key={idx} className="border-b border-stone-50 hover:bg-stone-50/50">
-                  <td className="py-3 text-sm">{ref.first_name}</td>
-                  <td className="py-3 text-sm font-mono">{ref.phone_number}</td>
-                  <td className="py-3 text-sm text-right text-stone-500">
+                <tr key={idx} className="hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors">
+                  <td className="py-3 text-sm text-stone-900 dark:text-stone-200">{ref.first_name}</td>
+                  <td className="py-3 text-sm font-mono text-stone-900 dark:text-stone-300">{ref.phone_number}</td>
+                  <td className="py-3 text-sm text-right text-stone-500 dark:text-stone-500">
                     {new Date(ref.created_at).toLocaleString()}
                   </td>
                 </tr>
