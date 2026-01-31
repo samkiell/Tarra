@@ -45,7 +45,7 @@ export default async function StatusPage({
   const referralUrl = `${baseUrl}?ref=${user.id}`;
 
   return (
-    <main className="min-h-screen bg-white text-stone-900 px-6 py-12 flex flex-col items-center">
+    <main className="min-h-screen bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 px-6 py-12 flex flex-col items-center transition-colors duration-300">
       <div className="w-full max-w-2xl">
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
@@ -53,7 +53,7 @@ export default async function StatusPage({
             <h1 className="text-2xl font-bold tracking-tight mb-2">
               Hello {firstName}
             </h1>
-            <div className="inline-flex items-center px-2 py-1 bg-stone-100 text-stone-600 text-xs font-bold uppercase tracking-wider rounded border border-stone-200">
+            <div className="inline-flex items-center px-2 py-1 bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-400 text-xs font-bold uppercase tracking-wider rounded border border-stone-200 dark:border-stone-800 transition-colors">
               Verified Student
             </div>
           </div>
@@ -62,8 +62,8 @@ export default async function StatusPage({
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="p-6 border border-stone-200 rounded-lg">
-            <h3 className="text-sm font-medium text-stone-500 mb-1">Referral Count</h3>
+          <div className="p-6 border border-stone-200 dark:border-stone-800 rounded-lg bg-stone-50 dark:bg-stone-900/50 transition-colors">
+            <h3 className="text-sm font-medium text-stone-500 dark:text-stone-400 mb-1">Referral Count</h3>
             <p className="text-3xl font-bold">You have referred {referralCount} people.</p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default async function StatusPage({
         <section className="mb-16">
           <h2 className="text-lg font-semibold mb-4">Your Referral Link</h2>
           <CopyLinkButton referralUrl={referralUrl} />
-          <p className="mt-3 text-sm text-stone-500">
+          <p className="mt-3 text-sm text-stone-500 dark:text-stone-400 transition-colors">
             Share this link to move up the leaderboard and win ₦50,000.
           </p>
         </section>
