@@ -52,26 +52,24 @@
 
 @layer base {
   body {
-    @apply antialiased min-h-screen transition-colors duration-500 bg-grid-pattern;
+    @apply antialiased min-h-screen transition-colors duration-300;
     color: var(--foreground);
     background-color: var(--background);
   }
 }
 
 @layer utilities {
-  /* Subtle Geometric Background Pattern */
+  /* Extremely Subtle Grid */
   .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-400) 1px, transparent 1.2px);
-    background-size: 32px 32px;
+    background-image: radial-gradient(circle, var(--stone-200) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
   
   .dark .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-700) 1px, transparent 1.2px);
+    background-image: radial-gradient(circle, var(--stone-900) 1px, transparent 1px);
   }
 
   .bg-mesh-gradient {
-    background-image: 
-      radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.08) 0px, transparent 50%);
+    background: none;
   }
 }

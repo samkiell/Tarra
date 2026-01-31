@@ -107,7 +107,7 @@ const WaitlistForm: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white dark:bg-stone-900/50 backdrop-blur-sm border border-stone-200 dark:border-stone-800 rounded-2xl p-8 shadow-xl transition-all duration-300">
+    <div className="w-full max-w-md bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 shadow-sm transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Full Name</label>
@@ -163,8 +163,8 @@ const WaitlistForm: React.FC = () => {
                 onClick={() => handleInterestChange(interest)}
                   className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
                     formData.interests.includes(interest)
-                      ? "bg-primary border-primary text-white shadow-sm shadow-primary/20"
-                      : "bg-stone-50 dark:bg-stone-950 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-primary/50"
+                      ? "bg-primary border-primary text-white"
+                      : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-primary/50"
                   }`}
               >
                 {interest}
@@ -176,7 +176,7 @@ const WaitlistForm: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-primary text-white font-black rounded-lg hover:brightness-110 active:scale-[0.98] disabled:opacity-50 transition-all shadow-lg shadow-primary/10"
+            className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-sm"
           >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>

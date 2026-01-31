@@ -12,22 +12,19 @@ import WaitlistForm from "./WaitlistForm";
  */
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden transition-colors">
-      {/* Mesh gradient for depth */}
-      <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-30 pointer-events-none" />
-
+    <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden border-b border-stone-100 dark:border-stone-900 transition-colors">
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-8 w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 transition-all hover:scale-105">
+            <div className="mb-6 w-12 h-12 bg-primary rounded-lg flex items-center justify-center transition-all">
               <Rocket className="w-6 h-6 text-white" />
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 transition-colors">
+            <h1 className="text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 tracking-tight transition-colors">
               Everything You Need. All in One Place.
             </h1>
 
-            <p className="text-xl text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">
+            <p className="text-lg text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
@@ -35,8 +32,8 @@ const Hero: React.FC = () => {
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
-            <div className="flex items-center gap-3 py-3 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-full text-stone-500 dark:text-stone-400 text-sm font-medium transition-colors">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
+              <span className="w-2 h-2 rounded-full bg-primary" />
               Over 2,000 students joined this week
             </div>
           </div>
