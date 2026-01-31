@@ -1,14 +1,15 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 // Interface defining the Waitlist document structure
-// Meaningful comment: Captures contact information and user interests for the pre-launch phase
+// Meaningful comment: Captures verified student identity and contact for the OAU campus commerce ecosystem
 export interface IWaitlist extends Document {
-  id: string; // Strategic unique identifier, often used for external lookups
-  full_name: string; // User's provided legal or preferred name
-  email: string; // Primary contact address, must be unique and valid
-  interests: string[]; // List of platform features or categories the user is interested in
-  referred_by: string | null; // Optional ID or name of the referring entity
-  created_at: Date; // Timestamp of the initial registration
+  id: string; // Unique system-generated identifier
+  full_name: string; 
+  email: string; // Must be a valid OAU student email
+  phone_number: string; // Must be a valid 11-digit Nigerian mobile number
+  interests: string[]; 
+  referred_by: string | null; 
+  created_at: Date; 
 }
 
 const WaitlistSchema: Schema = new Schema<IWaitlist>(
@@ -27,10 +28,19 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
     email: {
       type: String,
       required: [true, "Email address is required"],
-      unique: true,
+      unique: true, // Database-level constraint to prevent multiple signups from the same student
       lowercase: true,
       trim: true,
-      match: [/^\S+@\S+\.\S+$/, "Please provide a valid email address"],
+      // Meaningful comment: Restricts entry to official OAU student accounts as per project mandate
+      match: [/@student\.oauife\.edu\.ng$/, "Please use your official @student.oauife.edu.ng email"],
+    },
+    phone_number: {
+      type: String,
+      required: [true, "Phone number is required"],
+      unique: true, // Database-level constraint to prevent identity duplication
+      trim: true,
+      // Meaningful comment: Enforces valid Nigerian mobile format starting with approved prefixes (080, 081, 090, 070)
+      match: [/^(080|081|090|070)\d{8}$/, "Please provide a valid 11-digit Nigerian phone number"],
     },
     interests: {
       type: [String],
@@ -42,7 +52,7 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
     },
   },
   {
-    // Meaningful comment: Automates the management of creation and update timestamps
+    // Meaningful comment: Automates registration timestamping for conversion auditing
     timestamps: { createdAt: "created_at", updatedAt: false },
     versionKey: false,
   }
