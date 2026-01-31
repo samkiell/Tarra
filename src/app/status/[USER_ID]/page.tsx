@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
@@ -45,7 +45,15 @@ export default async function StatusPage({
   const referralCount = await Waitlist.countDocuments({ referred_by: USER_ID });
 
   const firstName = user.full_name.split(" ")[0];
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.ng";
+  
+  // Dynamic host detection for production robustness
+  const headerList = await headers();
+  const host = headerList.get("host");
+  const protocol = host?.includes("localhost") ? "http" : "https";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL && !process.env.NEXT_PUBLIC_BASE_URL.includes("localhost")
+    ? process.env.NEXT_PUBLIC_BASE_URL 
+    : `${protocol}://${host}`;
+    
   const referralUrl = `${baseUrl}?ref=${user.id}`;
 
   return (

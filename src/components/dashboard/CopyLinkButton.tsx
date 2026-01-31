@@ -35,13 +35,13 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row gap-2 w-full max-w-md">
-      <div className="flex-grow px-3 py-2 bg-stone-50 border border-stone-200 rounded text-stone-600 text-sm truncate font-mono">
+    <div className="flex flex-col sm:flex-row gap-2 w-full max-w-lg">
+      <div className="flex-grow px-4 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-600 dark:text-stone-300 text-sm truncate font-mono transition-colors">
         {referralUrl}
       </div>
       <button
         onClick={handleCopy}
-        className="px-4 py-2 bg-stone-900 text-white text-sm font-semibold rounded hover:bg-stone-800 transition-colors whitespace-nowrap flex items-center justify-center gap-2"
+        className="px-6 py-3 bg-primary text-white text-sm font-black rounded-lg hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary/10 whitespace-nowrap flex items-center justify-center gap-2"
       >
         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         {copied ? "Copied!" : "Copy Link"}
