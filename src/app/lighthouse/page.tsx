@@ -7,8 +7,10 @@ import { Footer } from "@/components/Footer";
 
 export const dynamic = "force-dynamic";
 
+import LogoutButton from "@/components/dashboard/LogoutButton";
+
 /**
- * Lighthouse Audit Page
+ * Admin Panel Page
  * 
  * Logic:
  * 1. Gateway: Checks for a valid "lighthouse_session" cookie.
@@ -61,17 +63,20 @@ export default async function LighthousePage() {
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-stone-950 py-12 px-6 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-10">
+        <div className="flex justify-between items-center mb-10 overflow-x-auto gap-4">
           <div>
-            <h1 className="text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase">
-              Lighthouse Audit
+            <h1 className="text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase whitespace-nowrap">
+              Admin Panel
             </h1>
-            <p className="text-stone-500 dark:text-stone-400 font-medium">
+            <p className="text-stone-500 dark:text-stone-400 font-medium whitespace-nowrap">
               Real-time Waitlist & Referral Monitoring
             </p>
           </div>
-          <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-black rounded-full border border-green-200 dark:border-green-800">
-            SECURE ACCESS ACTIVE
+          <div className="flex items-center gap-6">
+            <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-black rounded-full border border-green-200 dark:border-green-800 whitespace-nowrap">
+              TARRA ADMIN
+            </div>
+            <LogoutButton />
           </div>
         </div>
         
