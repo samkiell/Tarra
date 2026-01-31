@@ -4,6 +4,7 @@ import Leaderboard from "@/components/Leaderboard";
 import StatusCheck from "@/components/StatusCheck";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 /**
  * Tarra Landing Page
@@ -20,20 +21,7 @@ import { Footer } from "@/components/Footer";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar Placeholder */}
-      <nav className="border-b border-stone-100 dark:border-stone-800 py-4 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="text-xl font-black tracking-tighter text-stone-900 dark:text-stone-50">
-            TARRA
-          </div>
-          <div className="flex items-center gap-6">
-            <div className="hidden sm:block text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest">
-              OAU Edition
-            </div>
-            <ThemeSwitcher />
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Main Content Sections */}
       <main className="flex-grow">

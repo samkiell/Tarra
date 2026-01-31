@@ -6,6 +6,7 @@ import LogoutButton from "@/components/dashboard/LogoutButton";
 import CopyLinkButton from "@/components/dashboard/CopyLinkButton";
 import Leaderboard from "@/components/Leaderboard";
 import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 /**
  * User Dashboard Page (Status)
@@ -46,7 +47,9 @@ export default async function StatusPage({
   const referralUrl = `${baseUrl}?ref=${user.id}`;
 
   return (
-    <main className="min-h-screen bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 px-6 py-12 flex flex-col items-center transition-colors duration-300">
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 px-6 py-12 flex flex-col items-center transition-colors duration-300">
       <div className="w-full max-w-2xl">
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
@@ -81,12 +84,10 @@ export default async function StatusPage({
         {/* Leaderboard Section */}
         <section>
           <h2 className="text-lg font-semibold mb-6">Top 10 recruiters</h2>
-          <Leaderboard />
-        </section>
-      </div>
-      <div className="w-full mt-auto">
-        <Footer />
+          </section>
       </div>
     </main>
+    <Footer />
+</div>
   );
 }
