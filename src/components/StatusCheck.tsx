@@ -71,6 +71,12 @@ const StatusCheck: React.FC = () => {
 
   return (
     <div className="w-full max-w-sm mx-auto mt-8 text-center">
+      {/* 
+        Symmetry & Trust:
+        By using the exact same input geometry (h-11, rounded-lg) and focus behavior (teal ring)
+        as the registration form, we build a "system mental model" for the student.
+        Predictable UI components reduce user anxiety during recovery actions.
+      */}
       <h3 className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>
@@ -79,14 +85,14 @@ const StatusCheck: React.FC = () => {
           type="tel"
           required
           placeholder="Phone Number"
-          className="flex-grow px-4 py-2 text-sm border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+          className="flex-grow h-11 px-4 text-sm border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-900/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-400"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-primary text-white text-sm font-bold rounded hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all"
+          className="h-11 px-6 bg-primary text-white text-sm font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center"
         >
           {loading ? "..." : "Check"}
         </button>
