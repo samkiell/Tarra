@@ -18,6 +18,7 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from "react-hot-toast";
+import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
   children,
@@ -25,10 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased min-h-screen bg-white text-stone-900 selection:bg-stone-100">
-        {children}
-        <Toaster position="bottom-right" />
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased min-h-screen bg-white text-stone-900 dark:text-stone-50 selection:bg-stone-100 dark:selection:bg-stone-800 transition-colors duration-300">
+        <Providers>
+          {children}
+          <Toaster position="bottom-right" />
+        </Providers>
       </body>
     </html>
   );
