@@ -13,9 +13,25 @@ import { toast } from "react-hot-toast";
  * 2. Collects the ADMIN_PIN from the user.
  * 3. Appends the PIN to the URL as a query parameter to trigger server-side re-render.
  */
-const PinGate: React.FC = () => {
+interface PinGateProps {
+  error?: boolean;
+}
+
+const PinGate: React.FC<PinGateProps> = ({ error }) => {
   const [pin, setPin] = useState("");
   const router = useRouter();
+
+  React.useEffect(() => {
+    if (error) {
+      toast.error("Invalid Access PIN", {
+        style: {
+          borderRadius: '10px',
+          background: '#1c1917',
+          color: '#fff',
+        },
+      });
+    }
+  }, [error]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

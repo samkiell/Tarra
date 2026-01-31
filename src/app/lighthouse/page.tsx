@@ -24,7 +24,7 @@ export default async function LighthousePage({
   // Decision: If PIN doesn't match, show the entry gate instead of redirecting.
   // This creates a dedicated "locked" experience.
   if (!ADMIN_PIN || pin !== ADMIN_PIN) {
-    return <PinGate />;
+    return <PinGate error={!!pin} />;
   }
 
   await dbConnect();
