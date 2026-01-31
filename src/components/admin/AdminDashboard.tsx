@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { Download } from "lucide-react";
 import DrillDownTable from "./DrillDownTable";
 
 interface AdminUser {
@@ -31,12 +32,37 @@ interface AdminDashboardProps {
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
 
+  const handleExportCSV = () => {
+    const headers = ["ID,Full Name,Email,Phone Number,Referral Code,Referral Count"];
+    const rows = users.map(user => 
+      `"${user.id}","${user.full_name}","${user.email}","${user.phone_number}","${user.referral_code}",${user.referral_count}`
+    );
+    const csvContent = [headers, ...rows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `tarra_waitlist_${new Date().toISOString().split("T")[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="w-full">
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
-        <div className="text-sm text-stone-500 dark:text-stone-400">
-          Total Users: <span className="font-bold text-stone-900 dark:text-stone-100 transition-colors">{users.length}</span>
+        <div className="flex items-center gap-4">
+          <div className="text-sm text-stone-500 dark:text-stone-400">
+            Total Users: <span className="font-bold text-stone-900 dark:text-stone-100 transition-colors">{users.length}</span>
+          </div>
+          <button
+            onClick={handleExportCSV}
+            className="flex items-center gap-2 px-3 py-1.5 bg-stone-900 dark:bg-stone-50 text-stone-50 dark:text-stone-900 text-xs font-bold uppercase tracking-wider rounded border border-transparent hover:opacity-90 transition-all"
+          >
+            <Download className="w-3 h-3" />
+            Export CSV
+          </button>
         </div>
       </div>
 
