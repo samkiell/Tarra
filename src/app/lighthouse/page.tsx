@@ -66,15 +66,15 @@ export default async function LighthousePage() {
         <div className="flex justify-between items-center mb-10 overflow-x-auto gap-4">
           <div>
             <h1 className="text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase whitespace-nowrap">
-              Admin Panel
+              Tarra Admin
             </h1>
             <p className="text-stone-500 dark:text-stone-400 font-medium whitespace-nowrap">
               Real-time Waitlist & Referral Monitoring
             </p>
           </div>
           <div className="flex items-center gap-6">
-            <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-black rounded-full border border-green-200 dark:border-green-800 whitespace-nowrap">
-              TARRA ADMIN
+            <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-black rounded-full border border-green-200 dark:border-green-800 whitespace-nowrap uppercase">
+              Admin Panel
             </div>
             <LogoutButton />
           </div>
