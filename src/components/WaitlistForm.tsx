@@ -164,7 +164,7 @@ const WaitlistForm: React.FC = () => {
                   className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
                     formData.interests.includes(interest)
                       ? "bg-primary border-primary text-white shadow-sm shadow-primary/20"
-                      : "bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-primary/50"
+                      : "bg-stone-50 dark:bg-stone-950 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-primary/50"
                   }`}
               >
                 {interest}
