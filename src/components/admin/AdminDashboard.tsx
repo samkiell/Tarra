@@ -61,7 +61,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-xs font-semibold text-stone-600 dark:text-stone-300 transition-colors truncate max-w-[150px]">{user.email}</div>
+                    <div className="text-xs font-semibold text-stone-600 dark:text-stone-300 transition-colors whitespace-nowrap">{user.email}</div>
                     <div className="text-xs text-stone-400 dark:text-stone-500 transition-colors mt-0.5">{user.phone_number}</div>
                   </td>
                   <td className="px-6 py-4 text-right transition-colors">
