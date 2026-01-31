@@ -110,7 +110,7 @@ const WaitlistForm: React.FC = () => {
     <div className="w-full max-w-md bg-white dark:bg-stone-900/50 backdrop-blur-sm border border-stone-200 dark:border-stone-800 rounded-2xl p-8 shadow-xl transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-1 transition-colors">Full Name</label>
+          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Full Name</label>
           <input
             type="text"
             required
@@ -122,7 +122,7 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-1 transition-colors">Campus Email</label>
+          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Campus Email</label>
           <input
             type="email"
             required
@@ -140,7 +140,7 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-1 transition-colors">Phone Number</label>
+          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Phone Number</label>
           <input
             type="tel"
             required

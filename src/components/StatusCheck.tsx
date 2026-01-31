@@ -71,7 +71,7 @@ const StatusCheck: React.FC = () => {
 
   return (
     <div className="w-full max-w-sm mx-auto mt-8 text-center">
-      <h3 className="text-sm font-semibold text-stone-500 dark:text-stone-400 mb-4 uppercase tracking-widest transition-colors">
+      <h3 className="text-sm font-black text-stone-500 dark:text-stone-300 mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>
       <form onSubmit={handleSubmit} className="flex gap-2">

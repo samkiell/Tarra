@@ -59,7 +59,7 @@ const Leaderboard: React.FC = async () => {
           {data.length > 0 ? (
             data.map((item, index) => (
               <tr key={item._id as string}>
-                <td className="px-4 py-4 text-sm text-stone-500 dark:text-stone-500">#{index + 1}</td>
+                <td className="px-4 py-4 text-sm text-stone-500 dark:text-stone-400">#{index + 1}</td>
                 <td className="px-4 py-4 text-sm font-medium text-stone-900 dark:text-stone-100">{item.firstName}</td>
                 <td className="px-4 py-4 text-sm text-primary font-black text-right">{item.count}</td>
               </tr>
