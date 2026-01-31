@@ -88,7 +88,7 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
             <input
               type="password"
               autoFocus
-              className="w-full h-14 px-4 bg-stone-50 dark:bg-stone-900/50 border border-stone-200 dark:border-stone-800 rounded-lg text-center text-2xl tracking-[0.5em] font-bold text-stone-900 dark:text-stone-50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-300"
+              className="w-full h-14 px-4 bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-lg text-center text-2xl tracking-[0.5em] font-bold text-stone-900 dark:text-stone-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-300"
               placeholder="••••"
               value={pin}
               onChange={(e) => setPin(e.target.value)}

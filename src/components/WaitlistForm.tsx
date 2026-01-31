@@ -120,7 +120,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="text"
             required
-            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-900/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-400"
+            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
             placeholder="Samkiel Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
@@ -132,7 +132,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="email"
             required
-            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-900/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-400"
+            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
             placeholder="user@student.oauife.edu.ng"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -150,7 +150,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="tel"
             required
-            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-900/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-400"
+            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
             placeholder="08012345678"
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}

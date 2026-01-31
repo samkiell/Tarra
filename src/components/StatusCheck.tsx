@@ -85,7 +85,7 @@ const StatusCheck: React.FC = () => {
           type="tel"
           required
           placeholder="Phone Number"
-          className="flex-grow h-11 px-4 text-sm border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-50 bg-stone-50 dark:bg-stone-900/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-stone-400"
+          className="flex-grow h-11 px-4 text-sm border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
