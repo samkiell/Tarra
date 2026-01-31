@@ -4,6 +4,8 @@ import AdminDashboard from "@/components/admin/AdminDashboard";
 import PinGate from "@/components/admin/PinGate";
 import { Footer } from "@/components/Footer";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Lighthouse Audit Page
  * 

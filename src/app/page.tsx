@@ -6,6 +6,8 @@ import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
+export const dynamic = "force-dynamic";
+
 /**
  * Tarra Landing Page
  * 

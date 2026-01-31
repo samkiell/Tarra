@@ -8,6 +8,8 @@ import Leaderboard from "@/components/Leaderboard";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
+export const dynamic = "force-dynamic";
+
 /**
  * User Dashboard Page (Status)
  * 
