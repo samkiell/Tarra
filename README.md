@@ -1,6 +1,9 @@
 # Tarra Waitlist & Referral Engine
 
-Tarra is a centralized commerce platform for the Obafemi Awolowo University (OAU) community. This repository contains the waitlist system designed to capture student intent, manage a ₦50,000 referral contest, and enforce identity verification through official campus email domains and Nigerian phone number validation.
+Tarra is a centralized commerce platform for the Obafemi Awolowo University (OAU) community. This project implements the waitlist system designed to capture student intent, manage a ₦50,000 referral contest, and enforce identity verification through official campus email domains and Nigerian phone number validation.
+
+## Lead Engineer
+Developed by **SAMKIEL** — [samkiel.dev](https://samkiel.dev)
 
 ## Technical Stack & Architecture
 
@@ -9,17 +12,6 @@ Tarra is a centralized commerce platform for the Obafemi Awolowo University (OAU
 - **Styling**: Tailwind CSS for a minimalist, neutral UI focused on high readability and performance.
 - **Authentication**: Stateless session management using HTTP-only cookies to support shared-device workflows common in campus environments.
 - **API**: Next.js Route Handlers for registration, session recovery, and administrative data aggregation.
-
-## Environment Variables
-
-The following variables must be defined in `.env.local` for local development and in the Vercel dashboard for production:
-
-```bash
-MONGODB_URI=           # MongoDB connection string
-NEXT_PUBLIC_BASE_URL=  # Public domain (e.g., https://tarra.ng)
-ADMIN_PIN=             # Numeric PIN for /admin dashboard access
-ADMIN_EXPORT_TOKEN=    # Bearer token for secure CSV data export
-```
 
 ## Referral Logic
 
@@ -43,8 +35,8 @@ ADMIN_EXPORT_TOKEN=    # Bearer token for secure CSV data export
 
 ## Deployment Instructions (Vercel)
 
-1. **Push to GitHub/GitLab**: Ensure `.env.local` is excluded via `.gitignore`.
+1. **Push to GitHub/GitLab**: Ensure local environment files are excluded via `.gitignore`.
 2. **Import Project**: Link the repository in the Vercel Dashboard.
-3. **Configure Environment Variables**: Add all variables listed in the Environment Variables section.
+3. **Configure Environment Variables**: Add `MONGODB_URI`, `NEXT_PUBLIC_BASE_URL`, `ADMIN_PIN`, and `ADMIN_EXPORT_TOKEN` in the Vercel dashboard.
 4. **Build Settings**: Use the default Next.js build settings (`npm run build`).
 5. **Deployment**: Trigger the deployment. The App Router handles the edge runtime aspects automatically.
