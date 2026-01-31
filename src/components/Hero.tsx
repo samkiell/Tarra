@@ -12,9 +12,9 @@ import WaitlistForm from "./WaitlistForm";
  */
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-white dark:bg-stone-950 transition-colors bg-grid-pattern">
+    <section className="relative w-full pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden transition-colors">
       {/* Mesh gradient for depth */}
-      <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-30 pointer-events-none" />
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">

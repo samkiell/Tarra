@@ -114,7 +114,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="text"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="Samkiel Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
@@ -126,7 +126,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="email"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="user@student.oauife.edu.ng"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -144,7 +144,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="tel"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="08012345678"
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
