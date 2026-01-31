@@ -1,5 +1,7 @@
 import React from "react";
 
+import { ShoppingCart, Building2, Wrench } from "lucide-react";
+
 /**
  * Features Component
  * 
@@ -11,17 +13,17 @@ const Features: React.FC = () => {
     {
       title: "Marketplace",
       description: "Buy and sell physical products within the OAU community safely.",
-      icon: "🛍️",
+      icon: <ShoppingCart className="w-8 h-8 text-stone-900" />,
     },
     {
       title: "Brands",
       description: "Discover and support verified campus-grown businesses.",
-      icon: "🏢",
+      icon: <Building2 className="w-8 h-8 text-stone-900" />,
     },
     {
       title: "Services",
       description: "Book essential student services from trusted providers.",
-      icon: "🛠️",
+      icon: <Wrench className="w-8 h-8 text-stone-900" />,
     },
   ];
 
@@ -31,7 +33,7 @@ const Features: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {pillars.map((pillar) => (
             <div key={pillar.title} className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white border border-stone-200 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm">
+              <div className="w-16 h-16 bg-white border border-stone-200 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
                 {pillar.icon}
               </div>
               <h3 className="text-xl font-bold text-stone-900 mb-3">

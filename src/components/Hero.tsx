@@ -1,4 +1,5 @@
 import React from "react";
+import { Rocket } from "lucide-react";
 import WaitlistForm from "./WaitlistForm";
 
 /**
@@ -22,7 +23,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="mb-8 w-12 h-12 bg-stone-900 rounded-lg flex items-center justify-center">
-              <div className="w-6 h-6 bg-white rounded-sm" />
+              <Rocket className="w-6 h-6 text-white" />
             </div>
 
             <h1 className="text-4xl md:text-6xl font-black text-stone-900 leading-tight mb-6">

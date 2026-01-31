@@ -6,12 +6,19 @@ interface CopyLinkButtonProps {
   referralUrl: string;
 }
 
+import { toast } from "react-hot-toast";
+import { Copy, Check } from "lucide-react";
+
+interface CopyLinkButtonProps {
+  referralUrl: string;
+}
+
 /**
  * CopyLinkButton Component
  * 
  * Logic:
  * 1. Copies the generated referral link to the mobile/desktop clipboard.
- * 2. Provides immediate visual feedback to the user.
+ * 2. Provides immediate visual feedback via toast and icon change.
  */
 const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
   const [copied, setCopied] = useState(false);
@@ -20,9 +27,10 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
     try {
       await navigator.clipboard.writeText(referralUrl);
       setCopied(true);
+      toast.success("Link copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Failed to copy", err);
+      toast.error("Failed to copy link.");
     }
   };
 
@@ -33,8 +41,9 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
       </div>
       <button
         onClick={handleCopy}
-        className="px-4 py-2 bg-stone-900 text-white text-sm font-semibold rounded hover:bg-stone-800 transition-colors whitespace-nowrap"
+        className="px-4 py-2 bg-stone-900 text-white text-sm font-semibold rounded hover:bg-stone-800 transition-colors whitespace-nowrap flex items-center justify-center gap-2"
       >
+        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         {copied ? "Copied!" : "Copy Link"}
       </button>
     </div>
