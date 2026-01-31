@@ -32,18 +32,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { full_name, email, phone_number, interests, referral_code } = body;
 
-    // Content Validation: Check for Gmail (Yellow Info Box Trigger)
-    if (email?.toLowerCase().endsWith("@gmail.com")) {
-      return NextResponse.json(
-        { 
-          type: "info",
-          message: "Gmail is accepted, but verified student features require an @student.oauife.edu.ng email.",
-          redirect_hint: true // Hint to UI to show the yellow info box
-        },
-        { status: 200 } // We allow moving forward but with a warning
-      );
-    }
-
     if (!full_name || !email || !phone_number) {
       return NextResponse.json(
         { error: "Required fields are missing" },
