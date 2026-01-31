@@ -6,17 +6,10 @@
   --background: #ffffff;
   --foreground: #0a0a0a;
   
-  /* Tarra Teal Palette (Silicon Valley Standard) */
+  /* Tarra Teal - High Contrast Primary */
   --primary: #0d9488;
   --primary-foreground: #ffffff;
-  
-  /* Functional UI Colors */
-  --success: #22c55e;
-  --warning: #eab308;
-  --error: #ef4444;
-  --verification: #3b82f6;
-  
-  /* Neutral scale */
+
   --stone-50: #fafaf9;
   --stone-100: #f5f5f4;
   --stone-200: #e7e5e4;
@@ -34,9 +27,9 @@
   --background: #0a0a0a;
   --foreground: #fafaf9;
   
-  /* Teal as a vibrant accent in dark mode */
-  --primary: #14b8a6; 
-  --primary-foreground: #0a0a0a;
+  /* Primary Inversion */
+  --primary: #0d9488; 
+  --primary-foreground: #ffffff;
 
   --stone-50: #0a0a0a;
   --stone-100: #1c1917;
@@ -48,6 +41,7 @@
   --stone-700: #d6d3d1;
   --stone-800: #e7e5e4;
   --stone-900: #fafaf9;
+  --stone-950: #ffffff;
 }
 
 @layer base {
