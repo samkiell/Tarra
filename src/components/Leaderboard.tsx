@@ -46,7 +46,7 @@ const Leaderboard: React.FC = async () => {
   ]);
 
   return (
-    <div className="w-full border border-stone-200 dark:border-stone-800 rounded-xl overflow-hidden bg-white dark:bg-stone-900/50 backdrop-blur-sm shadow-xl transition-all duration-300">
+    <div className="w-full border border-stone-200 dark:border-stone-800 rounded-lg overflow-hidden bg-white dark:bg-stone-900 shadow-sm transition-all duration-300">
       <table className="w-full text-left">
         <thead className="bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800 transition-colors">
           <tr>

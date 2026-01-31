@@ -32,14 +32,14 @@ const Features: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {pillars.map((pillar) => (
-            <div key={pillar.title} className="flex flex-col items-center text-center group">
-              <div className="w-16 h-16 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 group-hover:border-primary/30 transition-all duration-300">
+            <div key={pillar.title} className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-xl flex items-center justify-center mb-6 transition-colors">
                 {pillar.icon}
               </div>
-              <h3 className="text-xl font-black text-stone-900 dark:text-stone-50 mb-3 tracking-tight uppercase transition-colors">
+              <h3 className="text-lg font-bold text-stone-900 dark:text-stone-50 mb-3 tracking-tight transition-colors">
                 {pillar.title}
               </h3>
-              <p className="text-stone-500 dark:text-stone-400 leading-relaxed font-medium transition-colors">
+              <p className="text-stone-500 dark:text-stone-400 leading-relaxed transition-colors">
                 {pillar.description}
               </p>
             </div>
