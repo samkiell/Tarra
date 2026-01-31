@@ -12,18 +12,15 @@ import WaitlistForm from "./WaitlistForm";
  */
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-white dark:bg-stone-950 transition-colors">
-      {/* Decorative patterns */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 border border-stone-900 dark:border-stone-100 rounded-full -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 border border-stone-900 dark:border-stone-100 rounded-full translate-x-1/3 translate-y-1/3" />
-      </div>
+    <section className="relative w-full pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-white dark:bg-stone-950 transition-colors bg-grid-pattern">
+      {/* Mesh gradient for depth */}
+      <div className="absolute inset-0 z-0 bg-mesh-gradient opacity-40 pointer-events-none" />
 
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-8 w-12 h-12 bg-stone-900 dark:bg-stone-100 rounded-lg flex items-center justify-center transition-colors">
-              <Rocket className="w-6 h-6 text-white dark:text-stone-900" />
+            <div className="mb-8 w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20 transition-all hover:scale-105">
+              <Rocket className="w-6 h-6 text-white" />
             </div>
 
             <h1 className="text-4xl md:text-6xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 transition-colors">

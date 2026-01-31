@@ -4,41 +4,75 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0a0a0a;
+  
+  /* Tarra Teal Palette (Silicon Valley Standard) */
+  --primary: #0d9488;
+  --primary-foreground: #ffffff;
+  
+  /* Functional UI Colors */
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --verification: #3b82f6;
+  
+  /* Neutral scale */
   --stone-50: #fafaf9;
   --stone-100: #f5f5f4;
   --stone-200: #e7e5e4;
+  --stone-300: #d6d3d1;
   --stone-400: #a8a29e;
   --stone-500: #78716c;
   --stone-600: #57534e;
+  --stone-700: #44403c;
+  --stone-800: #292524;
   --stone-900: #1c1917;
+  --stone-950: #0a0a0a;
 }
 
 .dark {
   --background: #0a0a0a;
-  --foreground: #ededed;
-  --stone-50: #1c1917;
-  --stone-100: #292524;
-  --stone-200: #44403c;
-  --stone-400: #78716c;
-  --stone-500: #a8a29e;
-  --stone-600: #d6d3d1;
+  --foreground: #fafaf9;
+  
+  /* Teal as a vibrant accent in dark mode */
+  --primary: #14b8a6; 
+  --primary-foreground: #0a0a0a;
+
+  --stone-50: #0a0a0a;
+  --stone-100: #1c1917;
+  --stone-200: #292524;
+  --stone-300: #44403c;
+  --stone-400: #57534e;
+  --stone-500: #78716c;
+  --stone-600: #a8a29e;
+  --stone-700: #d6d3d1;
+  --stone-800: #e7e5e4;
   --stone-900: #fafaf9;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+@layer base {
+  body {
+    @apply antialiased min-h-screen transition-colors duration-300;
+    color: var(--foreground);
+    background: var(--background);
+  }
 }
 
-/* Ensure all elements with stone classes respond to dark mode */
-@layer base {
-  .bg-white {
-    background-color: var(--background);
+@layer utilities {
+  /* Subtle Geometric Background Pattern */
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle, var(--stone-200) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
-  .bg-stone-50 {
-    background-color: var(--stone-50);
+  
+  .dark .bg-grid-pattern {
+    background-image: radial-gradient(circle, var(--stone-800) 1px, transparent 1px);
+  }
+
+  .bg-mesh-gradient {
+    background-color: var(--background);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.05) 0px, transparent 50%);
   }
 }

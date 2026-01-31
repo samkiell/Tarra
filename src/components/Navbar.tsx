@@ -16,7 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
     <nav className="border-b border-stone-100 dark:border-stone-800 py-4 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link href="/" className="text-xl font-black tracking-tighter text-stone-900 dark:text-stone-50 hover:opacity-80 transition-opacity">
+        <Link href="/" className="text-xl font-black tracking-tighter text-primary hover:opacity-80 transition-opacity">
           TARRA
         </Link>
         <div className="flex items-center gap-6">
