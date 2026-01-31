@@ -46,8 +46,8 @@ const PinGate: React.FC<PinGateProps> = ({ error }) => {
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-stone-950 px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-stone-900 dark:bg-stone-100 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-            <Lock className="w-8 h-8 text-white dark:text-stone-900" />
+          <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-primary/20">
+            <Lock className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase mb-2">
             Lighthouse
@@ -62,7 +62,7 @@ const PinGate: React.FC<PinGateProps> = ({ error }) => {
             <input
               type="password"
               autoFocus
-              className="w-full px-4 py-4 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl text-center text-2xl tracking-[1em] font-black text-stone-900 dark:text-stone-50 focus:outline-none focus:ring-2 focus:ring-stone-900 dark:focus:ring-stone-100 transition-all"
+              className="w-full px-4 py-4 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl text-center text-2xl tracking-[1em] font-black text-stone-900 dark:text-stone-50 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
               placeholder="••••"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
@@ -72,7 +72,7 @@ const PinGate: React.FC<PinGateProps> = ({ error }) => {
           
           <button
             type="submit"
-            className="w-full py-4 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 font-black rounded-xl hover:bg-stone-800 dark:hover:bg-white transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-4 bg-primary text-white font-black rounded-xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/10"
           >
             <Zap className="w-5 h-5 group-hover:animate-pulse" />
             INITIALIZE AUDIT

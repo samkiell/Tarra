@@ -62,10 +62,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
                 <td className="px-6 py-4 text-right transition-colors">
                   <button
                     onClick={() => setSelectedUser(user)}
-                    className={`inline-flex items-center px-3 py-1 rounded text-sm font-bold transition-all ${
+                    className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-black transition-all ${
                       user.referral_count > 0 
-                        ? "bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-white underline decoration-stone-500 underline-offset-4" 
-                        : "bg-stone-100 dark:bg-stone-800 text-stone-400 dark:text-stone-500 cursor-default"
+                        ? "bg-primary text-white hover:brightness-110 shadow-sm shadow-primary/20" 
+                        : "bg-stone-50 dark:bg-stone-950 text-stone-400 dark:text-stone-600 cursor-default border border-stone-100 dark:border-stone-800"
                     }`}
                     disabled={user.referral_count === 0}
                   >
