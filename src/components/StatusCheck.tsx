@@ -79,14 +79,14 @@ const StatusCheck: React.FC = () => {
           type="tel"
           required
           placeholder="Phone Number"
-          className="flex-grow px-4 py-2 text-sm border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-stone-100 transition-all"
+          className="flex-grow px-4 py-2 text-sm border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-900 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 text-sm font-bold rounded hover:bg-stone-200 dark:hover:bg-stone-700 disabled:opacity-50 transition-all border border-stone-200 dark:border-stone-700"
+          className="px-4 py-2 bg-primary text-white text-sm font-black rounded hover:brightness-110 active:scale-95 disabled:opacity-50 transition-all shadow-sm"
         >
           {loading ? "..." : "Check"}
         </button>

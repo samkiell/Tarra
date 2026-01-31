@@ -13,33 +13,33 @@ const Features: React.FC = () => {
     {
       title: "Marketplace",
       description: "Buy and sell physical products within the OAU community safely.",
-      icon: <ShoppingCart className="w-8 h-8 text-stone-900 dark:text-stone-100" />,
+      icon: <ShoppingCart className="w-8 h-8 text-primary" />,
     },
     {
       title: "Brands",
       description: "Discover and support verified campus-grown businesses.",
-      icon: <Building2 className="w-8 h-8 text-stone-900 dark:text-stone-100" />,
+      icon: <Building2 className="w-8 h-8 text-primary" />,
     },
     {
       title: "Services",
       description: "Book essential student services from trusted providers.",
-      icon: <Wrench className="w-8 h-8 text-stone-900 dark:text-stone-100" />,
+      icon: <Wrench className="w-8 h-8 text-primary" />,
     },
   ];
 
   return (
-    <section className="py-20 bg-stone-50 dark:bg-stone-900 border-y border-stone-200 dark:border-stone-800 transition-colors">
+    <section className="py-20 bg-white dark:bg-stone-950 border-y border-stone-100 dark:border-stone-900 transition-colors">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {pillars.map((pillar) => (
-            <div key={pillar.title} className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-2xl flex items-center justify-center mb-6 shadow-sm transition-colors">
+            <div key={pillar.title} className="flex flex-col items-center text-center group">
+              <div className="w-16 h-16 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-2xl flex items-center justify-center mb-6 shadow-sm group-hover:scale-105 group-hover:border-primary/30 transition-all duration-300">
                 {pillar.icon}
               </div>
-              <h3 className="text-xl font-bold text-stone-900 dark:text-stone-50 mb-3 transition-colors">
+              <h3 className="text-xl font-black text-stone-900 dark:text-stone-50 mb-3 tracking-tight uppercase transition-colors">
                 {pillar.title}
               </h3>
-              <p className="text-stone-600 dark:text-stone-400 leading-relaxed transition-colors">
+              <p className="text-stone-500 dark:text-stone-400 leading-relaxed font-medium transition-colors">
                 {pillar.description}
               </p>
             </div>

@@ -114,7 +114,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="text"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-stone-100 transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="Samkiel Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
@@ -126,13 +126,13 @@ const WaitlistForm: React.FC = () => {
           <input
             type="email"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-stone-100 transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="user@student.oauife.edu.ng"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
           />
           {isGmail && (
-            <div className="mt-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800/50 rounded text-xs text-yellow-800 dark:text-yellow-200 flex items-center gap-2 transition-colors">
+            <div className="mt-2 p-2 bg-warning/10 dark:bg-warning/20 border border-warning/20 dark:border-warning/50 rounded text-xs text-warning leading-snug flex items-center gap-2 transition-colors">
               <span className="text-sm">⚠️</span>
               Gmail is accepted, but verified student features require an @student.oauife.edu.ng email.
             </div>
@@ -144,7 +144,7 @@ const WaitlistForm: React.FC = () => {
           <input
             type="tel"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-stone-900 dark:focus:ring-stone-100 transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-700 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-800 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="08012345678"
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
@@ -153,7 +153,7 @@ const WaitlistForm: React.FC = () => {
 
         <div>
           <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2 transition-colors">
-            I am a... <span className="text-red-500">*</span>
+            I am a... <span className="text-error">*</span>
           </label>
           <div className="flex flex-wrap gap-2">
             {["Buyer", "Seller", "Service Provider"].map(interest => (
@@ -161,11 +161,11 @@ const WaitlistForm: React.FC = () => {
                 key={interest}
                 type="button"
                 onClick={() => handleInterestChange(interest)}
-                className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
-                  formData.interests.includes(interest)
-                    ? "bg-stone-900 dark:bg-stone-100 border-stone-900 dark:border-stone-100 text-white dark:text-stone-900"
-                    : "bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-stone-400 dark:hover:border-stone-500"
-                }`}
+                  className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
+                    formData.interests.includes(interest)
+                      ? "bg-primary border-primary text-white shadow-sm shadow-primary/20"
+                      : "bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-400 hover:border-primary/50"
+                  }`}
               >
                 {interest}
               </button>
@@ -173,11 +173,11 @@ const WaitlistForm: React.FC = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full py-3 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 font-bold rounded hover:bg-stone-800 dark:hover:bg-white disabled:opacity-50 transition-all"
-        >
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 bg-primary text-white font-black rounded-lg hover:brightness-110 active:scale-[0.98] disabled:opacity-50 transition-all shadow-lg shadow-primary/10"
+          >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>
       </form>
