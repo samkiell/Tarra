@@ -33,21 +33,16 @@
 
 @layer base {
   body {
-    @apply antialiased min-h-screen transition-colors duration-300;
+    @apply antialiased min-h-screen transition-colors duration-200;
     color: var(--foreground);
     background-color: var(--background);
   }
 }
 
 @layer utilities {
-  /* Extremely Subtle Grid */
+  /* Plain backgrounds for form-first systems */
   .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-200) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  
-  .dark .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-900) 1px, transparent 1px);
+    background: none;
   }
 
   .bg-mesh-gradient {

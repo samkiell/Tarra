@@ -12,7 +12,7 @@ import WaitlistForm from "./WaitlistForm";
  */
 const Hero: React.FC = () => {
   return (
-    <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden border-b border-stone-100 dark:border-stone-900 transition-colors">
+    <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
