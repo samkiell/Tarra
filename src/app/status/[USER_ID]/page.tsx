@@ -59,7 +59,8 @@ export default async function StatusPage({
             <h1 className="text-2xl font-bold tracking-tight mb-2">
               Hello {firstName}
             </h1>
-            <div className="inline-flex items-center px-2 py-1 bg-stone-100 dark:bg-stone-900 text-stone-600 dark:text-stone-400 text-xs font-bold uppercase tracking-wider rounded border border-stone-200 dark:border-stone-800 transition-colors">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-verification/10 text-verification text-xs font-black uppercase tracking-wider rounded border border-verification/20 transition-all">
+              <span className="w-1.5 h-1.5 rounded-full bg-verification animate-pulse" />
               Verified Student
             </div>
           </div>
