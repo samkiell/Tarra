@@ -46,27 +46,35 @@ const Leaderboard: React.FC = async () => {
   ]);
 
   return (
-    <div className="w-full border border-stone-200 dark:border-stone-800 rounded-lg overflow-hidden bg-white dark:bg-stone-900 shadow-sm transition-all duration-300">
-      <table className="w-full text-left">
-        <thead className="bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800 transition-colors">
+    <div className="w-full border border-stone-200 dark:border-stone-800 rounded-lg overflow-hidden bg-white dark:bg-stone-900 shadow-sm transition-colors">
+      <table className="w-full text-left border-collapse">
+        <thead className="bg-stone-50 dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 transition-colors">
           <tr>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Rank</th>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Student</th>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider text-right">Referrals</th>
+            <th className="px-6 py-4 text-[10px] font-bold text-primary uppercase tracking-[0.2em] w-20">Rank</th>
+            <th className="px-6 py-4 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-[0.2em]">Student Name</th>
+            <th className="px-6 py-4 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-[0.2em] text-right">Referrals</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-stone-100 dark:divide-stone-800 transition-colors">
           {data.length > 0 ? (
             data.map((item, index) => (
-              <tr key={item._id as string}>
-                <td className="px-4 py-4 text-sm text-stone-500 dark:text-stone-400">#{index + 1}</td>
-                <td className="px-4 py-4 text-sm font-medium text-stone-900 dark:text-stone-100">{item.firstName}</td>
-                <td className="px-4 py-4 text-sm text-primary font-black text-right">{item.count}</td>
+              <tr key={item._id as string} className="hover:bg-stone-50/50 dark:hover:bg-stone-800/20 transition-colors">
+                <td className="px-6 py-4 text-sm font-bold text-stone-900 dark:text-stone-50">
+                  <span className={index < 3 ? "text-primary" : "text-stone-400 dark:text-stone-600"}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-sm font-semibold text-stone-700 dark:text-stone-200">
+                  {item.firstName}
+                </td>
+                <td className="px-6 py-4 text-sm font-bold text-primary text-right tabular-nums">
+                  {item.count}
+                </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={3} className="px-4 py-12 text-center text-stone-400 dark:text-stone-600 text-sm italic">
+              <td colSpan={3} className="px-6 py-16 text-center text-stone-400 dark:text-stone-600 text-sm font-medium italic">
                 The leaderboard is currently empty. Start referring to lead!
               </td>
             </tr>
