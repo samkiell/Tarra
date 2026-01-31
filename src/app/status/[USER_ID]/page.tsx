@@ -7,6 +7,7 @@ import CopyLinkButton from "@/components/dashboard/CopyLinkButton";
 import Leaderboard from "@/components/Leaderboard";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { generateUniqueCode } from "@/lib/codes";
 
 export const dynamic = "force-dynamic";
 
@@ -36,9 +37,19 @@ export default async function StatusPage({
   await dbConnect();
 
   // Fetch current user data
-  const user = await Waitlist.findOne({ id: USER_ID });
+  let user = await Waitlist.findOne({ id: USER_ID });
   if (!user) {
     redirect("/");
+  }
+
+  // Legacy Support: Generate code if missing
+  if (!user.referral_code) {
+    const newCode = await generateUniqueCode();
+    user = await Waitlist.findOneAndUpdate(
+      { id: USER_ID },
+      { $set: { referral_code: newCode } },
+      { new: true }
+    );
   }
 
   // Aggregate referral data for the current user using the short code
