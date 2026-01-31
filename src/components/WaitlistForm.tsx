@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getReferral, clearReferral, captureReferral } from "@/lib/referrals";
 
+import { toast } from "react-hot-toast";
+
 /**
  * WaitlistForm Component
  * 
@@ -11,12 +13,11 @@ import { getReferral, clearReferral, captureReferral } from "@/lib/referrals";
  * 1. Capture: On mount, it triggers the referral capture logic.
  * 2. Submission: Sends data to /api/waitlist.
  * 3. Persistence: Reads referral code from localStorage.
- * 4. UX: Handles success, existing user, and validation errors.
+ * 4. UX: Handles success, existing user, and validation errors via toast.
  */
 const WaitlistForm: React.FC = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   
   const [formData, setFormData] = useState({
     full_name: "",
@@ -32,7 +33,6 @@ const WaitlistForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage(null);
 
     try {
       const referral_code = getReferral();
@@ -50,20 +50,16 @@ const WaitlistForm: React.FC = () => {
 
       if (response.ok) {
         clearReferral();
-        setMessage({ type: "success", text: data.message });
+        toast.success(data.message);
         
-        // Wait a moment so they can read the "Welcome back" or success message
-        setTimeout(() => {
-          router.push(`/status/${data.user_id}`);
-        }, 1500);
+        // Redirect to dashboard immediately on recognition
+        router.push(`/status/${data.user_id}`);
       } else {
-        setMessage({ 
-          type: "error", 
-          text: Array.isArray(data.details) ? data.details[0] : (data.error || "Something went wrong") 
-        });
+        const errorMessage = Array.isArray(data.details) ? data.details[0] : (data.error || "Something went wrong");
+        toast.error(errorMessage);
       }
     } catch (error) {
-      setMessage({ type: "error", text: "Failed to connect to the server" });
+      toast.error("Failed to connect to the server");
     } finally {
       setLoading(false);
     }
@@ -144,17 +140,9 @@ const WaitlistForm: React.FC = () => {
         >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>
-
-        {message && (
-          <div className={`mt-4 p-3 rounded text-sm font-medium ${
-            message.type === "success" ? "bg-green-50 text-green-700 border border-green-100" : "bg-red-50 text-red-700 border border-red-100"
-          }`}>
-            {message.text}
-          </div>
-        )}
       </form>
     </div>
   );
-};
+}
 
 export default WaitlistForm;

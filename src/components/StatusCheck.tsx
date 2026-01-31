@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { toast } from "react-hot-toast";
+
 /**
  * StatusCheck Component
  * 
@@ -10,18 +12,16 @@ import { useRouter } from "next/navigation";
  * 1. User enters phone number.
  * 2. System verifies existence.
  * 3. If found, cookie is re-issued and user is redirected to dashboard.
- * 4. If not found, a gentle message is shown.
+ * 4. If not found, a toast notification is shown.
  */
 const StatusCheck: React.FC = () => {
   const router = useRouter();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setMessage(null);
 
     try {
       const response = await fetch("/api/status", {
@@ -33,15 +33,13 @@ const StatusCheck: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(data.message);
-        setTimeout(() => {
-          router.push(`/status/${data.user_id}`);
-        }, 1000);
+        toast.success(data.message);
+        router.push(`/status/${data.user_id}`);
       } else {
-        setMessage(data.message || "Failed to find account.");
+        toast.error(data.message || "Failed to find account.");
       }
     } catch (error) {
-      setMessage("Connection error.");
+      toast.error("Connection error.");
     } finally {
       setLoading(false);
     }
@@ -69,13 +67,8 @@ const StatusCheck: React.FC = () => {
           {loading ? "..." : "Check"}
         </button>
       </form>
-      {message && (
-        <p className="mt-3 text-xs font-medium text-stone-500">
-          {message}
-        </p>
-      )}
     </div>
   );
-};
+}
 
 export default StatusCheck;
