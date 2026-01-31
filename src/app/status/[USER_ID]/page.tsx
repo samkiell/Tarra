@@ -70,7 +70,9 @@ export default async function StatusPage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="p-6 border border-stone-200 dark:border-stone-800 rounded-lg bg-stone-50 dark:bg-stone-900/50 transition-colors">
             <h3 className="text-sm font-medium text-stone-500 dark:text-stone-400 mb-1">Referral Count</h3>
-            <p className="text-3xl font-bold">You have referred {referralCount} people.</p>
+            <p className="text-3xl font-black tracking-tight transition-colors">
+              You have referred <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
+            </p>
           </div>
         </div>
 
