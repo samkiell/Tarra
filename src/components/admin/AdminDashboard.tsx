@@ -29,29 +29,81 @@ interface AdminDashboardProps {
  * 1. Ranking: High referral counts are surfaced immediately for audit.
  * 2. Drill-down: Clicking the count allows manual verification of referral quality.
  */
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
-  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
+  // State for optional filters (no complex UI controls)
+  const [filters, setFilters] = useState({
+    min_referrals: "",
+    referred_by: "",
+    start_date: "",
+    end_date: ""
+  });
 
   const handleExportCSV = () => {
-    // Triggers the server-side CSV generation endpoint
-    // This ensures data is fetched securely and formatted correctly with BOM for Excel
-    window.location.href = "/api/admin/export-csv";
+    // Triggers the server-side CSV generation endpoint with filters
+    const params = new URLSearchParams();
+    if (filters.min_referrals) params.append("min_referrals", filters.min_referrals);
+    if (filters.referred_by) params.append("referred_by", filters.referred_by);
+    if (filters.start_date) params.append("start_date", filters.start_date);
+    if (filters.end_date) params.append("end_date", filters.end_date);
+    
+    window.location.href = `/api/admin/export-csv?${params.toString()}`;
   };
 
   return (
     <div className="w-full">
-      <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
-        <div className="flex items-center gap-4">
+      <div className="mb-8 flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
           <div className="text-sm text-stone-500 dark:text-stone-400">
             Total Users: <span className="font-bold text-stone-900 dark:text-stone-100 transition-colors">{users.length}</span>
           </div>
+        </div>
+
+        {/* Filter Bar: Simple inputs for operational filtering */}
+        <div className="w-full p-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-lg flex flex-wrap items-end gap-4 transition-colors">
+          <div className="flex flex-col gap-1">
+            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Min Referrals</label>
+            <input 
+              type="number" 
+              placeholder="0"
+              className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm w-24"
+              value={filters.min_referrals}
+              onChange={(e) => setFilters({...filters, min_referrals: e.target.value})}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Topic / Referrer Code</label>
+            <input 
+              type="text" 
+              placeholder="Filter by code..."
+              className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm w-40"
+              value={filters.referred_by}
+              onChange={(e) => setFilters({...filters, referred_by: e.target.value})}
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Date Range</label>
+            <div className="flex items-center gap-2">
+              <input 
+                type="date" 
+                className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm"
+                value={filters.start_date}
+                onChange={(e) => setFilters({...filters, start_date: e.target.value})}
+              />
+              <span className="text-stone-400">-</span>
+              <input 
+                type="date" 
+                className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm"
+                value={filters.end_date}
+                onChange={(e) => setFilters({...filters, end_date: e.target.value})}
+              />
+            </div>
+          </div>
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-2 px-3 py-1.5 bg-stone-900 dark:bg-stone-50 text-stone-50 dark:text-stone-900 text-xs font-bold uppercase tracking-wider rounded border border-transparent hover:opacity-90 transition-all"
+            className="flex items-center gap-2 px-4 py-1.5 bg-stone-900 dark:bg-stone-50 text-stone-50 dark:text-stone-900 text-xs font-bold uppercase tracking-wider rounded border border-transparent hover:opacity-90 ml-auto transition-all h-9"
           >
             <Download className="w-3 h-3" />
-            Export CSV
+            Download Filtered CSV
           </button>
         </div>
       </div>
