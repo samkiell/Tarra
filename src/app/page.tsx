@@ -40,7 +40,7 @@ export default function Home() {
                 <h2 className="text-3xl font-bold text-stone-900 dark:text-stone-50 mb-4 transition-colors">
                   Leaderboard
                 </h2>
-                <p className="text-stone-500 dark:text-stone-400 max-w-md mx-auto transition-colors">
+                <p className="text-stone-500 dark:text-stone-300 max-w-md mx-auto transition-colors">
                   Grow the community and win up to ₦50,000. Current top performers in the referral contest.
                 </p>
               </div>

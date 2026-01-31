@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased min-h-screen bg-white text-stone-900 dark:text-stone-50 selection:bg-stone-100 dark:selection:bg-stone-800 transition-colors duration-300">
+      <body className="antialiased selection:bg-primary/10 transition-colors duration-500">
         <Providers>
           {children}
           <Toaster position="bottom-right" />

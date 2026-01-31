@@ -27,11 +27,11 @@ const Hero: React.FC = () => {
               Everything You Need. All in One Place.
             </h1>
 
-            <p className="text-xl text-stone-600 dark:text-stone-400 font-medium mb-6 transition-colors">
+            <p className="text-xl text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
-            <p className="text-stone-500 dark:text-stone-500 mb-8 max-w-lg leading-relaxed transition-colors">
+            <p className="text-stone-500 dark:text-stone-400 mb-8 max-w-lg leading-relaxed transition-colors">
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
