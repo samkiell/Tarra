@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 export const dynamic = "force-dynamic";
 
 import LogoutButton from "@/components/dashboard/LogoutButton";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 /**
  * Admin Panel Page
@@ -76,6 +77,7 @@ export default async function LighthousePage() {
             <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-black rounded-full border border-green-200 dark:border-green-800 whitespace-nowrap uppercase">
               Admin Panel
             </div>
+            <ThemeSwitcher />
             <LogoutButton />
           </div>
         </div>
