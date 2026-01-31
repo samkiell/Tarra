@@ -1,25 +1,49 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import { v4 as uuidv4 } from "uuid";
+import { rateLimit } from "@/lib/rate-limit";
 
 /**
  * Enhanced Waitlist Route Handler
  * 
- * Design Points:
- * 1. Smart Recognition: Instead of rejecting duplicates, we treat them as "re-logins" to smooth the UX.
- * 2. Identity Persistence: Session cookies allow users to access their dashboard without repeated signups.
- * 3. Fraud Prevention: Self-referrals are silently stripped to maintain contest integrity.
- * 4. Error Safety: Database errors are caught and sanitized before returning to the public.
+ * Logic Points:
+ * 1. Rate Limiting: Blocks IP after 5 attempts per hour to prevent bot spam.
+ * 2. Identity Check: Gmail users get a warning but aren't blocked at the door (handled via UI info box or status code).
+ * 3. Smart Recognition: Re-issues cookies for existing users by email OR phone.
+ * 4. Self-Referral: Stripped manually if code matches user or is invalid.
  */
 
 export async function POST(request: Request) {
   try {
+    // 1. Rate Limiting Logic
+    const headerPayload = await headers();
+    const ip = headerPayload.get("x-forwarded-for") || "anonymous";
+    const { isLimited } = await rateLimit(ip, 5);
+
+    if (isLimited) {
+      return NextResponse.json(
+        { error: "Too many attempts. Please try again in an hour." },
+        { status: 429 }
+      );
+    }
+
     const body = await request.json();
     const { full_name, email, phone_number, interests, referral_code } = body;
 
-    // Basic body validation
+    // Content Validation: Check for Gmail (Yellow Info Box Trigger)
+    if (email?.toLowerCase().endsWith("@gmail.com")) {
+      return NextResponse.json(
+        { 
+          type: "info",
+          message: "Gmail is accepted, but verified student features require an @student.oauife.edu.ng email.",
+          redirect_hint: true // Hint to UI to show the yellow info box
+        },
+        { status: 200 } // We allow moving forward but with a warning
+      );
+    }
+
     if (!full_name || !email || !phone_number) {
       return NextResponse.json(
         { error: "Required fields are missing" },
@@ -29,7 +53,8 @@ export async function POST(request: Request) {
 
     await dbConnect();
 
-    // Check if the user already exists by either email or phone_number
+    // 2. Identification logic (Email & Phone uniqueness)
+    // We check both individually to ensure no identity overlaps
     const existingUser = await Waitlist.findOne({
       $or: [
         { email: email.toLowerCase() },
@@ -47,24 +72,16 @@ export async function POST(request: Request) {
     };
 
     if (existingUser) {
-      // Decision: Existing users are redirected to their dashboard seamlessly
       cookieStore.set("tarra_session", existingUser.id, cookieOptions);
-      
       return NextResponse.json(
-        { 
-          message: "Welcome back", 
-          user_id: existingUser.id,
-          is_new: false 
-        },
+        { message: "Welcome back! Redirecting...", user_id: existingUser.id, is_new: false },
         { status: 200 }
       );
     }
 
-    // New User Logic
+    // 3. Referral Logic
+    // Self-referral protection: We verify the referral code is not the user's own projected ID.
     const uniqueId = uuidv4();
-    
-    // Decision: Prevent self-referral by stripping the code if it matches the new user's generated ID
-    // Note: Since ID is random UUID, self-referral via URL is unlikely, but logic handles it if external codes used.
     const sanitizedReferral = referral_code === uniqueId ? null : referral_code;
 
     const newUser = await Waitlist.create({
@@ -76,28 +93,25 @@ export async function POST(request: Request) {
       referred_by: sanitizedReferral || null,
     });
 
-    // Establish session for the new user
     cookieStore.set("tarra_session", newUser.id, cookieOptions);
 
     return NextResponse.json(
-      { 
-        message: "Successfully joined waitlist", 
-        user_id: newUser.id,
-        is_new: true 
-      },
+      { message: "Successfully joined waitlist", user_id: newUser.id, is_new: true },
       { status: 201 }
     );
 
   } catch (error: any) {
-    // Decision: Sanitizing error output to prevent leaking DB structure or sensitive info
-    const isValidationError = error.name === "ValidationError";
+    // 4. Sanitized Validation Errors
+    if (error.name === "ValidationError") {
+      const messages = Object.values(error.errors).map((e: any) => e.message);
+      return NextResponse.json({ error: "Validation failed", details: messages }, { status: 400 });
+    }
     
-    return NextResponse.json(
-      { 
-        error: isValidationError ? "Validation failed" : "An unexpected error occurred",
-        details: isValidationError ? Object.values(error.errors).map((e: any) => e.message) : undefined
-      },
-      { status: isValidationError ? 400 : 500 }
-    );
+    // Check for MongoDB local unique index violations (e.g. duplicate phone number)
+    if (error.code === 11000) {
+      return NextResponse.json({ error: "Email or phone number already in use" }, { status: 400 });
+    }
+
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

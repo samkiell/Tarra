@@ -49,6 +49,23 @@ const WaitlistForm: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Handle Gmail warning (Yellow Info Box)
+        if (data.type === "info") {
+          toast(data.message, {
+            icon: '⚠️',
+            style: {
+              borderRadius: '8px',
+              background: '#fefce8',
+              color: '#854d0e',
+              border: '1px solid #fef08a',
+            },
+            duration: 5000,
+          });
+          // Note: We don't redirect Gmail users automatically to dashboard 
+          // to let them read the warning, unless they are already registered.
+          return;
+        }
+
         clearReferral();
         toast.success(data.message);
         
