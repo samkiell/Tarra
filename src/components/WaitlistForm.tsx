@@ -110,11 +110,11 @@ const WaitlistForm: React.FC = () => {
     <div className="w-full max-w-md bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 shadow-sm transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Full Name</label>
+          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1 transition-colors">Full Name</label>
           <input
             type="text"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-50 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="Samkiel Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
@@ -122,11 +122,11 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Campus Email</label>
+          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1 transition-colors">Campus Email</label>
           <input
             type="email"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-50 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="user@student.oauife.edu.ng"
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -140,11 +140,11 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-200 mb-1 transition-colors">Phone Number</label>
+          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1 transition-colors">Phone Number</label>
           <input
             type="tel"
             required
-            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+            className="w-full px-4 py-2 border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-50 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
             placeholder="08012345678"
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
@@ -152,7 +152,7 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2 transition-colors">
+          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-2 transition-colors">
             I am a... <span className="text-error">*</span>
           </label>
           <div className="flex flex-wrap gap-2">
