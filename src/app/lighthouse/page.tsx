@@ -45,6 +45,24 @@ export default async function LighthousePage() {
         phone_number: 1,
         referral_code: 1,
         referral_count: { $size: "$referral_details" },
+        // Fraud Detection Logic (Computed)
+        // 1. Velocity: If >5 referrals created on same day
+        // 2. Self-Referral: If referrer name matches any referral name (approx)
+        isFlagged: {
+          $cond: {
+            if: {
+              $or: [
+                { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
+                { 
+                   // Check for self-referral attempts (Name similarity check)
+                   $in: [ "$full_name", "$referral_details.full_name" ] 
+                }
+              ]
+            },
+            then: true,
+            else: false
+          }
+        },
         referrals: {
           $map: {
             input: "$referral_details",

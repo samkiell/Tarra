@@ -16,6 +16,7 @@ interface AdminUser {
     phone_number: string;
     created_at: string;
   }>;
+  isFlagged?: boolean;
 }
 
 interface AdminDashboardProps {
@@ -29,6 +30,9 @@ interface AdminDashboardProps {
  * 1. Ranking: High referral counts are surfaced immediately for audit.
  * 2. Drill-down: Clicking the count allows manual verification of referral quality.
  */
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
+  const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
+  
   // State for optional filters (no complex UI controls)
   const [filters, setFilters] = useState({
     min_referrals: "",
@@ -122,7 +126,14 @@ interface AdminDashboardProps {
               {users.map((user) => (
                 <tr key={user.id} className="hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors">
                   <td className="px-6 py-4">
-                    <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors whitespace-nowrap">{user.full_name}</div>
+                    <div className="flex items-center gap-2">
+                       <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors whitespace-nowrap">{user.full_name}</div>
+                       {user.isFlagged && (
+                         <span className="px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-black uppercase tracking-wider rounded border border-red-200 dark:border-red-800" title="Suspicious activity detected">
+                           Flagged
+                         </span>
+                       )}
+                    </div>
                     <div className="flex flex-wrap gap-2 mt-1">
                       <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono transition-colors uppercase">ID: {user.id.slice(0, 8)}...</span>
                       <span className="text-[10px] text-primary font-black tracking-tighter uppercase">Code: {user.referral_code}</span>
