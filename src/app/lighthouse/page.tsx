@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import AdminDashboard from "@/components/admin/AdminDashboard";
@@ -10,21 +11,16 @@ export const dynamic = "force-dynamic";
  * Lighthouse Audit Page
  * 
  * Logic:
- * 1. Gateway: If searchParams.pin is missing or invalid, renders the PinGate modal.
- * 2. Audit Station: If valid, renders the full AdminDashboard.
+ * 1. Gateway: Checks for a valid "lighthouse_session" cookie.
+ * 2. Audit Station: If authorized, renders the full AdminDashboard.
  */
-export default async function LighthousePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ pin: string }>;
-}) {
-  const { pin } = await searchParams;
-  const ADMIN_PIN = process.env.ADMIN_PIN;
+export default async function LighthousePage() {
+  const cookieStore = await cookies();
+  const session = cookieStore.get("lighthouse_session");
 
-  // Decision: If PIN doesn't match, show the entry gate instead of redirecting.
-  // This creates a dedicated "locked" experience.
-  if (!ADMIN_PIN || pin !== ADMIN_PIN) {
-    return <PinGate error={!!pin} />;
+  // Authentication check: Session must exist and be valid
+  if (!session || session.value !== "authorized") {
+    return <PinGate />;
   }
 
   await dbConnect();

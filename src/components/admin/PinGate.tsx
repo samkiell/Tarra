@@ -17,29 +17,49 @@ interface PinGateProps {
   error?: boolean;
 }
 
-const PinGate: React.FC<PinGateProps> = ({ error }) => {
+const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
   const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (error) {
-      toast.error("Invalid Access PIN", {
-        style: {
-          borderRadius: '10px',
-          background: '#1c1917',
-          color: '#fff',
-        },
-      });
-    }
-  }, [error]);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!pin) return;
+    if (!pin || loading) return;
 
-    // We simple push to the same page with the pin as a query param
-    // The server component will then validate and show the dashboard or error.
-    router.push(`/lighthouse?pin=${pin}`);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/lighthouse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success("Access Granted", {
+          style: {
+            borderRadius: '10px',
+            background: '#0d9488',
+            color: '#fff',
+          },
+        });
+        router.refresh();
+      } else {
+        toast.error(data.error || "Invalid Access PIN", {
+          style: {
+            borderRadius: '10px',
+            background: '#1c1917',
+            color: '#fff',
+          },
+        });
+        setPin("");
+      }
+    } catch (err) {
+      toast.error("Connection failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -72,10 +92,11 @@ const PinGate: React.FC<PinGateProps> = ({ error }) => {
           
           <button
             type="submit"
-            className="w-full py-4 bg-primary text-white font-black rounded-xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/10"
+            disabled={loading}
+            className="w-full py-4 bg-primary text-white font-black rounded-xl hover:brightness-110 active:scale-[0.98] disabled:opacity-50 transition-all flex items-center justify-center gap-2 group shadow-lg shadow-primary/10"
           >
             <Zap className="w-5 h-5 group-hover:animate-pulse" />
-            INITIALIZE AUDIT
+            {loading ? "VERIFYING..." : "INITIALIZE AUDIT"}
           </button>
         </form>
 
