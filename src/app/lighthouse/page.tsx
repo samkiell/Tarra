@@ -1,23 +1,16 @@
-import { redirect } from "next/navigation";
 import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import AdminDashboard from "@/components/admin/AdminDashboard";
+import PinGate from "@/components/admin/PinGate";
 
 /**
- * Admin Audit Page
+ * Lighthouse Audit Page
  * 
- * Fraud Detection Intent:
- * This page serves as a manual auditing station for the ₦50,000 contest.
- * 
- * Access Control: 
- * Simple PIN-based validation via protected environment variable.
- * 
- * Data Strategy:
- * Aggregates all users and their direct referrals. 
- * Sorting by referral count (descending) highlights potential contest winners
- * and high-volume actors who require closer scrutiny.
+ * Logic:
+ * 1. Gateway: If searchParams.pin is missing or invalid, renders the PinGate modal.
+ * 2. Audit Station: If valid, renders the full AdminDashboard.
  */
-export default async function AdminPage({
+export default async function LighthousePage({
   searchParams,
 }: {
   searchParams: Promise<{ pin: string }>;
@@ -25,17 +18,14 @@ export default async function AdminPage({
   const { pin } = await searchParams;
   const ADMIN_PIN = process.env.ADMIN_PIN;
 
-  // Decision: Immediate hard rejection if PIN is missing or incorrect.
+  // Decision: If PIN doesn't match, show the entry gate instead of redirecting.
+  // This creates a dedicated "locked" experience.
   if (!ADMIN_PIN || pin !== ADMIN_PIN) {
-    redirect("/");
+    return <PinGate />;
   }
 
   await dbConnect();
 
-  // Aggregation Logic for Fraud Audit:
-  // 1. Fetches all users.
-  // 2. Lookups matching referrals from the same collection.
-  // 3. Projects a summary for the master list + detailed data for the drill-down view.
   const users = await Waitlist.aggregate([
     {
       $lookup: {
@@ -69,8 +59,22 @@ export default async function AdminPage({
   ]);
 
   return (
-    <main className="min-h-screen bg-stone-50 py-12 px-6">
+    <main className="min-h-screen bg-stone-50 dark:bg-stone-950 py-12 px-6 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
+        <div className="flex justify-between items-center mb-10">
+          <div>
+            <h1 className="text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase">
+              Lighthouse Audit
+            </h1>
+            <p className="text-stone-500 dark:text-stone-400 font-medium">
+              Real-time Waitlist & Referral Monitoring
+            </p>
+          </div>
+          <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-black rounded-full border border-green-200 dark:border-green-800">
+            SECURE ACCESS ACTIVE
+          </div>
+        </div>
+        
         <AdminDashboard users={JSON.parse(JSON.stringify(users))} />
       </div>
     </main>
