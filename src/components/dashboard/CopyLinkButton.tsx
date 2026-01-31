@@ -1,11 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
-interface CopyLinkButtonProps {
-  referralUrl: string;
-}
-
 import { toast } from "react-hot-toast";
 import { Copy, Check } from "lucide-react";
 
@@ -19,18 +14,36 @@ interface CopyLinkButtonProps {
  * Logic:
  * 1. Copies the generated referral link to the mobile/desktop clipboard.
  * 2. Provides immediate visual feedback via toast and icon change.
+ * 3. Includes fallback for non-secure contexts (HTTP) where navigator.clipboard is absent.
  */
 const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(referralUrl);
+      // Primary: Modern Clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(referralUrl);
+      } else {
+        // Fallback: ExecCommand approach for non-secure contexts
+        const textArea = document.createElement("textarea");
+        textArea.value = referralUrl;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        textArea.remove();
+      }
+      
       setCopied(true);
       toast.success("Link copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       toast.error("Failed to copy link.");
+      console.error("Copy failed:", err);
     }
   };
 
