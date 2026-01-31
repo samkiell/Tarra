@@ -40,6 +40,7 @@ export default async function LighthousePage() {
         full_name: 1,
         email: 1,
         phone_number: 1,
+        referral_code: 1,
         referral_count: { $size: "$referral_details" },
         referrals: {
           $map: {

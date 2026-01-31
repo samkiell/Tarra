@@ -8,6 +8,7 @@ interface AdminUser {
   full_name: string;
   email: string;
   phone_number: string;
+  referral_code: string;
   referral_count: number;
   referrals: Array<{
     first_name: string;
@@ -53,7 +54,10 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
               <tr key={user.id} className="hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors">
                 <td className="px-6 py-4">
                   <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors">{user.full_name}</div>
-                  <div className="text-xs text-stone-400 dark:text-stone-500 font-mono transition-colors">{user.id}</div>
+                  <div className="flex gap-2 text-xs">
+                    <span className="text-stone-400 dark:text-stone-500 font-mono transition-colors">{user.id}</span>
+                    <span className="text-primary font-bold">[{user.referral_code}]</span>
+                  </div>
                 </td>
                 <td className="px-6 py-4">
                   <div className="text-sm text-stone-600 dark:text-stone-300 transition-colors">{user.email}</div>
