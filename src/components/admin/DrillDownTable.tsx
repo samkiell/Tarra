@@ -25,9 +25,9 @@ interface DrillDownTableProps {
  */
 const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-stone-900/60 dark:bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-all">
-      <div className="bg-white dark:bg-stone-900 rounded-lg shadow-xl w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col border border-stone-200 dark:border-stone-800 transition-colors">
-        <div className="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-stone-50 dark:bg-stone-800/30 transition-colors">
+    <div className="fixed inset-0 bg-stone-900/40 z-50 flex items-center justify-center p-4 transition-all">
+      <div className="bg-white dark:bg-stone-900 rounded-lg shadow-sm w-full max-w-4xl max-h-[80vh] overflow-hidden flex flex-col border border-stone-200 dark:border-stone-800 transition-colors">
+        <div className="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-white dark:bg-stone-900 transition-colors">
           <h2 className="text-lg font-bold text-stone-900 dark:text-stone-50">
             Referrals for {referrerName}
           </h2>
