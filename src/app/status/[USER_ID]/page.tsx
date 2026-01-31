@@ -50,7 +50,7 @@ export default async function StatusPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar rightContent={<LogoutButton />} />
       <main className="flex-grow bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 px-6 py-12 flex flex-col items-center transition-colors duration-300">
       <div className="w-full max-w-2xl">
         {/* Header Section */}
@@ -63,7 +63,6 @@ export default async function StatusPage({
               Verified Student
             </div>
           </div>
-          <LogoutButton />
         </header>
 
         {/* Stats Grid */}

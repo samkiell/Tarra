@@ -8,7 +8,11 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
  * Logic:
  * Consistent navigation and theme switching across the app.
  */
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  rightContent?: React.ReactNode;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
     <nav className="border-b border-stone-100 dark:border-stone-800 py-4 bg-white/80 dark:bg-stone-950/80 backdrop-blur-md sticky top-0 z-50 transition-colors">
       <div className="container mx-auto px-6 flex justify-between items-center">
@@ -16,6 +20,7 @@ export const Navbar: React.FC = () => {
           TARRA
         </Link>
         <div className="flex items-center gap-6">
+          {rightContent}
           <div className="hidden sm:block text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest">
             OAU Edition
           </div>
