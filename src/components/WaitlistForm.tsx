@@ -26,6 +26,8 @@ const WaitlistForm: React.FC = () => {
     interests: [] as string[],
   });
 
+  const isGmail = formData.email.toLowerCase().endsWith("@gmail.com");
+
   useEffect(() => {
     captureReferral();
   }, []);
@@ -49,31 +51,18 @@ const WaitlistForm: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Handle Gmail warning (Yellow Info Box)
-        if (data.type === "info") {
-          toast(data.message, {
-            icon: '⚠️',
-            style: {
-              borderRadius: '8px',
-              background: '#fefce8',
-              color: '#854d0e',
-              border: '1px solid #fef08a',
-            },
-            duration: 5000,
-          });
-          // Note: We don't redirect Gmail users automatically to dashboard 
-          // to let them read the warning, unless they are already registered.
-          return;
-        }
-
         clearReferral();
         toast.success(data.message);
-        
-        // Redirect to dashboard immediately on recognition
         router.push(`/status/${data.user_id}`);
       } else {
-        const errorMessage = Array.isArray(data.details) ? data.details[0] : (data.error || "Something went wrong");
-        toast.error(errorMessage);
+        // Handle existing user block with guidance
+        if (data.message && response.status === 400) {
+          toast.error(data.error);
+          toast(data.message, { icon: "ℹ️", duration: 6000 });
+        } else {
+          const errorMessage = Array.isArray(data.details) ? data.details[0] : (data.error || "Something went wrong");
+          toast.error(errorMessage);
+        }
       }
     } catch (error) {
       toast.error("Failed to connect to the server");
@@ -116,6 +105,12 @@ const WaitlistForm: React.FC = () => {
             value={formData.email}
             onChange={e => setFormData({ ...formData, email: e.target.value })}
           />
+          {isGmail && (
+            <div className="mt-2 p-2 bg-yellow-50 border border-yellow-200 rounded text-xs text-yellow-800 flex items-center gap-2">
+              <span className="text-sm">⚠️</span>
+              Gmail is accepted, but verified student features require an @student.oauife.edu.ng email.
+            </div>
+          )}
         </div>
 
         <div>

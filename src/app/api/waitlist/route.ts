@@ -72,10 +72,14 @@ export async function POST(request: Request) {
     };
 
     if (existingUser) {
-      cookieStore.set("tarra_session", existingUser.id, cookieOptions);
+      // Decision: Block re-joining to maintain list integrity.
+      // Returning users must use the 'Check Status' recovery flow.
       return NextResponse.json(
-        { message: "Welcome back! Redirecting...", user_id: existingUser.id, is_new: false },
-        { status: 200 }
+        { 
+          error: "You are already on the waitlist", 
+          message: "Please use the 'Check Status' section at the bottom to access your dashboard." 
+        },
+        { status: 400 }
       );
     }
 
