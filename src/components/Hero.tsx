@@ -13,6 +13,10 @@ import WaitlistForm from "./WaitlistForm";
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
+      {/* Background Decorators: Replicating the 'Blueprint' aesthetic */}
+      <div className="absolute inset-0 bg-grid-plus opacity-40 dark:opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-noise pointer-events-none" />
+
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
