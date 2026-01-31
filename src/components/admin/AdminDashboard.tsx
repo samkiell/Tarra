@@ -33,19 +33,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
 
   const handleExportCSV = () => {
-    const headers = ["ID,Full Name,Email,Phone Number,Referral Code,Referral Count"];
-    const rows = users.map(user => 
-      `"${user.id}","${user.full_name}","${user.email}","${user.phone_number}","${user.referral_code}",${user.referral_count}`
-    );
-    const csvContent = [headers, ...rows].join("\n");
-    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", `tarra_waitlist_${new Date().toISOString().split("T")[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Triggers the server-side CSV generation endpoint
+    // This ensures data is fetched securely and formatted correctly with BOM for Excel
+    window.location.href = "/api/admin/export-csv";
   };
 
   return (
