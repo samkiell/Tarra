@@ -5,63 +5,41 @@ import { Moon, Sun, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
 
 /**
- * ThemeSwitcher Component
+ * ThemeSwitcher Component (Cyclic)
  * 
  * Logic:
- * 1. Mode Detection: Detects current theme (light, dark, system).
- * 2. Interaction: Allows users to cycle through theme options.
- * 3. Persistence: next-themes handles storage and hydration.
+ * 1. Single Button: Cycles through 'light' -> 'dark' -> 'system' on each click.
+ * 2. Visuals: Icon changes to represent the *current* state.
  */
 export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // Avoid hydration mismatch
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
     return (
-      <div className="w-9 h-9 border border-stone-200 dark:border-stone-800 rounded-md animate-pulse bg-stone-50 dark:bg-stone-900" />
+      <div className="w-10 h-10 border border-stone-200 dark:border-stone-800 rounded-full animate-pulse bg-stone-50 dark:bg-stone-900" />
     );
   }
 
+  const cycleTheme = () => {
+    if (theme === "light") setTheme("dark");
+    else if (theme === "dark") setTheme("system");
+    else setTheme("light");
+  };
+
   return (
-    <div className="flex items-center gap-1 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg p-1">
-      <button
-        onClick={() => setTheme("light")}
-        className={`p-1.5 rounded-md transition-all ${
-          theme === "light"
-            ? "bg-white text-stone-900 shadow-sm"
-            : "text-stone-500 hover:text-stone-700"
-        }`}
-        title="Light Mode"
-      >
-        <Sun className="w-4 h-4" />
-      </button>
-      <button
-        onClick={() => setTheme("dark")}
-        className={`p-1.5 rounded-md transition-all ${
-          theme === "dark"
-            ? "bg-stone-800 text-white shadow-sm"
-            : "text-stone-500 hover:text-stone-400"
-        }`}
-        title="Dark Mode"
-      >
-        <Moon className="w-4 h-4" />
-      </button>
-      <button
-        onClick={() => setTheme("system")}
-        className={`p-1.5 rounded-md transition-all ${
-          theme === "system"
-            ? "bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-sm"
-            : "text-stone-500 hover:text-stone-700 dark:hover:text-stone-300"
-        }`}
-        title="System Preference"
-      >
-        <Monitor className="w-4 h-4" />
-      </button>
-    </div>
+    <button
+      onClick={cycleTheme}
+      className="w-10 h-10 flex items-center justify-center rounded-full bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-all shadow-sm"
+      title={`Current: ${theme} (Click to change)`}
+    >
+      {theme === "light" && <Sun className="w-5 h-5" />}
+      {theme === "dark" && <Moon className="w-5 h-5" />}
+      {theme === "system" && <Monitor className="w-5 h-5" />}
+    </button>
   );
 }

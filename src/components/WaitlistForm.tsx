@@ -34,6 +34,13 @@ const WaitlistForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Mandatory Interest Validation
+    if (formData.interests.length === 0) {
+      toast.error("Please select at least one interest (Buyer, Seller, or Service Provider)");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -126,7 +133,9 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2 transition-colors">I am a...</label>
+          <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-2 transition-colors">
+            I am a... <span className="text-red-500">*</span>
+          </label>
           <div className="flex flex-wrap gap-2">
             {["Buyer", "Seller", "Service Provider"].map(interest => (
               <button
