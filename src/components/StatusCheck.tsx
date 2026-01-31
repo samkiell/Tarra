@@ -71,7 +71,7 @@ const StatusCheck: React.FC = () => {
 
   return (
     <div className="w-full max-w-sm mx-auto mt-8 text-center">
-      <h3 className="text-sm font-black text-stone-500 dark:text-stone-300 mb-4 uppercase tracking-widest transition-colors">
+      <h3 className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>
       <form onSubmit={handleSubmit} className="flex gap-2">
@@ -79,14 +79,14 @@ const StatusCheck: React.FC = () => {
           type="tel"
           required
           placeholder="Phone Number"
-          className="flex-grow px-4 py-2 text-sm border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+          className="flex-grow px-4 py-2 text-sm border border-stone-200 dark:border-stone-800 rounded text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-900 focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-primary text-white text-sm font-black rounded hover:brightness-110 active:scale-95 disabled:opacity-50 transition-all shadow-sm"
+          className="px-4 py-2 bg-primary text-white text-sm font-bold rounded hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all"
         >
           {loading ? "..." : "Check"}
         </button>

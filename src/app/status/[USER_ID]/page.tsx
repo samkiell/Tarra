@@ -59,7 +59,7 @@ export default async function StatusPage({
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar rightContent={<LogoutButton />} />
-      <main className="flex-grow bg-white dark:bg-stone-950 text-stone-900 dark:text-stone-50 px-6 py-12 flex flex-col items-center transition-colors duration-300">
+      <main className="flex-grow px-6 py-12 flex flex-col items-center transition-colors duration-300">
       <div className="w-full max-w-2xl">
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
@@ -67,8 +67,8 @@ export default async function StatusPage({
             <h1 className="text-2xl font-bold tracking-tight mb-2">
               Hello {firstName}
             </h1>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-verification/10 text-verification text-xs font-black uppercase tracking-wider rounded border border-verification/20 transition-all">
-              <span className="w-1.5 h-1.5 rounded-full bg-verification animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-verification/10 text-verification text-xs font-bold uppercase tracking-wider rounded border border-verification/20 transition-all">
+              <span className="w-1.5 h-1.5 rounded-full bg-verification" />
               Verified Student
             </div>
           </div>
@@ -76,9 +76,9 @@ export default async function StatusPage({
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="p-6 border border-stone-200 dark:border-stone-800 rounded-lg bg-stone-50 dark:bg-stone-900/50 transition-colors">
+          <div className="p-6 border border-stone-200 dark:border-stone-800 rounded-lg bg-white dark:bg-stone-900 shadow-sm transition-colors">
             <h3 className="text-sm font-medium text-stone-500 dark:text-stone-400 mb-1">Referral Count</h3>
-            <p className="text-3xl font-black tracking-tight transition-colors">
+            <p className="text-3xl font-bold tracking-tight transition-colors">
               You have referred <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
             </p>
           </div>

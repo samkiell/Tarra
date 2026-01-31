@@ -33,14 +33,14 @@ export default function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section className="py-24 transition-colors">
+        <section className="py-20 transition-colors">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-16">
-                <h2 className="text-3xl font-bold text-stone-900 dark:text-stone-50 mb-4 transition-colors">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-50 mb-3 transition-colors">
                   Leaderboard
                 </h2>
-                <p className="text-stone-500 dark:text-stone-300 max-w-md mx-auto transition-colors">
+                <p className="text-stone-500 dark:text-stone-400 max-w-md mx-auto transition-colors">
                   Grow the community and win up to ₦50,000. Current top performers in the referral contest.
                 </p>
               </div>
