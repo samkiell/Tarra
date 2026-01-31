@@ -27,21 +27,8 @@
   --background: #0a0a0a;
   --foreground: #fafaf9;
   
-  /* Primary Inversion */
   --primary: #0d9488; 
   --primary-foreground: #ffffff;
-
-  --stone-50: #0a0a0a;
-  --stone-100: #1c1917;
-  --stone-200: #292524;
-  --stone-300: #44403c;
-  --stone-400: #57534e;
-  --stone-500: #78716c;
-  --stone-600: #a8a29e;
-  --stone-700: #d6d3d1;
-  --stone-800: #e7e5e4;
-  --stone-900: #fafaf9;
-  --stone-950: #ffffff;
 }
 
 @layer base {
