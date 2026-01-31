@@ -3,10 +3,11 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 // Interface defining the Waitlist document structure
 // Meaningful comment: Captures verified student identity and contact for the OAU campus commerce ecosystem
 export interface IWaitlist extends Document {
-  id: string; // Unique system-generated identifier
+  id: string; // Secure UUID for session tracking
+  referral_code: string; // Unique 5-digit code for sharing
   full_name: string; 
-  email: string; // Must be a valid OAU student email
-  phone_number: string; // Must be a valid 11-digit Nigerian mobile number
+  email: string; 
+  phone_number: string; 
   interests: string[]; 
   referred_by: string | null; 
   created_at: Date; 
@@ -17,6 +18,12 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
     id: {
       type: String,
       required: [true, "Unique ID is required"],
+      unique: true,
+      trim: true,
+    },
+    referral_code: {
+      type: String,
+      required: [true, "Referral code is required"],
       unique: true,
       trim: true,
     },
