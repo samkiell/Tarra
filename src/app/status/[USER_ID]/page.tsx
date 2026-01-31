@@ -50,6 +50,10 @@ export default async function StatusPage({
       { $set: { referral_code: newCode } },
       { new: true }
     );
+    
+    if (!user) {
+      redirect("/");
+    }
   }
 
   // Aggregate referral data for the current user using the short code
