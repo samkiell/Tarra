@@ -39,13 +39,13 @@ const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals
           </button>
         </div>
         
-        <div className="overflow-auto p-6 scrollbar-thin scrollbar-thumb-stone-200 dark:scrollbar-thumb-stone-800">
-          <table className="w-full text-left border-collapse">
+        <div className="overflow-x-auto p-6 scrollbar-thin scrollbar-thumb-stone-200 dark:scrollbar-thumb-stone-800">
+          <table className="w-full text-left border-collapse min-w-[500px]">
             <thead>
               <tr className="border-b-2 border-stone-100 dark:border-stone-800">
-                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase transition-colors">First Name</th>
-                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase transition-colors">Phone Number</th>
-                <th className="py-2 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase text-right transition-colors">Date Referred</th>
+                <th className="py-2 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest transition-colors">First Name</th>
+                <th className="py-2 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest transition-colors">Phone Number</th>
+                <th className="py-2 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest text-right transition-colors">Date Referred</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-stone-50 dark:divide-stone-800">
@@ -54,7 +54,7 @@ const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals
                   <td className="py-3 text-sm text-stone-900 dark:text-stone-200">{ref.first_name}</td>
                   <td className="py-3 text-sm font-mono text-stone-900 dark:text-stone-300">{ref.phone_number}</td>
                   <td className="py-3 text-sm text-right text-stone-500 dark:text-stone-500">
-                    {new Date(ref.created_at).toLocaleString()}
+                    {new Date(ref.created_at).toLocaleDateString()}
                   </td>
                 </tr>
               ))}
