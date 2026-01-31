@@ -2,6 +2,7 @@ import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import PinGate from "@/components/admin/PinGate";
+import { Footer } from "@/components/Footer";
 
 /**
  * Lighthouse Audit Page
@@ -76,6 +77,9 @@ export default async function LighthousePage({
         </div>
         
         <AdminDashboard users={JSON.parse(JSON.stringify(users))} />
+      </div>
+      <div className="w-full mt-auto">
+        <Footer />
       </div>
     </main>
   );

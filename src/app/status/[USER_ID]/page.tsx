@@ -5,6 +5,7 @@ import Waitlist from "@/models/Waitlist";
 import LogoutButton from "@/components/dashboard/LogoutButton";
 import CopyLinkButton from "@/components/dashboard/CopyLinkButton";
 import Leaderboard from "@/components/Leaderboard";
+import { Footer } from "@/components/Footer";
 
 /**
  * User Dashboard Page (Status)
@@ -82,6 +83,9 @@ export default async function StatusPage({
           <h2 className="text-lg font-semibold mb-6">Top 10 recruiters</h2>
           <Leaderboard />
         </section>
+      </div>
+      <div className="w-full mt-auto">
+        <Footer />
       </div>
     </main>
   );

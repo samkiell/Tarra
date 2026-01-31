@@ -3,6 +3,7 @@ import Features from "@/components/Features";
 import Leaderboard from "@/components/Leaderboard";
 import StatusCheck from "@/components/StatusCheck";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { Footer } from "@/components/Footer";
 
 /**
  * Tarra Landing Page
@@ -65,17 +66,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer Placeholder */}
-      <footer className="py-12 border-t border-stone-100 dark:border-stone-800 bg-white dark:bg-stone-950 transition-colors">
-        <div className="container mx-auto px-6 text-center">
-          <div className="text-sm font-bold text-stone-900 dark:text-stone-50 mb-2 transition-colors">
-            Tarra | The Official OAU Marketplace
-          </div>
-          <p className="text-xs text-stone-400 dark:text-stone-500 transition-colors">
-            &copy; {new Date().getFullYear()} built for OAU. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
