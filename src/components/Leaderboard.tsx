@@ -46,27 +46,27 @@ const Leaderboard: React.FC = async () => {
   ]);
 
   return (
-    <div className="w-full border border-stone-200 rounded-lg overflow-hidden bg-white">
+    <div className="w-full border border-stone-200 dark:border-stone-800 rounded-lg overflow-hidden bg-white dark:bg-stone-900 transition-colors">
       <table className="w-full text-left">
-        <thead className="bg-stone-50 border-b border-stone-200">
+        <thead className="bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800 transition-colors">
           <tr>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">Rank</th>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">Student</th>
-            <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider text-right">Referrals</th>
+            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Rank</th>
+            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider">Student</th>
+            <th className="px-4 py-3 text-xs font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider text-right">Referrals</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-stone-100">
+        <tbody className="divide-y divide-stone-100 dark:divide-stone-800 transition-colors">
           {data.length > 0 ? (
             data.map((item, index) => (
               <tr key={item._id as string}>
-                <td className="px-4 py-4 text-sm text-stone-500">#{index + 1}</td>
-                <td className="px-4 py-4 text-sm font-medium text-stone-900">{item.firstName}</td>
-                <td className="px-4 py-4 text-sm text-stone-900 font-bold text-right">{item.count}</td>
+                <td className="px-4 py-4 text-sm text-stone-500 dark:text-stone-500">#{index + 1}</td>
+                <td className="px-4 py-4 text-sm font-medium text-stone-900 dark:text-stone-100">{item.firstName}</td>
+                <td className="px-4 py-4 text-sm text-stone-900 dark:text-stone-100 font-bold text-right">{item.count}</td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan={3} className="px-4 py-12 text-center text-stone-400 text-sm italic">
+              <td colSpan={3} className="px-4 py-12 text-center text-stone-400 dark:text-stone-600 text-sm italic">
                 The leaderboard is currently empty. Start referring to lead!
               </td>
             </tr>
