@@ -28,10 +28,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased selection:bg-primary/10 transition-colors duration-500">
-        <Providers>
-          {children}
-          <Toaster position="bottom-right" />
-        </Providers>
+        {/* Global Blueprint Texture */}
+        <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute inset-0 bg-grid-plus opacity-[0.4] dark:opacity-[0.2]" />
+          <div className="absolute inset-0 bg-noise opacity-50 mix-blend-soft-light" />
+        </div>
+        
+        <div className="relative z-10 min-h-screen flex flex-col">
+          <Providers>
+            {children}
+            <Toaster position="bottom-right" />
+          </Providers>
+        </div>
       </body>
     </html>
   );

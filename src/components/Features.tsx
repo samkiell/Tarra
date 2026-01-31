@@ -28,11 +28,8 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="relative py-20 transition-colors">
-      <div className="absolute inset-0 bg-grid-plus opacity-40 dark:opacity-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-noise pointer-events-none" />
-      
-      <div className="container relative z-10 mx-auto px-6">
+    <section className="py-20 transition-colors">
+      <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {pillars.map((pillar) => (
             <div key={pillar.title} className="flex flex-col items-center text-center">
