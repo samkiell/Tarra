@@ -4,6 +4,7 @@ import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import LogoutButton from "@/components/dashboard/LogoutButton";
 import CopyLinkButton from "@/components/dashboard/CopyLinkButton";
+import Leaderboard from "@/components/Leaderboard";
 
 /**
  * User Dashboard Page (Status)
@@ -38,39 +39,6 @@ export default async function StatusPage({
 
   // Aggregate referral data for the current user
   const referralCount = await Waitlist.countDocuments({ referred_by: USER_ID });
-
-  // Compute Leaderboard: Top 10 recruiters
-  // Logic: Groups by referral ID and joins with user names
-  const leaderboard = await Waitlist.aggregate([
-    {
-      $match: {
-        referred_by: { $ne: null },
-      },
-    },
-    {
-      $group: {
-        _id: "$referred_by",
-        count: { $sum: 1 },
-      },
-    },
-    {
-      $lookup: {
-        from: "waitlists",
-        localField: "_id",
-        foreignField: "id",
-        as: "referrer",
-      },
-    },
-    { $unwind: "$referrer" },
-    {
-      $project: {
-        firstName: { $arrayElemAt: [{ $split: ["$referrer.full_name", " "] }, 0] },
-        count: 1,
-      },
-    },
-    { $sort: { count: -1, firstName: 1 } },
-    { $limit: 10 },
-  ]);
 
   const firstName = user.full_name.split(" ")[0];
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.ng";
@@ -112,34 +80,7 @@ export default async function StatusPage({
         {/* Leaderboard Section */}
         <section>
           <h2 className="text-lg font-semibold mb-6">Top 10 recruiters</h2>
-          <div className="border border-stone-200 rounded-lg overflow-hidden">
-            <table className="w-full text-left">
-              <thead className="bg-stone-50 border-b border-stone-200">
-                <tr>
-                  <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">Rank</th>
-                  <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider">Student</th>
-                  <th className="px-4 py-3 text-xs font-bold text-stone-500 uppercase tracking-wider text-right">Referrals</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-stone-100">
-                {leaderboard.length > 0 ? (
-                  leaderboard.map((item, index) => (
-                    <tr key={index}>
-                      <td className="px-4 py-4 text-sm text-stone-500">#{index + 1}</td>
-                      <td className="px-4 py-4 text-sm font-medium">{item.firstName}</td>
-                      <td className="px-4 py-4 text-sm text-stone-900 font-bold text-right">{item.count}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={3} className="px-4 py-8 text-center text-stone-400 text-sm italic">
-                      No referrals yet. Be the first to start!
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+          <Leaderboard />
         </section>
       </div>
     </main>
