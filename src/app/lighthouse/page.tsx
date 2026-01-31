@@ -29,7 +29,7 @@ export default async function LighthousePage() {
     {
       $lookup: {
         from: "waitlists",
-        localField: "id",
+        localField: "referral_code",
         foreignField: "referred_by",
         as: "referral_details",
       },

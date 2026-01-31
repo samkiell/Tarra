@@ -15,6 +15,8 @@ import { rateLimit } from "@/lib/rate-limit";
  * 4. Self-Referral: Stripped manually if code matches user or is invalid.
  */
 
+import { generateUniqueCode } from "@/lib/codes";
+
 export async function POST(request: Request) {
   try {
     // 1. Rate Limiting Logic
@@ -30,7 +32,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    const { full_name, email, phone_number, interests, referral_code } = body;
+    const { full_name, email, phone_number, interests, referral_code: incomingRefCode } = body;
 
     if (!full_name || !email || !phone_number) {
       return NextResponse.json(
@@ -42,7 +44,6 @@ export async function POST(request: Request) {
     await dbConnect();
 
     // 2. Identification logic (Email & Phone uniqueness)
-    // We check both individually to ensure no identity overlaps
     const existingUser = await Waitlist.findOne({
       $or: [
         { email: email.toLowerCase() },
@@ -60,8 +61,6 @@ export async function POST(request: Request) {
     };
 
     if (existingUser) {
-      // Decision: Block re-joining to maintain list integrity.
-      // Returning users must use the 'Check Status' recovery flow.
       return NextResponse.json(
         { 
           error: "You are already on the waitlist", 
@@ -71,18 +70,28 @@ export async function POST(request: Request) {
       );
     }
 
-    // 3. Referral Logic
-    // Self-referral protection: We verify the referral code is not the user's own projected ID.
+    // 3. Generation Logic
     const uniqueId = uuidv4();
-    const sanitizedReferral = referral_code === uniqueId ? null : referral_code;
+    const shortRefCode = await generateUniqueCode();
+    
+    // 4. Referral Validation
+    // Check if the referred_by code actually exists in the DB
+    let validatedReferrer = null;
+    if (incomingRefCode && incomingRefCode.length === 5) {
+      const referrer = await Waitlist.findOne({ referral_code: incomingRefCode });
+      if (referrer) {
+        validatedReferrer = incomingRefCode;
+      }
+    }
 
     const newUser = await Waitlist.create({
       id: uniqueId,
+      referral_code: shortRefCode,
       full_name,
       email: email.toLowerCase(),
       phone_number,
       interests: Array.isArray(interests) ? interests : [],
-      referred_by: sanitizedReferral || null,
+      referred_by: validatedReferrer,
     });
 
     cookieStore.set("tarra_session", newUser.id, cookieOptions);

@@ -30,7 +30,7 @@ const Leaderboard: React.FC = async () => {
       $lookup: {
         from: "waitlists",
         localField: "_id",
-        foreignField: "id",
+        foreignField: "referral_code",
         as: "referrer",
       },
     },

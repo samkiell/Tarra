@@ -41,8 +41,8 @@ export default async function StatusPage({
     redirect("/");
   }
 
-  // Aggregate referral data for the current user
-  const referralCount = await Waitlist.countDocuments({ referred_by: USER_ID });
+  // Aggregate referral data for the current user using the short code
+  const referralCount = await Waitlist.countDocuments({ referred_by: user.referral_code });
 
   const firstName = user.full_name.split(" ")[0];
   
@@ -54,7 +54,7 @@ export default async function StatusPage({
     ? process.env.NEXT_PUBLIC_BASE_URL 
     : `${protocol}://${host}`;
     
-  const referralUrl = `${baseUrl}?ref=${user.id}`;
+  const referralUrl = `${baseUrl}?ref=${user.referral_code}`;
 
   return (
     <div className="flex flex-col min-h-screen">
