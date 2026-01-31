@@ -107,7 +107,7 @@ const WaitlistForm: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 shadow-sm transition-colors">
+    <div className="w-full max-w-md bg-white dark:bg-stone-900/50 backdrop-blur-sm border border-stone-200 dark:border-stone-800 rounded-2xl p-8 shadow-xl transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-sm font-semibold text-stone-700 dark:text-stone-300 mb-1 transition-colors">Full Name</label>
