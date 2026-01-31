@@ -36,7 +36,7 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
 
   return (
     <div className="flex flex-col sm:flex-row gap-2 w-full max-w-lg">
-      <div className="flex-grow px-4 py-3 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-600 dark:text-stone-300 text-sm truncate font-mono transition-colors">
+      <div className="flex-grow px-4 py-3 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-600 dark:text-stone-400 text-sm truncate font-mono transition-colors">
         {referralUrl}
       </div>
       <button
