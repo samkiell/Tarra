@@ -15,7 +15,7 @@ const options = {
 
 const tokenCache = new LRUCache(options);
 
-export async function rateLimit(ip: string, limit: number = 50) {
+export async function rateLimit(ip: string, limit: number = 520) {
   const currentUsage = (tokenCache.get(ip) as number) || 0;
   
   if (currentUsage >= limit) {
