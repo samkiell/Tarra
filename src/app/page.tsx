@@ -36,7 +36,9 @@ export default function Home() {
 
       {/* Main Content Sections */}
       <main className="flex-grow">
-        <Hero />
+        <section id="join-section">
+          <Hero />
+        </section>
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
@@ -55,7 +57,7 @@ export default function Home() {
               <Leaderboard />
               
               {/* Recovery Path for Students on Shared Devices */}
-              <div className="mt-20">
+              <div id="status-section" className="mt-20 scroll-mt-24">
                 <StatusCheck />
               </div>
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { toast } from "react-hot-toast";
@@ -19,6 +19,20 @@ const StatusCheck: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    // Smart Listen: Auto-fill phone from WaitlistForm
+    const handleAutoFill = (e: any) => {
+      if (e.detail?.phone) {
+        setPhone(e.detail.phone);
+        const section = document.getElementById("status-section");
+        section?.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+
+    window.addEventListener("tarra:fill-check", handleAutoFill);
+    return () => window.removeEventListener("tarra:fill-check", handleAutoFill);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -36,7 +50,17 @@ const StatusCheck: React.FC = () => {
         toast.success(data.message);
         router.push(`/status/${data.user_id}`);
       } else {
-        toast.error(data.message || "Failed to find account.");
+        // Handle user not found with smart redirection
+        if (response.status === 404) {
+          toast.error("Looks like you're new. Let's get you on the list.");
+          
+          // Emit event to scroll up to join
+          window.dispatchEvent(new CustomEvent("tarra:fill-join", { 
+            detail: { phone } 
+          }));
+        } else {
+          toast.error(data.message || "Failed to find account.");
+        }
       }
     } catch (error) {
       toast.error("Connection error.");

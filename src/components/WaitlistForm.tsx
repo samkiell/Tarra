@@ -30,6 +30,19 @@ const WaitlistForm: React.FC = () => {
 
   useEffect(() => {
     captureReferral();
+
+    // Smart Listen: Auto-fill phone from StatusCheck
+    const handleAutoFill = (e: any) => {
+      if (e.detail?.phone) {
+        setFormData(prev => ({ ...prev, phone_number: e.detail.phone }));
+        const section = document.getElementById("join-section");
+        section?.scrollIntoView({ behavior: "smooth" });
+        toast.success("We've filled in your phone number. Just add your name and email!");
+      }
+    };
+
+    window.addEventListener("tarra:fill-join", handleAutoFill);
+    return () => window.removeEventListener("tarra:fill-join", handleAutoFill);
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,9 +75,15 @@ const WaitlistForm: React.FC = () => {
         toast.success(data.message);
         router.push(`/status/${data.user_id}`);
       } else {
-        // Handle existing user block with guidance
+        // Handle existing user block with smart redirection
         if (data.message && response.status === 400) {
           toast.error(data.error);
+          
+          // Emit event to scroll down to check status
+          window.dispatchEvent(new CustomEvent("tarra:fill-check", { 
+            detail: { phone: formData.phone_number } 
+          }));
+          
           toast(data.message, { icon: "ℹ️", duration: 6000 });
         } else {
           const errorMessage = Array.isArray(data.details) ? data.details[0] : (data.error || "Something went wrong");
