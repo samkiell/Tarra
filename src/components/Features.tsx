@@ -28,7 +28,7 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white dark:bg-stone-950 border-y border-stone-100 dark:border-stone-900 transition-colors">
+    <section className="py-20 border-y border-stone-100 dark:border-stone-900 transition-colors">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {pillars.map((pillar) => (

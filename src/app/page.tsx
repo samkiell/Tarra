@@ -33,7 +33,7 @@ export default function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section className="py-24 bg-white dark:bg-stone-950 transition-colors">
+        <section className="py-24 transition-colors">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-16">

@@ -54,19 +54,19 @@
   body {
     @apply antialiased min-h-screen transition-colors duration-500 bg-grid-pattern;
     color: var(--foreground);
-    background: var(--background);
+    background-color: var(--background);
   }
 }
 
 @layer utilities {
   /* Subtle Geometric Background Pattern */
   .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-300) 1px, transparent 1.5px);
+    background-image: radial-gradient(circle, var(--stone-400) 1px, transparent 1.2px);
     background-size: 32px 32px;
   }
   
   .dark .bg-grid-pattern {
-    background-image: radial-gradient(circle, var(--stone-800) 1px, transparent 1.5px);
+    background-image: radial-gradient(circle, var(--stone-700) 1px, transparent 1.2px);
   }
 
   .bg-mesh-gradient {
