@@ -84,10 +84,11 @@ export default async function StatusPage({
         {/* Leaderboard Section */}
         <section>
           <h2 className="text-lg font-semibold mb-6">Top 10 recruiters</h2>
-          </section>
+          <Leaderboard />
+        </section>
       </div>
     </main>
     <Footer />
-</div>
+  </div>
   );
 }
