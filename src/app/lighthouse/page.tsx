@@ -79,6 +79,20 @@ export default async function LighthousePage() {
     { $sort: { referral_count: -1, full_name: 1 } },
   ]);
 
+  // Compute Lightweight Metrics (Read-only, Server-side)
+  // Operational Intent: Simplicity > Dashboards. Just the numbers that matter for daily checks.
+  const totalUsers = users.length;
+  const totalReferrals = users.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
+  const avgReferrals = totalUsers > 0 ? (totalReferrals / totalUsers).toFixed(1) : "0.0";
+  const topRecruiterCount = users.length > 0 ? users[0].referral_count : 0;
+
+  const metrics = {
+    totalUsers,
+    totalReferrals,
+    avgReferrals,
+    topRecruiterCount
+  };
+
   return (
     <main className="min-h-screen bg-stone-50 dark:bg-stone-950 py-12 px-6 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
@@ -100,7 +114,7 @@ export default async function LighthousePage() {
           </div>
         </div>
         
-        <AdminDashboard users={JSON.parse(JSON.stringify(users))} />
+        <AdminDashboard users={JSON.parse(JSON.stringify(users))} metrics={metrics} />
       </div>
       <div className="w-full mt-auto">
         <Footer />

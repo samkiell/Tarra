@@ -19,8 +19,16 @@ interface AdminUser {
   isFlagged?: boolean;
 }
 
+interface DashboardMetrics {
+  totalUsers: number;
+  totalReferrals: number;
+  avgReferrals: string;
+  topRecruiterCount: number;
+}
+
 interface AdminDashboardProps {
   users: AdminUser[];
+  metrics: DashboardMetrics;
 }
 
 /**
@@ -30,7 +38,7 @@ interface AdminDashboardProps {
  * 1. Ranking: High referral counts are surfaced immediately for audit.
  * 2. Drill-down: Clicking the count allows manual verification of referral quality.
  */
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   
   // State for optional filters (no complex UI controls)
@@ -54,12 +62,29 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users }) => {
 
   return (
     <div className="w-full">
+      {/* Lightweight Metrics Grid (Read-only, plain numbers) */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Total Waitlist</div>
+          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.totalUsers.toLocaleString()}</div>
+        </div>
+        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Total Referrals</div>
+          <div className="text-2xl font-black text-primary">{metrics.totalReferrals.toLocaleString()}</div>
+        </div>
+        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Avg. Referrals</div>
+          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.avgReferrals}</div>
+        </div>
+        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
+          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Top Recruiter</div>
+          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.topRecruiterCount}</div>
+        </div>
+      </div>
+
       <div className="mb-8 flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
-          <div className="text-sm text-stone-500 dark:text-stone-400">
-            Total Users: <span className="font-bold text-stone-900 dark:text-stone-100 transition-colors">{users.length}</span>
-          </div>
         </div>
 
         {/* Filter Bar: Simple inputs for operational filtering */}
