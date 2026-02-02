@@ -145,7 +145,7 @@ const WaitlistForm: React.FC = () => {
             type="text"
             required
             className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
-            placeholder="Samkiel Tarra"
+            placeholder="User Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
           />
