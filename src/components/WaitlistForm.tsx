@@ -137,14 +137,14 @@ const WaitlistForm: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-xl p-6 shadow-sm transition-all duration-300">
+    <div className="w-full max-w-md bg-dark border border-muted/20 rounded-xl p-6 shadow-2xl transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1.5 transition-colors">Full Name</label>
+          <label className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Full Name</label>
           <input
             type="text"
             required
-            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
+            className="w-full h-11 px-4 border border-muted/20 rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-secondary/50"
             placeholder="User Tarra"
             value={formData.full_name}
             onChange={e => setFormData({ ...formData, full_name: e.target.value })}
@@ -152,17 +152,17 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 transition-colors">Campus Email</label>
+          <label className="block text-sm font-semibold text-secondary transition-colors">Campus Email</label>
           <div className="relative group">
             <input
               type="email"
               required
-              className={`w-full h-11 pl-4 pr-36 border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
+              className={`w-full h-11 pl-4 pr-36 border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
                 errors.email === "typo" 
-                  ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500" 
+                  ? "border-primary focus:ring-primary focus:border-primary" 
                   : errors.email === "non-oau" || errors.email === "existing"
                   ? "border-primary focus:ring-primary focus:border-primary"
-                  : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
+                  : "border-muted/20 focus:ring-primary focus:border-primary"
               }`}
               placeholder="user@student.oauife.edu.ng"
               value={formData.email}
@@ -184,21 +184,21 @@ const WaitlistForm: React.FC = () => {
           </div>
           
           {errors.email === "typo" && (
-            <div className="mt-2 p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 transition-all">
-              <span className="text-amber-500">⚠️</span>
+            <div className="mt-2 p-2.5 bg-primary/5 border border-primary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 transition-all">
+              <span className="text-primary">ℹ️</span>
               Oops, looks like a typo. Double check?
             </div>
           )}
 
           {errors.email === "non-oau" && (
-            <div className="mt-2 p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 leading-snug flex items-center gap-2 transition-all">
+            <div className="mt-2 p-2.5 bg-primary/5 border border-primary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 transition-all">
               <span className="text-primary">ℹ️</span>
               Please use your OAU student email.
             </div>
           )}
 
           {errors.email === "existing" && (
-            <div className="mt-2 p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-md text-[11px] text-stone-500 dark:text-stone-400 leading-snug flex flex-col gap-2 transition-all">
+            <div className="mt-2 p-2.5 bg-dark border border-muted/20 rounded-md text-[11px] text-secondary leading-snug flex flex-col gap-2 transition-all">
               <div className="flex items-center gap-2">
                 <span className="text-primary">ℹ️</span>
                 You&apos;re already on the list!
@@ -219,11 +219,11 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1.5 transition-colors">Phone Number</label>
+          <label className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Phone Number</label>
           <input
             type="tel"
             required
-            className="w-full h-11 px-4 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-400"
+            className="w-full h-11 px-4 border border-muted/20 rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-secondary/50"
             placeholder="08012345678"
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
@@ -231,7 +231,7 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-2 transition-colors">
+          <label className="block text-sm font-semibold text-secondary mb-2 transition-colors">
             I am a... <span className="text-primary">*</span>
           </label>
           <div className="flex flex-wrap gap-2">
@@ -243,7 +243,7 @@ const WaitlistForm: React.FC = () => {
                   className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
                     formData.interests.includes(interest)
                       ? "bg-primary border-primary text-white"
-                      : "bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-primary/50"
+                      : "bg-dark border-muted/20 text-secondary hover:border-primary/50"
                   }`}
               >
                 {interest}
@@ -251,15 +251,15 @@ const WaitlistForm: React.FC = () => {
             ))}
           </div>
           {errors.interests && (
-             <p className="mt-2 text-[11px] text-amber-600 dark:text-amber-400 font-medium">
+             <p className="mt-2 text-[11px] text-primary font-medium">
                {errors.interests}
              </p>
           )}
         </div>
 
         {errors.general && (
-          <div className="p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 transition-all">
-            <span className="text-amber-500">⚠️</span>
+          <div className="p-2.5 bg-primary/5 border border-primary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 transition-all">
+            <span className="text-primary">ℹ️</span>
             {errors.general}
           </div>
         )}
@@ -267,26 +267,26 @@ const WaitlistForm: React.FC = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-sm"
+          className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-lg shadow-primary/20"
         >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>
 
         {successMessage && (
-          <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center gap-2 animate-in fade-in zoom-in-95 duration-300">
+          <div className="p-2.5 bg-primary/10 border border-primary/20 rounded-md text-[11px] text-white font-bold leading-snug flex items-center gap-2 animate-in fade-in zoom-in-95 duration-300">
             <span className="text-primary">✅</span>
             {successMessage}
           </div>
         )}
 
         {infoMessage && (
-          <div className="p-2.5 bg-sky-50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-900/50 rounded-md text-[11px] text-sky-700 dark:text-sky-400 leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
-            <span className="text-sky-500">ℹ️</span>
+          <div className="p-2.5 bg-secondary/10 border border-secondary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+            <span className="text-primary">ℹ️</span>
             {infoMessage}
           </div>
         )}
 
-        <p className="text-center text-[11px] font-medium text-stone-500 dark:text-stone-400 mt-2 transition-colors">
+        <p className="text-center text-[11px] font-medium text-secondary mt-2 transition-colors">
           Already joined?{" "}
           <button
             type="button"

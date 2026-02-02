@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import WaitlistForm from "./WaitlistForm";
@@ -37,20 +39,20 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
               />
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 tracking-tight transition-colors">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-4 sm:mb-6 tracking-tight transition-colors">
               OAU Commerce. Without the Chaos.
             </h1>
 
-            <p className="text-lg text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">
+            <p className="text-base sm:text-lg text-secondary font-medium mb-4 sm:mb-6 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
-            <p className="text-stone-500 dark:text-stone-400 mb-8 max-w-lg leading-relaxed transition-colors">
+            <p className="text-sm sm:text-base text-secondary/80 mb-6 sm:mb-8 max-w-lg leading-relaxed transition-colors">
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
             {!userData && (
-              <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
+              <div className="flex items-center gap-3 py-2 px-4 bg-dark/50 border border-muted/20 rounded text-secondary text-xs font-semibold uppercase tracking-wider transition-colors">
                 <span className="w-2 h-2 rounded-full bg-primary" />
                 Over {totalJoined.toLocaleString()} students joined
               </div>
