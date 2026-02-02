@@ -1,24 +1,8 @@
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-sm"
-          >
-          {loading ? "Joining..." : "Join Waitlist"}
-        </button>
+"use client";
 
-        {successMessage && (
-          <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center gap-2 animate-in fade-in zoom-in-95 duration-300">
-            <span className="text-primary">✅</span>
-            {successMessage}
-          </div>
-        )}
-
-        {infoMessage && (
-          <div className="p-2.5 bg-sky-50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-900/50 rounded-md text-[11px] text-sky-700 dark:text-sky-400 leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
-            <span className="text-sky-500">ℹ️</span>
-            {infoMessage}
-          </div>
-        )}
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getReferral, clearReferral, captureReferral } from "@/lib/referrals";
 
 /**
  * WaitlistForm Component
@@ -280,13 +264,27 @@ const WaitlistForm: React.FC = () => {
           </div>
         )}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-sm"
-          >
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full py-3 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all shadow-sm"
+        >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>
+
+        {successMessage && (
+          <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center gap-2 animate-in fade-in zoom-in-95 duration-300">
+            <span className="text-primary">✅</span>
+            {successMessage}
+          </div>
+        )}
+
+        {infoMessage && (
+          <div className="p-2.5 bg-sky-50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-900/50 rounded-md text-[11px] text-sky-700 dark:text-sky-400 leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+            <span className="text-sky-500">ℹ️</span>
+            {infoMessage}
+          </div>
+        )}
 
         <p className="text-center text-[11px] font-medium text-stone-500 dark:text-stone-400 mt-2 transition-colors">
           Already joined?{" "}
