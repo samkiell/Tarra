@@ -8,15 +8,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Tarra | The Official OAU Marketplace",
-  description: "Join the exclusive waitlist for the official OAU marketplace. Connect with verified campus vendors and discover essential services in one secure platform.",
+  title: "Tarra | OAU Commerce Without the Chaos",
+  description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.app"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Tarra | The Official OAU Marketplace",
-    description: "Join the exclusive waitlist for the official OAU marketplace.",
-    url: "https://tarra.app",
+    title: "Tarra | OAU Commerce Without the Chaos",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    url: "/",
     siteName: "Tarra",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Tarra - OAU Commerce Without the Chaos",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tarra | OAU Commerce Without the Chaos",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    images: ["/og-image.png"],
   },
   icons: {
     icon: "/assets/favicon_nobg.png",
