@@ -148,22 +148,37 @@ const WaitlistForm: React.FC = () => {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 mb-1.5 transition-colors">Campus Email</label>
-          <input
-            type="email"
-            required
-            className={`w-full h-11 px-4 border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
-              errors.email === "typo" 
-                ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500" 
-                : errors.email === "non-oau" || errors.email === "existing"
-                ? "border-primary focus:ring-primary focus:border-primary"
-                : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
-            }`}
-            placeholder="user@student.oauife.edu.ng"
-            value={formData.email}
-            onChange={e => setFormData({ ...formData, email: e.target.value })}
-          />
+        <div className="space-y-1.5">
+          <label className="block text-sm font-semibold text-stone-600 dark:text-stone-400 transition-colors">Campus Email</label>
+          <div className="relative group">
+            <input
+              type="email"
+              required
+              className={`w-full h-11 pl-4 pr-32 border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
+                errors.email === "typo" 
+                  ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500" 
+                  : errors.email === "non-oau" || errors.email === "existing"
+                  ? "border-primary focus:ring-primary focus:border-primary"
+                  : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
+              }`}
+              placeholder="user@student.oauife.edu.ng"
+              value={formData.email}
+              onChange={e => setFormData({ ...formData, email: e.target.value })}
+            />
+            
+            {formData.email && !formData.email.endsWith("@student.oauife.edu.ng") && (
+              <button
+                type="button"
+                onClick={() => {
+                  const prefix = formData.email.split("@")[0];
+                  setFormData({ ...formData, email: `${prefix}@student.oauife.edu.ng` });
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-[10px] font-bold rounded-md border border-primary/20 transition-all opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
+              >
+                + @student.oauife.edu.ng
+              </button>
+            )}
+          </div>
           
           {errors.email === "typo" && (
             <div className="mt-2 p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 transition-all">
