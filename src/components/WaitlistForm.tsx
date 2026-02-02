@@ -323,11 +323,18 @@ const WaitlistForm: React.FC = () => {
           <button
             type="button"
             onClick={() => {
-              document.getElementById("leaderboard-section")?.scrollIntoView({ behavior: "smooth" });
+              const anchor = document.getElementById("status-anchor");
+              if (anchor) {
+                anchor.scrollIntoView({ behavior: "smooth" });
+                // Attempt focus after scroll
+                setTimeout(() => {
+                  document.getElementById("status_phone")?.focus();
+                }, 800);
+              }
             }}
             className="text-primary hover:underline underline-offset-2 transition-all"
           >
-            Check your Rank
+            Check Status
           </button>
         </p>
       </form>

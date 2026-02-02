@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 /**
@@ -18,14 +18,18 @@ const StatusCheck: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [error, setError] = useState<{ type: 'new' | 'general', message: string } | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Smart Listen: Auto-fill phone from WaitlistForm
     const handleAutoFill = (e: any) => {
       if (e.detail?.phone) {
         setPhone(e.detail.phone);
-        const section = document.getElementById("status-section");
+        const section = document.getElementById("status-anchor");
         section?.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 800);
       }
     };
 
@@ -74,10 +78,12 @@ const StatusCheck: React.FC = () => {
         Check Status
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <div id="status-anchor" className="scroll-mt-32" />
         <div className="flex flex-col sm:flex-row gap-2">
           <label htmlFor="status_phone" className="sr-only">Phone Number</label>
           <input
             id="status_phone"
+            ref={inputRef}
             type="tel"
             required
             placeholder="Phone Number"
