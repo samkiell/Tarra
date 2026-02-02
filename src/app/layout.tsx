@@ -63,6 +63,38 @@ export default function RootLayout({
           }}
         />
         
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://tarra.app/#organization",
+                  "name": "Tarra",
+                  "url": "https://tarra.app",
+                  "logo": "https://tarra.app/logo.png",
+                  "description": "Campus commerce platform for OAU students"
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://tarra.app/#website",
+                  "url": "https://tarra.app",
+                  "name": "Tarra",
+                  "publisher": {
+                    "@id": "https://tarra.app/#organization"
+                  },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://tarra.app/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ]
+            }),
+          }}
+        />
         <div className="relative z-10 min-h-screen flex flex-col">
           <Providers>
             {children}
