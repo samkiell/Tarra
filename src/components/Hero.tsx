@@ -21,7 +21,7 @@ const Hero: React.FC = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 tracking-tight transition-colors">
-              Everything You Need. All in One Place.
+              OAU Commerce. Without the Chaos.
             </h1>
 
             <p className="text-lg text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">

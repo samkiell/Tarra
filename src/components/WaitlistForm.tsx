@@ -253,6 +253,19 @@ const WaitlistForm: React.FC = () => {
           >
           {loading ? "Joining..." : "Join Waitlist"}
         </button>
+
+        <p className="text-center text-[11px] font-medium text-stone-500 dark:text-stone-400 mt-2 transition-colors">
+          Already joined?{" "}
+          <button
+            type="button"
+            onClick={() => {
+              document.getElementById("leaderboard-section")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="text-primary hover:underline underline-offset-2 transition-all"
+          >
+            Check your Rank
+          </button>
+        </p>
       </form>
     </div>
   );

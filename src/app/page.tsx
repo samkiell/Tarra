@@ -33,7 +33,7 @@ export default function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section className="py-20 transition-colors">
+        <section id="leaderboard-section" className="py-20 transition-colors scroll-mt-24">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12">

@@ -8,6 +8,7 @@ import Leaderboard from "@/components/Leaderboard";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { generateUniqueCode } from "@/lib/codes";
+import { CheckCircle2 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -79,13 +80,10 @@ export default async function StatusPage({
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight mb-2">
-              Hello {firstName}
+            <h1 className="text-3xl font-black tracking-tight text-stone-900 dark:text-stone-50 flex items-center gap-2">
+              Hello, {firstName} 👋
+              <CheckCircle2 className="w-6 h-6 text-primary fill-primary/10" strokeWidth={2.5} />
             </h1>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-verification/10 text-verification text-xs font-bold uppercase tracking-wider rounded border border-verification/20 transition-all">
-              <span className="w-1.5 h-1.5 rounded-full bg-verification" />
-              Verified Student
-            </div>
           </div>
         </header>
 
