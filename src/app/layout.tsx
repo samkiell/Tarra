@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
-// Standard production-ready layout
-// Meaningful comment: Root layout defines the HTML structure and global styles
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+});
 
 export const metadata: Metadata = {
   title: "Tarra | The Official OAU Marketplace",
@@ -26,12 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased selection:bg-primary/10 transition-colors duration-500">
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
+      <body className="antialiased selection:bg-primary/10 transition-colors duration-500 font-sans">
         {/* Global Blueprint Texture */}
         <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
           <div className="absolute inset-0 bg-grid-plus opacity-[0.4] dark:opacity-[0.2]" />
-          <div className="absolute inset-0 bg-noise opacity-50 mix-blend-soft-light" />
+          <div className="absolute inset-0 bg-noise opacity-30 mix-blend-soft-light" />
         </div>
         
         <div className="relative z-10 min-h-screen flex flex-col">
