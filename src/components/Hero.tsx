@@ -10,6 +10,7 @@ interface HeroProps {
     rank: number;
     referralUrl: string;
   } | null;
+  totalJoined: number;
 }
 
 /**
@@ -20,7 +21,7 @@ interface HeroProps {
  * 2. Conversion: Houses the WaitlistForm for immediate student capture.
  * 3. Persistence: Displays WelcomeBackCard for returning users with valid sessions.
  */
-const Hero: React.FC<HeroProps> = ({ userData }) => {
+const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
     <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
@@ -45,7 +46,7 @@ const Hero: React.FC<HeroProps> = ({ userData }) => {
             {!userData && (
               <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
                 <span className="w-2 h-2 rounded-full bg-primary" />
-                Over 2,000 students joined this week
+                Over {totalJoined.toLocaleString()} students joined
               </div>
             )}
           </div>

@@ -34,9 +34,13 @@ export default async function Home() {
     : `${protocol}://${host}`;
 
   let userData = null;
+  
+  await dbConnect();
+  const realUserCount = await Waitlist.countDocuments();
+  const baseCount = parseInt(process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT || "0", 10);
+  const totalJoined = realUserCount + baseCount;
 
   if (session) {
-    await dbConnect();
     const user = await Waitlist.findOne({ id: session.value });
     
     if (user) {
@@ -66,7 +70,7 @@ export default async function Home() {
       {/* Main Content Sections */}
       <main className="flex-grow">
         <section id="join-section">
-          <Hero userData={userData} />
+          <Hero userData={userData} totalJoined={totalJoined} />
         </section>
         <Features />
         
