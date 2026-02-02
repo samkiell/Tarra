@@ -80,18 +80,18 @@ export default async function StatusPage({
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
           <div>
-            <h1 className="text-3xl font-black tracking-tight text-stone-900 dark:text-stone-50 flex items-center gap-2">
+            <h1 className="text-3xl font-black tracking-tight text-white flex items-center gap-2">
               Hello, {firstName} 👋
-              <CheckCircle2 className="w-6 h-6 text-primary fill-primary/10" strokeWidth={2.5} />
+              <CheckCircle2 className="w-6 h-6 text-primary" strokeWidth={2.5} />
             </h1>
           </div>
         </header>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          <div className="p-6 border border-stone-200 dark:border-stone-800 rounded-lg bg-white dark:bg-stone-900 shadow-sm transition-colors">
-            <h3 className="text-sm font-medium text-stone-500 dark:text-stone-400 mb-1">Referral Count</h3>
-            <p className="text-3xl font-bold tracking-tight transition-colors">
+          <div className="p-6 border border-muted/10 rounded-lg shadow-xl transition-colors">
+            <h3 className="text-sm font-medium text-secondary mb-3">Referral Count</h3>
+            <p className="text-3xl font-bold tracking-tight text-white transition-colors">
               You have referred <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
             </p>
           </div>
@@ -99,16 +99,16 @@ export default async function StatusPage({
 
         {/* Referral Link Section */}
         <section className="mb-16">
-          <h2 className="text-lg font-semibold mb-4">Your Referral Link</h2>
+          <h2 className="text-lg font-bold text-white mb-4">Your Referral Link</h2>
           <CopyLinkButton referralUrl={referralUrl} />
-          <p className="mt-3 text-sm text-stone-500 dark:text-stone-400 transition-colors">
+          <p className="mt-3 text-sm text-secondary transition-colors leading-relaxed">
             Share this link to move up the leaderboard and win ₦50,000.
           </p>
         </section>
 
         {/* Leaderboard Section */}
         <section>
-          <h2 className="text-lg font-semibold mb-6">Top 10 recruiters</h2>
+          <h2 className="text-lg font-bold text-white mb-6">Top 10 recruiters</h2>
           <Leaderboard />
         </section>
       </div>
