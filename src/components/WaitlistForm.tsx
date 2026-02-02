@@ -154,7 +154,7 @@ const WaitlistForm: React.FC = () => {
             <input
               type="email"
               required
-              className={`w-full h-11 pl-4 pr-32 border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
+              className={`w-full h-11 pl-4 pr-36 border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
                 errors.email === "typo" 
                   ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500" 
                   : errors.email === "non-oau" || errors.email === "existing"
