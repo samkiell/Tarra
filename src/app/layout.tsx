@@ -45,7 +45,6 @@ export default function RootLayout({
         <div className="relative z-10 min-h-screen flex flex-col">
           <Providers>
             {children}
-            <Toaster position="bottom-right" />
           </Providers>
         </div>
       </body>
