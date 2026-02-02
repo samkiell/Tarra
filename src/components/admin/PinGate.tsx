@@ -2,8 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, Zap } from "lucide-react";
-import { toast } from "react-hot-toast";
+import { Lock, Zap, CheckCircle2 } from "lucide-react";
 
 /**
  * PinGate Component
@@ -11,7 +10,7 @@ import { toast } from "react-hot-toast";
  * Logic:
  * 1. Modal overlay for unauthorized access to /lighthouse.
  * 2. Collects the ADMIN_PIN from the user.
- * 3. Appends the PIN to the URL as a query parameter to trigger server-side re-render.
+ * 3. Verifies via /api/auth/lighthouse and refreshes the page on success.
  */
 interface PinGateProps {
   error?: boolean;
@@ -20,6 +19,7 @@ interface PinGateProps {
 const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
   const [pin, setPin] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(initialError ? "Access Denied" : null);
   const router = useRouter();
 
@@ -39,14 +39,10 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
       const data = await res.json();
 
       if (res.ok) {
-        toast.success("Access Granted", {
-          style: {
-            borderRadius: '10px',
-            background: '#0d9488',
-            color: '#fff',
-          },
-        });
-        router.refresh();
+        setSuccess(true);
+        setTimeout(() => {
+            router.refresh();
+        }, 1000);
       } else {
         setError(data.error || "Invalid Access PIN");
         setPin("");
@@ -54,7 +50,7 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
     } catch (err) {
       setError("Connection failed");
     } finally {
-      setLoading(false);
+      if (!success) setLoading(false);
     }
   };
 
@@ -62,8 +58,12 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-stone-950 px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto mb-6">
-            <Lock className="w-8 h-8 text-white" />
+          <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20 transition-all">
+            {success ? (
+              <CheckCircle2 className="w-8 h-8 text-white animate-in zoom-in-50 duration-300" />
+            ) : (
+              <Lock className="w-8 h-8 text-white" />
+            )}
           </div>
           <h1 className="text-xl font-bold text-stone-900 dark:text-stone-50 tracking-tight mb-2">
             Lighthouse
@@ -78,8 +78,11 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
             <input
               type="password"
               autoFocus
+              disabled={loading || success}
               className={`w-full h-14 px-4 bg-stone-50 dark:bg-stone-950 border rounded-lg text-center text-2xl tracking-[0.5em] font-bold text-stone-900 dark:text-stone-200 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-300 ${
-                error
+                success
+                  ? "border-teal-500 focus:ring-teal-500 ring-1 ring-teal-500"
+                  : error
                   ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500"
                   : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
               }`}
@@ -91,19 +94,30 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
           </div>
 
           {error && (
-            <div className="p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 transition-all">
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-300">
               <span className="text-amber-500">⚠️</span>
               {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-300">
+              <span className="text-teal-500">✅</span>
+              Access Granted. Opening Dashboard...
             </div>
           )}
           
           <button
             type="submit"
-            disabled={loading}
-            className="w-full h-12 bg-primary text-white font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+            disabled={loading || success}
+            className={`w-full h-12 font-bold rounded-lg transition-all flex items-center justify-center gap-2 shadow-md ${
+                success 
+                    ? "bg-teal-600 text-white cursor-wait" 
+                    : "bg-primary text-white hover:brightness-110 active:opacity-90 disabled:opacity-50"
+            }`}
           >
-            <Zap className="w-4 h-4" />
-            {loading ? "VERIFYING..." : "ACCESS DASHBOARD"}
+            {success ? null : <Zap className="w-4 h-4" />}
+            {success ? "GRANTING ACCESS..." : loading ? "VERIFYING..." : "ACCESS DASHBOARD"}
           </button>
         </form>
 
