@@ -36,6 +36,7 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
                 width={72} 
                 height={72} 
                 className="w-16 h-16 object-contain"
+                priority
               />
             </div>
 
