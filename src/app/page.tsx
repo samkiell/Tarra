@@ -2,6 +2,8 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Leaderboard from "@/components/Leaderboard";
 import StatusCheck from "@/components/StatusCheck";
+import { LogoutButton } from "@/components/LogoutButton";
+
 
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -65,7 +67,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar rightContent={userData ? <LogoutButton /> : null} />
 
       {/* Main Content Sections */}
       <main className="flex-grow">

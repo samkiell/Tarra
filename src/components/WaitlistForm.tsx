@@ -28,6 +28,7 @@ const WaitlistForm: React.FC = () => {
 
   const [errors, setErrors] = useState<{
     email?: "typo" | "non-oau" | "existing";
+    phone_number?: "invalid";
     interests?: string;
     general?: string;
   }>({});
@@ -72,10 +73,22 @@ const WaitlistForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form submit payload:", formData);
     
+    // Phone Number Validation (Nigerian Format)
+    const nigerianPhoneRegex = /^(080|081|090|070)\d{8}$/;
+    if (!nigerianPhoneRegex.test(formData.phone_number)) {
+      setErrors(prev => ({ ...prev, phone_number: "invalid" }));
+      setLoading(false);
+      return;
+    } else {
+      setErrors(prev => ({ ...prev, phone_number: undefined }));
+    }
+
     // Mandatory Interest Validation
     if (formData.interests.length === 0) {
       setErrors(prev => ({ ...prev, interests: "Please select at least one interest" }));
+      setLoading(false);
       return;
     }
 
@@ -231,6 +244,12 @@ const WaitlistForm: React.FC = () => {
             value={formData.phone_number}
             onChange={e => setFormData({ ...formData, phone_number: e.target.value })}
           />
+          {errors.phone_number === "invalid" && (
+            <div className="mt-2 p-2.5 bg-primary/5 border border-primary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 transition-all">
+              <span className="text-primary">ℹ️</span>
+              Phone number must be 11 digits and start with 080, 081, 090, or 070.
+            </div>
+          )}
         </div>
 
         <div>

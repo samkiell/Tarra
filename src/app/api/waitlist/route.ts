@@ -32,6 +32,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
+    console.log("API Request Body:", body);
     const { full_name, email, phone_number, interests, referral_code: incomingRefCode } = body;
 
     if (!full_name || !email || !phone_number) {
@@ -41,13 +42,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const cleanPhone = phone_number.trim();
+    const cleanEmail = email.toLowerCase().trim();
+
     await dbConnect();
 
     // 2. Identification logic (Email & Phone uniqueness)
     const existingUser = await Waitlist.findOne({
       $or: [
-        { email: email.toLowerCase() },
-        { phone_number: phone_number }
+        { email: cleanEmail },
+        { phone_number: cleanPhone }
       ]
     });
 
@@ -88,13 +92,15 @@ export async function POST(request: Request) {
       id: uniqueId,
       referral_code: shortRefCode,
       full_name,
-      email: email.toLowerCase(),
-      phone_number,
+      email: cleanEmail,
+      phone_number: cleanPhone,
       interests: Array.isArray(interests) ? interests : [],
       referred_by: validatedReferrer,
     });
+    console.log("Database Response (New User):", newUser);
 
     cookieStore.set("tarra_session", newUser.id, cookieOptions);
+    console.log("Session cookie set for user:", newUser.id);
 
     return NextResponse.json(
       { message: "Successfully joined waitlist", user_id: newUser.id, is_new: true },
@@ -110,7 +116,11 @@ export async function POST(request: Request) {
     
     // Check for MongoDB local unique index violations (e.g. duplicate phone number)
     if (error.code === 11000) {
-      return NextResponse.json({ error: "Email or phone number already in use" }, { status: 400 });
+      const field = Object.keys(error.keyPattern)[0];
+      const message = field === "phone_number" 
+        ? "This phone number is already registered" 
+        : "This email is already registered";
+      return NextResponse.json({ error: message }, { status: 400 });
     }
 
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
