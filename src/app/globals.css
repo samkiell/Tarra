@@ -2,55 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  
-  /* Tarra Teal - High Contrast Primary */
-  --primary: #0d9488;
-  --primary-foreground: #ffffff;
-
-  --success: #0d9488;
-  --warning: #f59e0b;
-  --error: #f59e0b;
-  --verification: #0d9488;
-
-  --amber-50: #fffbeb;
-  --amber-100: #fef3c7;
-  --amber-500: #f59e0b;
-  --amber-600: #d97706;
-
-  --stone-50: #fafaf9;
-  --stone-100: #f5f5f4;
-  --stone-200: #e7e5e4;
-  --stone-300: #d6d3d1;
-  --stone-400: #a8a29e;
-  --stone-500: #78716c;
-  --stone-600: #57534e;
-  --stone-700: #44403c;
-  --stone-800: #292524;
-  --stone-900: #1c1917;
-  --stone-950: #0a0a0a;
-}
-
-.dark {
-  --background: #0a0a0a;
-  --foreground: #fafaf9;
-  
-  --primary: #0d9488; 
-  --primary-foreground: #ffffff;
-
-  --success: #0d9488;
-  --warning: #f59e0b;
-  --error: #f59e0b;
-  --verification: #0d9488;
-}
-
 @layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    
+    /* Tarra Teal - High Contrast Primary */
+    --primary: #0d9488;
+    --primary-foreground: #ffffff;
+
+    --success: #0d9488;
+    --warning: #f59e0b;
+    --error: #f59e0b;
+    --verification: #0d9488;
+
+    --amber-50: #fffbeb;
+    --amber-100: #fef3c7;
+    --amber-500: #f59e0b;
+    --amber-600: #d97706;
+
+    --stone-50: #fafaf9;
+    --stone-100: #f5f5f4;
+    --stone-200: #e7e5e4;
+    --stone-300: #d6d3d1;
+    --stone-400: #a8a29e;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: #1c1917;
+    --stone-950: #0a0a0a;
+
+    --font-outfit: var(--font-outfit), system-ui, sans-serif;
+    --font-inter: var(--font-inter), system-ui, sans-serif;
+  }
+
+  .dark {
+    --background: #0a0a0a;
+    --foreground: #fafaf9;
+  }
+
   body {
     @apply antialiased min-h-screen transition-colors duration-200;
     color: var(--foreground);
     background-color: var(--background);
+    font-family: var(--font-inter);
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-outfit);
   }
 }
 
@@ -67,9 +67,9 @@
       radial-gradient(circle at 1px 1px, var(--stone-800) 1px, transparent 0);
   }
 
-  /* Structural Grain/Noise overlay */
+  /* Structural Grain/Noise overlay - Optimized for Mobile (numOctaves: 1) */
   .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     opacity: 0.03;
   }
 
