@@ -8,6 +8,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
       colors: {
         primary: {
           DEFAULT: "var(--primary)",
@@ -31,6 +32,7 @@ const config: Config = {
           950: "var(--stone-950)",
         },
       },
+    },
   },
   plugins: [],
 };
