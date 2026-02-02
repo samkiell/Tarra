@@ -73,13 +73,14 @@ export default function RootLayout({
       <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans overflow-x-hidden">
         {/* Global Brand Background Pattern */}
         <div 
-          className="fixed inset-0 z-0 pointer-events-none opacity-[0.1] dark:opacity-[0.08]" 
+          className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
           aria-hidden="true"
           style={{ 
             backgroundImage: 'url("/assets/bg.jpeg")',
-            backgroundSize: '300px 300px',
+            backgroundSize: '400px 400px',
             backgroundRepeat: 'repeat',
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: 'fixed',
+            filter: 'blur(1px)'
           }}
         />
         

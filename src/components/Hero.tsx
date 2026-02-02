@@ -29,13 +29,13 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-8 p-1">
+            <div className="mb-6 sm:mb-8">
               <Image 
-                src="/assets/favicon_nobg.png" 
+                src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={72} 
-                height={72} 
-                className="w-16 h-16 object-contain"
+                width={180} 
+                height={60} 
+                className="w-32 sm:w-40 h-auto object-contain"
                 priority
               />
             </div>
