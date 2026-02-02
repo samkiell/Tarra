@@ -64,7 +64,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-dark">
       <Navbar />
 
       {/* Main Content Sections */}
@@ -72,17 +72,18 @@ export default async function Home() {
         <section id="join-section">
           <Hero userData={userData} totalJoined={totalJoined} />
         </section>
+        
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section id="leaderboard-section" className="py-20 transition-colors scroll-mt-24">
+        <section id="leaderboard-section" className="py-24 transition-colors scroll-mt-24 border-t border-muted/5 bg-dark">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-50 mb-3 transition-colors">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold text-white mb-4 transition-colors">
                   Leaderboard
                 </h2>
-                <p className="text-stone-500 dark:text-stone-400 max-w-md mx-auto transition-colors">
+                <p className="text-secondary max-w-md mx-auto transition-colors leading-relaxed">
                   Grow the community and win up to ₦50,000. Current top performers in the referral contest.
                 </p>
               </div>
@@ -90,7 +91,7 @@ export default async function Home() {
               <Leaderboard />
               
               {/* Recovery Path for Students on Shared Devices */}
-              <div id="status-section" className="mt-20 scroll-mt-24">
+              <div id="status-section" className="mt-24 scroll-mt-24">
                 <StatusCheck />
               </div>
             </div>
