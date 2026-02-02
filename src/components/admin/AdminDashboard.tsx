@@ -62,66 +62,65 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
 
   return (
     <div className="w-full">
-      {/* Lightweight Metrics Grid (Read-only, plain numbers) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
-          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Total Waitlist</div>
-          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.totalUsers.toLocaleString()}</div>
+        <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Total Waitlist</div>
+          <div className="text-2xl font-black text-white">{metrics.totalUsers.toLocaleString()}</div>
         </div>
-        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
-          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Total Referrals</div>
+        <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Total Referrals</div>
           <div className="text-2xl font-black text-primary">{metrics.totalReferrals.toLocaleString()}</div>
         </div>
-        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
-          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Avg. Referrals</div>
-          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.avgReferrals}</div>
+        <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Avg. Referrals</div>
+          <div className="text-2xl font-black text-white">{metrics.avgReferrals}</div>
         </div>
-        <div className="p-4 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-lg shadow-sm">
-          <div className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400 tracking-wider mb-1">Top Recruiter</div>
-          <div className="text-2xl font-black text-stone-900 dark:text-stone-50">{metrics.topRecruiterCount}</div>
+        <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Top Recruiter</div>
+          <div className="text-2xl font-black text-white">{metrics.topRecruiterCount}</div>
         </div>
       </div>
 
       <div className="mb-8 flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h2 className="text-xl font-bold text-stone-900 dark:text-stone-50 transition-colors">Waitlist Master List</h2>
+          <h2 className="text-xl font-bold text-white transition-colors">Waitlist Master List</h2>
         </div>
 
-        {/* Filter Bar: Simple inputs for operational filtering */}
-        <div className="w-full p-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-lg flex flex-wrap items-end gap-4 transition-colors">
+        {/* Filter Bar */}
+        <div className="w-full p-4 border border-muted/10 rounded-lg flex flex-wrap items-end gap-4 transition-colors">
           <div className="flex flex-col gap-1">
-            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Min Referrals</label>
+            <label className="text-[10px] uppercase font-bold text-secondary">Min Referrals</label>
             <input 
               type="number" 
               placeholder="0"
-              className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm w-24"
+              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm w-24 text-white focus:outline-none focus:border-primary"
               value={filters.min_referrals}
               onChange={(e) => setFilters({...filters, min_referrals: e.target.value})}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Topic / Referrer Code</label>
+            <label className="text-[10px] uppercase font-bold text-secondary">Topic / Referrer Code</label>
             <input 
               type="text" 
               placeholder="Filter by code..."
-              className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm w-40"
+              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm w-40 text-white focus:outline-none focus:border-primary"
               value={filters.referred_by}
               onChange={(e) => setFilters({...filters, referred_by: e.target.value})}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-[10px] uppercase font-bold text-stone-500 dark:text-stone-400">Date Range</label>
+            <label className="text-[10px] uppercase font-bold text-secondary">Date Range</label>
             <div className="flex items-center gap-2">
               <input 
                 type="date" 
-                className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm"
+                className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
                 value={filters.start_date}
                 onChange={(e) => setFilters({...filters, start_date: e.target.value})}
               />
-              <span className="text-stone-400">-</span>
+              <span className="text-secondary">-</span>
               <input 
                 type="date" 
-                className="px-3 py-1.5 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-700 rounded text-sm"
+                className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
                 value={filters.end_date}
                 onChange={(e) => setFilters({...filters, end_date: e.target.value})}
               />
@@ -129,7 +128,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
           </div>
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-2 px-4 py-1.5 bg-stone-900 dark:bg-stone-50 text-stone-50 dark:text-stone-900 text-xs font-bold uppercase tracking-wider rounded border border-transparent hover:opacity-90 ml-auto transition-all h-9"
+            className="flex items-center gap-2 px-4 py-1.5 bg-primary text-white text-xs font-bold uppercase tracking-wider rounded shadow-lg shadow-primary/20 hover:brightness-110 ml-auto transition-all h-9"
           >
             <Download className="w-3 h-3" />
             Download Filtered CSV
@@ -137,44 +136,44 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
         </div>
       </div>
 
-      <div className="border border-stone-200 dark:border-stone-800 rounded-lg bg-white dark:bg-stone-900 shadow-sm overflow-hidden transition-colors">
-        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-stone-200 dark:scrollbar-thumb-stone-800">
+      <div className="border border-muted/10 rounded-lg bg-dark shadow-2xl overflow-hidden transition-colors">
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-muted/10">
           <table className="w-full text-left border-collapse min-w-[600px]">
-            <thead className="bg-stone-50 dark:bg-stone-800/50 border-b border-stone-200 dark:border-stone-800">
+            <thead className="bg-dark border-b border-muted/10">
               <tr>
-                <th className="px-6 py-4 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest transition-colors">User Identity</th>
-                <th className="px-6 py-4 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest transition-colors">Contact Details</th>
-                <th className="px-6 py-4 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest text-right transition-colors">Referral Growth</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">User Identity</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">Contact Details</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right transition-colors">Referral Growth</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
+            <tbody className="divide-y divide-muted/5">
               {users.map((user) => (
-                <tr key={user.id} className="hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors">
+                <tr key={user.id} className="hover:bg-primary/5 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                       <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors whitespace-nowrap">{user.full_name}</div>
+                       <div className="text-sm font-bold text-white transition-colors whitespace-nowrap">{user.full_name}</div>
                        {user.isFlagged && (
-                         <span className="px-1.5 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider rounded border border-amber-200 dark:border-amber-800" title="Suspicious activity detected">
+                         <span className="px-1.5 py-0.5 bg-secondary/10 text-secondary text-[10px] font-black uppercase tracking-wider rounded border border-secondary/20" title="Suspicious activity detected">
                            Flagged
                          </span>
                        )}
                     </div>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      <span className="text-[10px] text-stone-400 dark:text-stone-500 font-mono transition-colors uppercase">ID: {user.id.slice(0, 8)}...</span>
+                      <span className="text-[10px] text-secondary/50 font-mono transition-colors uppercase">ID: {user.id.slice(0, 8)}...</span>
                       <span className="text-[10px] text-primary font-black tracking-tighter uppercase">Code: {user.referral_code}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-xs font-semibold text-stone-600 dark:text-stone-300 transition-colors whitespace-nowrap">{user.email}</div>
-                    <div className="text-xs text-stone-400 dark:text-stone-500 transition-colors mt-0.5">{user.phone_number}</div>
+                    <div className="text-xs font-semibold text-white/80 transition-colors whitespace-nowrap">{user.email}</div>
+                    <div className="text-xs text-secondary transition-colors mt-0.5">{user.phone_number}</div>
                   </td>
                   <td className="px-6 py-4 text-right transition-colors">
                     <button
                       onClick={() => setSelectedUser(user)}
                       className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-bold transition-all ${
                         user.referral_count > 0 
-                          ? "bg-primary text-white shadow-sm hover:brightness-110 active:scale-95" 
-                          : "bg-stone-50 dark:bg-stone-900 text-stone-300 dark:text-stone-600 cursor-default border border-stone-100 dark:border-stone-800"
+                          ? "bg-primary text-white shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95" 
+                          : "bg-dark border border-muted/10 text-secondary/30 cursor-default"
                       }`}
                       disabled={user.referral_count === 0}
                     >

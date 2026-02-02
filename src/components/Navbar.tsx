@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeSwitcher } from "./ThemeSwitcher";
+
 
 /**
  * Global Navbar Component
@@ -15,7 +15,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
-    <nav className="border-b border-stone-100 dark:border-stone-800 py-4 bg-white dark:bg-stone-950 sticky top-0 z-50 transition-colors">
+    <nav className="border-b border-muted/10 py-4 sticky top-0 z-50 transition-colors">
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="hover:opacity-80 transition-opacity">
           <Image 
@@ -23,16 +23,16 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
             alt="Tarra Logo" 
             width={120} 
             height={40} 
-            className="h-14 w-auto p-0 m-0 rounded-sm"
+            className="h-10 sm:h-14 w-auto p-0 m-0 rounded-sm"
             priority
           />
         </Link>
         <div className="flex items-center gap-6">
           {rightContent}
-          <div className="hidden sm:block text-xs font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest">
+          <div className="hidden sm:block text-xs font-bold text-secondary uppercase tracking-widest">
             OAU Edition
           </div>
-          <ThemeSwitcher />
+
         </div>
       </div>
     </nav>
