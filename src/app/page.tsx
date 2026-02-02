@@ -2,7 +2,7 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Leaderboard from "@/components/Leaderboard";
 import StatusCheck from "@/components/StatusCheck";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { cookies, headers } from "next/headers";
