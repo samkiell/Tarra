@@ -33,11 +33,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
       <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans">
-        {/* Global Blueprint Texture */}
-        <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 bg-grid-plus opacity-[0.4] dark:opacity-[0.2]" />
-          <div className="absolute inset-0 bg-noise opacity-30 mix-blend-soft-light" />
-        </div>
+        {/* Global Brand Background Pattern */}
+        <div 
+          className="fixed inset-0 z-0 pointer-events-none opacity-[0.1] dark:opacity-[0.08]" 
+          aria-hidden="true"
+          style={{ 
+            backgroundImage: 'url("/assets/bg.jpeg")',
+            backgroundSize: '300px 300px',
+            backgroundRepeat: 'repeat',
+            backgroundAttachment: 'fixed'
+          }}
+        />
         
         <div className="relative z-10 min-h-screen flex flex-col">
           <Providers>
