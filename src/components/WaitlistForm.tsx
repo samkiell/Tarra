@@ -140,8 +140,9 @@ const WaitlistForm: React.FC = () => {
     <div className="w-full max-w-md bg-dark border border-muted/20 rounded-xl p-6 shadow-2xl transition-all duration-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Full Name</label>
+          <label htmlFor="full_name" className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Full Name</label>
           <input
+            id="full_name"
             type="text"
             required
             className="w-full h-11 px-4 border border-muted/20 rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-secondary/50"
@@ -152,9 +153,10 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div className="space-y-1.5">
-          <label className="block text-sm font-semibold text-secondary transition-colors">Campus Email</label>
+          <label htmlFor="email" className="block text-sm font-semibold text-secondary transition-colors">Campus Email</label>
           <div className="relative group">
             <input
+              id="email"
               type="email"
               required
               className={`w-full h-11 pl-4 pr-36 border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
@@ -219,8 +221,9 @@ const WaitlistForm: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Phone Number</label>
+          <label htmlFor="phone_number" className="block text-sm font-semibold text-secondary mb-1.5 transition-colors">Phone Number</label>
           <input
+            id="phone_number"
             type="tel"
             required
             className="w-full h-11 px-4 border border-muted/20 rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all placeholder:text-secondary/50"
