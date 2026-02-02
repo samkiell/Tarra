@@ -18,7 +18,10 @@ interface PinGateProps {
 }
 
 const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
-  const [error, setError] = useState<string | null>(null);
+  const [pin, setPin] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(initialError ? "Access Denied" : null);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,24 +73,29 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
           </p>
         </div>
 
-        {/* 
-          Security UI Trust:
-          Consistency in administrative interfaces reinforces the perception of a robust, controlled environment.
-          By sharing the same focus states (primary ring) and surface colors as the rest of the application,
-          we create a unified security layer that feels intentional and well-engineered.
-        */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
             <input
               type="password"
               autoFocus
-              className="w-full h-14 px-4 bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-lg text-center text-2xl tracking-[0.5em] font-bold text-stone-900 dark:text-stone-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-stone-950 transition-all placeholder:text-stone-300"
+              className={`w-full h-14 px-4 bg-stone-50 dark:bg-stone-950 border rounded-lg text-center text-2xl tracking-[0.5em] font-bold text-stone-900 dark:text-stone-200 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-300 ${
+                error
+                  ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500"
+                  : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
+              }`}
               placeholder="••••"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               maxLength={8}
             />
           </div>
+
+          {error && (
+            <div className="p-2.5 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50 rounded-md text-[11px] text-amber-700 dark:text-amber-400 leading-snug flex items-center gap-2 transition-all">
+              <span className="text-amber-500">⚠️</span>
+              {error}
+            </div>
+          )}
           
           <button
             type="submit"

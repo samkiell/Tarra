@@ -15,7 +15,7 @@ export default function NotFound() {
           <div className="w-32 h-32 bg-stone-900 dark:bg-stone-100 rounded-full flex items-center justify-center mx-auto shadow-2xl animate-bounce">
             <Ghost className="w-16 h-16 text-white dark:text-stone-900" />
           </div>
-          <div className="absolute -top-2 -right-2 px-3 py-1 bg-red-500 text-white text-xs font-black rounded-full rotate-12 shadow-lg">
+          <div className="absolute -top-2 -right-2 px-3 py-1 bg-primary text-white text-xs font-black rounded-full rotate-12 shadow-lg">
             404
           </div>
         </div>

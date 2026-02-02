@@ -74,12 +74,12 @@ const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals
                 const isSuspiciousPattern = prefixGroups[prefix] > 2;
 
                 return (
-                  <tr key={idx} className={`group transition-colors ${isSuspiciousPattern ? 'bg-orange-50/50 dark:bg-orange-900/10 hover:bg-orange-50 dark:hover:bg-orange-900/20' : 'hover:bg-stone-50 dark:hover:bg-stone-800/50'}`}>
+                  <tr key={idx} className={`group transition-colors ${isSuspiciousPattern ? 'bg-amber-50/50 dark:bg-amber-950/10 hover:bg-amber-50 dark:hover:bg-amber-950/20' : 'hover:bg-stone-50 dark:hover:bg-stone-800/50'}`}>
                     <td className="px-6 py-3">
                       <div className="text-sm font-medium text-stone-900 dark:text-stone-200">{ref.first_name}</div>
                     </td>
                     <td className="px-6 py-3 text-center">
-                      <div className={`text-sm font-mono inline-block px-2 py-0.5 rounded ${isSuspiciousPattern ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/40 dark:text-orange-400 font-bold' : 'text-stone-500 dark:text-stone-400'}`}>
+                      <div className={`text-sm font-mono inline-block px-2 py-0.5 rounded ${isSuspiciousPattern ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 font-bold' : 'text-stone-500 dark:text-stone-400'}`}>
                         {ref.phone_number}
                       </div>
                     </td>
