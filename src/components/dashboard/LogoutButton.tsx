@@ -26,7 +26,7 @@ const LogoutButton: React.FC = () => {
         router.refresh();
       }
     } catch (error) {
-      toast.error("Logout failed");
+      console.error("Logout failed:", error);
     }
   };
 

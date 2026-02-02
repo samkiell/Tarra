@@ -42,7 +42,6 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
       toast.success("Link copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      toast.error("Failed to copy link.");
       console.error("Copy failed:", err);
     }
   };
