@@ -29,6 +29,7 @@ const Features: React.FC = () => {
   return (
     <section className="py-24 transition-colors border-t border-muted/5">
       <div className="container mx-auto px-6">
+        <h2 className="sr-only">Our Core Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {pillars.map((pillar) => (
             <div key={pillar.title} className="flex flex-col items-center text-center group">

@@ -75,7 +75,9 @@ const StatusCheck: React.FC = () => {
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <div className="flex flex-col sm:flex-row gap-2">
+          <label htmlFor="status_phone" className="sr-only">Phone Number</label>
           <input
+            id="status_phone"
             type="tel"
             required
             placeholder="Phone Number"
