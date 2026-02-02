@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
 
 /**
  * StatusCheck Component
@@ -17,6 +16,7 @@ const StatusCheck: React.FC = () => {
   const router = useRouter();
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [error, setError] = useState<{ type: 'new' | 'general', message: string } | null>(null);
 
   useEffect(() => {
@@ -37,6 +37,7 @@ const StatusCheck: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSuccessMessage(null);
 
     try {
       const response = await fetch("/api/status", {
@@ -48,8 +49,10 @@ const StatusCheck: React.FC = () => {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message);
-        router.push(`/status/${data.user_id}`);
+        setSuccessMessage(data.message);
+        setTimeout(() => {
+            router.push(`/status/${data.user_id}`);
+        }, 1500);
       } else {
         // Handle user not found with smart redirection
         if (response.status === 404) {
@@ -66,7 +69,7 @@ const StatusCheck: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto mt-8 text-center">
+    <div className="w-full max-w-sm mx-auto mt-8 text-center px-4 sm:px-0">
       <h3 className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>
@@ -92,6 +95,13 @@ const StatusCheck: React.FC = () => {
             {loading ? "..." : "Check"}
           </button>
         </div>
+
+        {successMessage && (
+          <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center justify-center gap-2 animate-in fade-in zoom-in-95 duration-300">
+            <span className="text-primary">✅</span>
+            {successMessage}
+          </div>
+        )}
 
         {error && (
           <div className={`p-2.5 border rounded-md text-[11px] leading-snug flex flex-col gap-2 transition-all duration-300 text-left ${
