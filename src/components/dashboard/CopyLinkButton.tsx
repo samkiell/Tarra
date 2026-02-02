@@ -47,15 +47,15 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
   return (
     <div className="flex flex-col w-full max-w-lg gap-2">
       <div className="flex flex-col sm:flex-row gap-2">
-        <div className="flex-grow px-4 py-3 bg-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-lg text-stone-600 dark:text-stone-400 text-sm truncate font-mono transition-colors">
+        <div className="flex-grow px-4 py-3 bg-dark/50 border border-muted/20 rounded-lg text-secondary text-sm truncate font-mono transition-colors">
           {referralUrl}
         </div>
         <button
           onClick={handleCopy}
           className={`px-6 py-3 text-sm font-bold rounded-lg transition-all whitespace-nowrap flex items-center justify-center gap-2 ${
             copied 
-              ? "bg-teal-600 dark:bg-teal-700 text-white" 
-              : "bg-primary text-white hover:brightness-110 active:opacity-90"
+              ? "bg-primary text-white" 
+              : "bg-primary text-white hover:brightness-110 active:opacity-90 shadow-lg shadow-primary/20"
           }`}
         >
           {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -64,7 +64,7 @@ const CopyLinkButton: React.FC<CopyLinkButtonProps> = ({ referralUrl }) => {
       </div>
       
       {copied && (
-        <div className="text-[10px] font-bold text-teal-600 dark:text-teal-400 uppercase tracking-widest animate-in fade-in slide-in-from-top-1 duration-300">
+        <div className="text-[10px] font-bold text-primary uppercase tracking-widest animate-in fade-in slide-in-from-top-1 duration-300">
           ✨ Link copied to clipboard
         </div>
       )}
