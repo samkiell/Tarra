@@ -32,7 +32,6 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json();
-    console.log("API Request Body:", body);
     const { full_name, email, phone_number, interests, referral_code: incomingRefCode } = body;
 
     if (!full_name || !email || !phone_number) {
@@ -97,10 +96,8 @@ export async function POST(request: Request) {
       interests: Array.isArray(interests) ? interests : [],
       referred_by: validatedReferrer,
     });
-    console.log("Database Response (New User):", newUser);
 
     cookieStore.set("tarra_session", newUser.id, cookieOptions);
-    console.log("Session cookie set for user:", newUser.id);
 
     return NextResponse.json(
       { message: "Successfully joined waitlist", user_id: newUser.id, is_new: true },

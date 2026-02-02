@@ -73,7 +73,6 @@ const WaitlistForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submit payload:", formData);
     
     // Phone Number Validation (Nigerian Format)
     const nigerianPhoneRegex = /^(080|081|090|070)\d{8}$/;
