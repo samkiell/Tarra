@@ -23,9 +23,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  icons: {
+    icon: "/assets/favicon.jpeg",
+  },
 };
 
-import { Toaster } from "react-hot-toast";
 import { Providers } from "@/components/Providers";
 
 export default function RootLayout({

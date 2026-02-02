@@ -19,11 +19,11 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="hover:opacity-80 transition-opacity">
           <Image 
-            src="/assets/logo.jpeg" 
+            src="/assets/logo_nobg.png" 
             alt="Tarra Logo" 
             width={120} 
             height={40} 
-            className="h-8 w-auto dark:invert-[0.1] rounded-sm"
+            className="h-8 w-auto rounded-sm"
             priority
           />
         </Link>
