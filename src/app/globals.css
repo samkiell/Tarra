@@ -1,79 +1,48 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #0a0a0a;
+    --background: #0F172A;
+    --foreground: #FFFFFF;
     
-    /* Tarra Teal - High Contrast Primary */
-    --primary: #0d9488;
+    /* Tarra Brand Palette - Exact Hex Values */
+    --primary: #0FB9B1;
     --primary-foreground: #ffffff;
+    --secondary: #64748B;
+    --muted: #E5E7EB;
 
-    --success: #0d9488;
-    --warning: #f59e0b;
-    --error: #f59e0b;
-    --verification: #0d9488;
-
-    --amber-50: #fffbeb;
-    --amber-100: #fef3c7;
-    --amber-500: #f59e0b;
-    --amber-600: #d97706;
-
-    --stone-50: #fafaf9;
-    --stone-100: #f5f5f4;
-    --stone-200: #e7e5e4;
-    --stone-300: #d6d3d1;
-    --stone-400: #a8a29e;
-    --stone-500: #78716c;
-    --stone-600: #57534e;
-    --stone-700: #44403c;
-    --stone-800: #292524;
-    --stone-900: #1c1917;
-    --stone-950: #0a0a0a;
-
-    --font-outfit: var(--font-outfit), system-ui, sans-serif;
-    --font-inter: var(--font-inter), system-ui, sans-serif;
-  }
-
-  .dark {
-    --background: #0a0a0a;
-    --foreground: #fafaf9;
+    --font-display: 'Satoshi', var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
 
   body {
-    @apply antialiased min-h-screen transition-colors duration-200;
+    @apply antialiased min-h-screen transition-colors duration-200 bg-dark;
     color: var(--foreground);
     background-color: var(--background);
-    font-family: var(--font-inter);
+    font-family: var(--font-sans);
   }
 
   h1, h2, h3, h4, .font-display {
-    font-family: var(--font-outfit);
+    font-family: var(--font-display);
   }
 }
 
 @layer utilities {
-  /* High-fidelity 'Plus' Grid Pattern */
+  /* High-fidelity Brand Grid Pattern */
   .bg-grid-plus {
     background-size: 40px 40px;
     background-image: 
-      radial-gradient(circle at 1px 1px, var(--stone-300) 1px, transparent 0);
+      radial-gradient(circle at 1px 1px, rgba(229, 231, 235, 0.1) 1px, transparent 0);
   }
 
-  .dark .bg-grid-plus {
-    background-image: 
-      radial-gradient(circle at 1px 1px, var(--stone-800) 1px, transparent 0);
-  }
-
-  /* Structural Grain/Noise overlay - Optimized for Mobile (numOctaves: 1) */
+  /* Structural Grain/Noise overlay - Optimized for Mobile */
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03;
-  }
-
-  .dark .bg-noise {
     opacity: 0.05;
+    mix-blend-mode: soft-light;
   }
 }

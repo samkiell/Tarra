@@ -7,11 +7,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
-
 export const metadata: Metadata = {
   title: "Tarra | The Official OAU Marketplace",
   description: "Join the exclusive waitlist for the official OAU marketplace. Connect with verified campus vendors and discover essential services in one secure platform.",
@@ -36,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
-      <body className="antialiased selection:bg-primary/10 transition-colors duration-500 font-sans">
+    <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
+      <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans">
         {/* Global Blueprint Texture */}
         <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
           <div className="absolute inset-0 bg-grid-plus opacity-[0.4] dark:opacity-[0.2]" />
