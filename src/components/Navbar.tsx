@@ -23,7 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
             alt="Tarra Logo" 
             width={120} 
             height={40} 
-            className="h-8 w-auto rounded-sm"
+            className="h-14 w-auto p-0 m-0 rounded-sm"
             priority
           />
         </Link>
