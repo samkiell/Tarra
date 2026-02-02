@@ -5,6 +5,9 @@ import StatusCheck from "@/components/StatusCheck";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { cookies, headers } from "next/headers";
+import dbConnect from "@/lib/mongodb";
+import Waitlist from "@/models/Waitlist";
 
 export const dynamic = "force-dynamic";
 
@@ -17,10 +20,45 @@ export const dynamic = "force-dynamic";
  * 3. Validation: Leaderboard creates social proof and FOMO for the referral contest.
  * 4. Recovery: StatusCheck provides a path for returning users on shared devices.
  * 
- * SEO Requirements:
- * Uses the title and description mandated in the documentation.
+ * Persistence:
+ * If a session cookie exists, the Hero section shows a Welcome Back state instead of the form.
  */
-export default function Home() {
+export default async function Home() {
+  const cookieStore = await cookies();
+  const session = cookieStore.get("tarra_session");
+  const headerList = await headers();
+  const host = headerList.get("host");
+  const protocol = host?.includes("localhost") ? "http" : "https";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL && !process.env.NEXT_PUBLIC_BASE_URL.includes("localhost")
+    ? process.env.NEXT_PUBLIC_BASE_URL 
+    : `${protocol}://${host}`;
+
+  let userData = null;
+
+  if (session) {
+    await dbConnect();
+    const user = await Waitlist.findOne({ id: session.value });
+    
+    if (user) {
+      const referralCount = await Waitlist.countDocuments({ referred_by: user.referral_code });
+      
+      // Calculate Rank
+      const higherReferrers = await Waitlist.aggregate([
+        { $group: { _id: "$referred_by", count: { $sum: 1 } } },
+        { $match: { _id: { $ne: null }, count: { $gt: referralCount } } },
+        { $count: "total" }
+      ]);
+      const rank = (higherReferrers[0]?.total || 0) + 1;
+
+      userData = {
+        firstName: user.full_name.split(" ")[0],
+        referralCount,
+        rank,
+        referralUrl: `${baseUrl}?ref=${user.referral_code}`,
+      };
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -28,7 +66,7 @@ export default function Home() {
       {/* Main Content Sections */}
       <main className="flex-grow">
         <section id="join-section">
-          <Hero />
+          <Hero userData={userData} />
         </section>
         <Features />
         

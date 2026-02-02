@@ -1,6 +1,16 @@
 import React from "react";
 import { Rocket } from "lucide-react";
 import WaitlistForm from "./WaitlistForm";
+import WelcomeBackCard from "./dashboard/WelcomeBackCard";
+
+interface HeroProps {
+  userData?: {
+    firstName: string;
+    referralCount: number;
+    rank: number;
+    referralUrl: string;
+  } | null;
+}
 
 /**
  * Hero Component
@@ -8,9 +18,9 @@ import WaitlistForm from "./WaitlistForm";
  * Logic:
  * 1. Visual Anchor: Uses the primary headline and sub-headline from the docs.
  * 2. Conversion: Houses the WaitlistForm for immediate student capture.
- * 3. Branding: Displays the "Verified Student" context and referral contest hook.
+ * 3. Persistence: Displays WelcomeBackCard for returning users with valid sessions.
  */
-const Hero: React.FC = () => {
+const Hero: React.FC<HeroProps> = ({ userData }) => {
   return (
     <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
@@ -32,14 +42,20 @@ const Hero: React.FC = () => {
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
-            <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
-              <span className="w-2 h-2 rounded-full bg-primary" />
-              Over 2,000 students joined this week
-            </div>
+            {!userData && (
+              <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
+                <span className="w-2 h-2 rounded-full bg-primary" />
+                Over 2,000 students joined this week
+              </div>
+            )}
           </div>
 
           <div className="lg:w-1/2 w-full flex justify-center">
-            <WaitlistForm />
+            {userData ? (
+              <WelcomeBackCard {...userData} />
+            ) : (
+              <WaitlistForm />
+            )}
           </div>
         </div>
       </div>
