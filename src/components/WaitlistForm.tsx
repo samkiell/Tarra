@@ -18,6 +18,7 @@ const WaitlistForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [infoMessage, setInfoMessage] = useState<string | null>(null);
+  const emailInputRef = React.useRef<HTMLInputElement>(null);
   
   const [formData, setFormData] = useState({
     full_name: "",
@@ -169,9 +170,10 @@ const WaitlistForm: React.FC = () => {
           <div className="relative group">
             <input
               id="email"
+              ref={emailInputRef}
               type="email"
               required
-              className={`w-full h-11 pl-4 pr-36 border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
+              className={`w-full h-11 pl-4 pr-4 border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
                 errors.email === "typo" 
                   ? "border-primary focus:ring-primary focus:border-primary" 
                   : errors.email === "non-oau" || errors.email === "existing"
@@ -183,14 +185,23 @@ const WaitlistForm: React.FC = () => {
               onChange={e => setFormData({ ...formData, email: e.target.value })}
             />
             
-            {formData.email && !formData.email.endsWith("@student.oauife.edu.ng") && (
+            {!formData.email.toLowerCase().includes("@student.oauife.edu.ng") && (
               <button
                 type="button"
                 onClick={() => {
-                  const prefix = formData.email.split("@")[0];
-                  setFormData({ ...formData, email: `${prefix}@student.oauife.edu.ng` });
+                  const prefix = formData.email ? formData.email.split("@")[0] : "";
+                  const newEmail = `${prefix}@student.oauife.edu.ng`;
+                  setFormData({ ...formData, email: newEmail });
+                  
+                  // Move cursor to end after state update
+                  setTimeout(() => {
+                    if (emailInputRef.current) {
+                      emailInputRef.current.focus();
+                      emailInputRef.current.setSelectionRange(newEmail.length, newEmail.length);
+                    }
+                  }, 0);
                 }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-[10px] font-bold rounded-md border border-primary/20 transition-all opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
+                className="absolute right-2 top-1/2 -translate-y-1/2 px-2 py-1 bg-primary/10 hover:bg-primary/20 text-primary text-[10px] font-bold rounded-md border border-primary/20 transition-all opacity-0 group-focus-within:opacity-100 group-hover:opacity-100 whitespace-nowrap z-10"
               >
                 + @student.oauife.edu.ng
               </button>
