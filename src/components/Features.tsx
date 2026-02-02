@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ShoppingCart, Building2, Wrench } from "lucide-react";
 
 /**
@@ -28,18 +27,18 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 transition-colors">
+    <section className="py-24 transition-colors border-t border-muted/5">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {pillars.map((pillar) => (
-            <div key={pillar.title} className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 bg-white dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded-xl flex items-center justify-center mb-6 transition-colors">
+            <div key={pillar.title} className="flex flex-col items-center text-center group">
+              <div className="w-16 h-16 bg-dark border border-muted/10 rounded-xl flex items-center justify-center mb-6 transition-all group-hover:border-primary/50 shadow-xl shadow-black/20">
                 {pillar.icon}
               </div>
-              <h3 className="text-lg font-bold text-stone-900 dark:text-stone-50 mb-3 tracking-tight transition-colors">
+              <h3 className="text-xl font-bold text-white mb-3 tracking-tight transition-colors">
                 {pillar.title}
               </h3>
-              <p className="text-stone-500 dark:text-stone-400 leading-relaxed transition-colors">
+              <p className="text-secondary leading-relaxed transition-colors max-w-sm">
                 {pillar.description}
               </p>
             </div>
