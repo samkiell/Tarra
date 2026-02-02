@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 /**
@@ -16,8 +17,15 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
     <nav className="border-b border-stone-100 dark:border-stone-800 py-4 bg-white dark:bg-stone-950 sticky top-0 z-50 transition-colors">
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link href="/" className="text-xl font-black tracking-tighter text-primary hover:opacity-80 transition-opacity">
-          TARRA
+        <Link href="/" className="hover:opacity-80 transition-opacity">
+          <Image 
+            src="/assets/logo.jpeg" 
+            alt="Tarra Logo" 
+            width={120} 
+            height={40} 
+            className="h-8 w-auto dark:invert-[0.1] rounded-sm"
+            priority
+          />
         </Link>
         <div className="flex items-center gap-6">
           {rightContent}

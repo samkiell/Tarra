@@ -1,5 +1,5 @@
 import React from "react";
-import { Rocket } from "lucide-react";
+import Image from "next/image";
 import WaitlistForm from "./WaitlistForm";
 import WelcomeBackCard from "./dashboard/WelcomeBackCard";
 
@@ -17,7 +17,7 @@ interface HeroProps {
  * Hero Component
  * 
  * Logic:
- * 1. Visual Anchor: Uses the primary headline and sub-headline from the docs.
+ * 1. Visual Anchor: Uses the official Tarra logo from assets.
  * 2. Conversion: Houses the WaitlistForm for immediate student capture.
  * 3. Persistence: Displays WelcomeBackCard for returning users with valid sessions.
  */
@@ -27,8 +27,14 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-6 w-12 h-12 bg-primary rounded-lg flex items-center justify-center transition-all">
-              <Rocket className="w-6 h-6 text-white" />
+            <div className="mb-8">
+              <Image 
+                src="/assets/logo.jpeg" 
+                alt="Tarra Logo" 
+                width={64} 
+                height={64} 
+                className="w-16 h-16 object-contain rounded-xl shadow-lg border border-stone-100 dark:border-stone-800"
+              />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 tracking-tight transition-colors">
