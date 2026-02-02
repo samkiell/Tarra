@@ -1,11 +1,18 @@
-import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: "#0F172A",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Tarra | OAU Commerce Without the Chaos",
@@ -50,7 +57,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
-      <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans">
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link 
+          rel="preload" 
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" 
+          as="style" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" 
+        />
+        <link rel="preload" href="/assets/bg.jpeg" as="image" />
+      </head>
+      <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans overflow-x-hidden">
         {/* Global Brand Background Pattern */}
         <div 
           className="fixed inset-0 z-0 pointer-events-none opacity-[0.1] dark:opacity-[0.08]" 
