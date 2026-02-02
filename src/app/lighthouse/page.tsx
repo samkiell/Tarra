@@ -91,7 +91,7 @@ export default async function LighthousePage() {
   };
 
   return (
-    <main className="min-h-screen bg-dark py-12 px-6 transition-colors duration-300">
+    <main className="min-h-screen py-12 px-6 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-10 overflow-x-auto gap-4">
           <div>

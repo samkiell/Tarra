@@ -64,7 +64,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-dark">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
 
       {/* Main Content Sections */}
@@ -76,7 +76,7 @@ export default async function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section id="leaderboard-section" className="py-24 transition-colors scroll-mt-24 border-t border-muted/5 bg-dark">
+        <section id="leaderboard-section" className="py-24 transition-colors scroll-mt-24 border-t border-muted/5">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-16">
