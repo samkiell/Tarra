@@ -29,7 +29,7 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="mb-8 p-1">
               <Image 
-                src="/assets/logo_nobg.png" 
+                src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
                 width={72} 
                 height={72} 
