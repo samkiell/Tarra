@@ -18,15 +18,14 @@ interface PinGateProps {
 }
 
 const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
-  const [pin, setPin] = useState("");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!pin || loading) return;
 
     setLoading(true);
+    setError(null);
     try {
       const res = await fetch("/api/auth/lighthouse", {
         method: "POST",
@@ -46,17 +45,11 @@ const PinGate: React.FC<PinGateProps> = ({ error: initialError }) => {
         });
         router.refresh();
       } else {
-        toast.error(data.error || "Invalid Access PIN", {
-          style: {
-            borderRadius: '10px',
-            background: '#1c1917',
-            color: '#fff',
-          },
-        });
+        setError(data.error || "Invalid Access PIN");
         setPin("");
       }
     } catch (err) {
-      toast.error("Connection failed");
+      setError("Connection failed");
     } finally {
       setLoading(false);
     }

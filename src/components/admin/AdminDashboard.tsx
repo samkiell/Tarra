@@ -154,7 +154,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
                     <div className="flex items-center gap-2">
                        <div className="text-sm font-bold text-stone-900 dark:text-stone-100 transition-colors whitespace-nowrap">{user.full_name}</div>
                        {user.isFlagged && (
-                         <span className="px-1.5 py-0.5 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-black uppercase tracking-wider rounded border border-red-200 dark:border-red-800" title="Suspicious activity detected">
+                         <span className="px-1.5 py-0.5 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase tracking-wider rounded border border-amber-200 dark:border-amber-800" title="Suspicious activity detected">
                            Flagged
                          </span>
                        )}
