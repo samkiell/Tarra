@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
     <footer className="py-12 border-t border-stone-100 dark:border-stone-800 bg-white dark:bg-stone-950 transition-colors">
       <div className="container mx-auto px-6 text-center flex flex-col items-center gap-4">
         <Image 
-          src="/assets/logo_nobg2.png" 
+          src="/assets/favicon.jpeg" 
           alt="Tarra Logo" 
           width={80} 
           height={28} 
