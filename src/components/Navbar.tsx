@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
         </Link>
         <div className="flex items-center gap-6">
           {rightContent}
-          <div className="hidden sm:block text-xs font-bold text-secondary uppercase tracking-widest">
+          <div className="block text-[10px] sm:text-xs font-bold text-secondary uppercase tracking-widest whitespace-nowrap">
             OAU Edition
           </div>
 
