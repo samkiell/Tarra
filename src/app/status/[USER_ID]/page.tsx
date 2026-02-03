@@ -57,8 +57,8 @@ export default async function StatusPage({
     }
   }
 
-  // Aggregate referral data for the current user using the short code
-  const referralCount = await Waitlist.countDocuments({ referred_by: user.referral_code });
+  // Use the numeric referral_count field
+  const referralCount = user.referral_count || 0;
 
   const firstName = user.full_name.split(" ")[0];
   

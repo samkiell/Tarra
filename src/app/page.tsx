@@ -46,15 +46,13 @@ export default async function Home() {
     const user = await Waitlist.findOne({ id: session.value });
     
     if (user) {
-      const referralCount = await Waitlist.countDocuments({ referred_by: user.referral_code });
+      const referralCount = user.referral_count || 0;
       
-      // Calculate Rank
-      const higherReferrers = await Waitlist.aggregate([
-        { $group: { _id: "$referred_by", count: { $sum: 1 } } },
-        { $match: { _id: { $ne: null }, count: { $gt: referralCount } } },
-        { $count: "total" }
-      ]);
-      const rank = (higherReferrers[0]?.total || 0) + 1;
+      // Calculate Rank based on the numeric referral_count field across ALL users (real and ghost)
+      const higherReferrersCount = await Waitlist.countDocuments({ 
+        referral_count: { $gt: referralCount } 
+      });
+      const rank = higherReferrersCount + 1;
 
       userData = {
         firstName: user.full_name.split(" ")[0],
