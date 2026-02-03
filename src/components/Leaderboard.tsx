@@ -41,6 +41,7 @@ const Leaderboard: React.FC = async () => {
     _id: user.id,
     firstName: user.full_name.split(" ")[0],
     count: user.referral_count,
+    isGhost: user.is_ghost || false,
   }));
 
   return <LeaderboardClient initialData={sanitizedData} />;

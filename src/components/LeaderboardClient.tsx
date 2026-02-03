@@ -7,6 +7,7 @@ interface LeaderboardItem {
   _id: string;
   firstName: string;
   count: number;
+  isGhost: boolean;
 }
 
 interface LeaderboardClientProps {
