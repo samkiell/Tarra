@@ -17,6 +17,7 @@ interface AdminUser {
     created_at: string;
   }>;
   isFlagged?: boolean;
+  is_ghost?: boolean;
 }
 
 interface DashboardMetrics {
@@ -169,13 +170,15 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
                   </td>
                   <td className="px-6 py-4 text-right transition-colors">
                     <button
-                      onClick={() => setSelectedUser(user)}
+                      onClick={() => !user.is_ghost && setSelectedUser(user)}
                       className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-bold transition-all ${
-                        user.referral_count > 0 
-                          ? "bg-primary text-white shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95" 
-                          : "bg-dark border border-muted/10 text-secondary/30 cursor-default"
+                        user.is_ghost
+                          ? "bg-dark border border-muted/20 text-secondary/50 cursor-default"
+                          : user.referral_count > 0 
+                            ? "bg-primary text-white shadow-lg shadow-primary/20 hover:brightness-110 active:scale-95 cursor-pointer" 
+                            : "bg-dark border border-muted/10 text-secondary/30 cursor-default"
                       }`}
-                      disabled={user.referral_count === 0}
+                      disabled={user.is_ghost || user.referral_count === 0}
                     >
                       {user.referral_count}
                     </button>

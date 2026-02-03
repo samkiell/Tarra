@@ -44,16 +44,29 @@ export default async function LighthousePage() {
         email: 1,
         phone_number: 1,
         referral_code: 1,
-        referral_count: { $size: "$referral_details" },
+        is_ghost: 1,
+        // For real users, count actual children. For ghosts, use hardcoded count.
+        referral_count: {
+          $cond: {
+            if: { $eq: ["$is_ghost", true] },
+            then: { $ifNull: ["$referral_count", 0] },
+            else: { $size: "$referral_details" }
+          }
+        },
         // Fraud Detection Logic (Computed)
         isFlagged: {
           $cond: {
             if: {
-              $or: [
-                { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
-                { 
-                   // Check for self-referral attempts (Name similarity check)
-                   $in: [ "$full_name", "$referral_details.full_name" ] 
+              $and: [
+                { $ne: ["$is_ghost", true] }, // Don't flag ghosts
+                {
+                  $or: [
+                    { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
+                    { 
+                       // Check for self-referral attempts (Name similarity check)
+                       $in: [ "$full_name", "$referral_details.full_name" ] 
+                    }
+                  ]
                 }
               ]
             },
@@ -62,15 +75,21 @@ export default async function LighthousePage() {
           }
         },
         referrals: {
-          $map: {
-            input: "$referral_details",
-            as: "r",
-            in: {
-              first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
-              phone_number: "$$r.phone_number",
-              created_at: "$$r.created_at",
-            },
-          },
+          $cond: {
+            if: { $eq: ["$is_ghost", true] },
+            then: [], // Ghosts have no actual referral records
+            else: {
+              $map: {
+                input: "$referral_details",
+                as: "r",
+                in: {
+                  first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
+                  phone_number: "$$r.phone_number",
+                  created_at: "$$r.created_at",
+                },
+              }
+            }
+          }
         },
       },
     },
