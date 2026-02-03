@@ -97,6 +97,14 @@ export async function POST(request: Request) {
       referred_by: validatedReferrer,
     });
 
+    // 5. Increment Referrer Count
+    if (validatedReferrer) {
+      await Waitlist.updateOne(
+        { referral_code: validatedReferrer },
+        { $inc: { referral_count: 1 } }
+      );
+    }
+
     cookieStore.set("tarra_session", newUser.id, cookieOptions);
 
     return NextResponse.json(

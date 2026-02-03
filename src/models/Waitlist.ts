@@ -10,6 +10,8 @@ export interface IWaitlist extends Document {
   phone_number: string; 
   interests: string[]; 
   referred_by: string | null; 
+  referral_count: number;
+  is_ghost: boolean;
   created_at: Date; 
 }
 
@@ -56,6 +58,14 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
     referred_by: {
       type: String,
       default: null,
+    },
+    referral_count: {
+      type: Number,
+      default: 0,
+    },
+    is_ghost: {
+      type: Boolean,
+      default: false,
     },
   },
   {

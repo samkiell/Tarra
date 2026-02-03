@@ -15,41 +15,32 @@ import LeaderboardClient from "./LeaderboardClient";
 const Leaderboard: React.FC = async () => {
   await dbConnect();
 
-  const data = await Waitlist.aggregate([
-    {
-      $match: {
-        referred_by: { $ne: null },
-      },
-    },
-    {
-      $group: {
-        _id: "$referred_by",
-        count: { $sum: 1 },
-      },
-    },
-    {
-      $lookup: {
-        from: "waitlists",
-        localField: "_id",
-        foreignField: "referral_code",
-        as: "referrer",
-      },
-    },
-    { $unwind: "$referrer" },
-    {
-      $project: {
-        firstName: { $arrayElemAt: [{ $split: ["$referrer.full_name", " "] }, 0] },
-        count: 1,
-      },
-    },
-    { $sort: { count: -1, firstName: 1 } },
-    { $limit: 100 }, // Fetch up to 100 to support "See More"
-  ]);
+  // Fetch the 10th ghost user's referral count to use as a floor for real users
+  const ghosts = await Waitlist.find({ is_ghost: true })
+    .sort({ referral_count: -1 })
+    .limit(10);
+  
+  const minGhostCount = ghosts.length > 0 ? ghosts[ghosts.length - 1].referral_count : 0;
 
-  // Convert mongoose _id to string for the client component
-  const sanitizedData = data.map(item => ({
-    ...item,
-    _id: item._id.toString()
+  // Query: Either a ghost OR a real user who beats the minimum ghost count
+  const leaderboardQuery = {
+    $or: [
+      { is_ghost: true },
+      { 
+        is_ghost: false, 
+        referral_count: { $gt: minGhostCount } 
+      }
+    ]
+  };
+
+  const users = await Waitlist.find(leaderboardQuery)
+    .sort({ referral_count: -1, full_name: 1 })
+    .limit(10);
+
+  const sanitizedData = users.map(user => ({
+    _id: user.id,
+    firstName: user.full_name.split(" ")[0],
+    count: user.referral_count,
   }));
 
   return <LeaderboardClient initialData={sanitizedData} />;
