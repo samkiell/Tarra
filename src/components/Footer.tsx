@@ -12,11 +12,11 @@ export const Footer: React.FC = () => {
     <footer className="py-12 border-t border-muted/10 transition-colors">
       <div className="container mx-auto px-6 text-center flex flex-col items-center gap-4">
         <Image 
-          src="/assets/favicon_nobg.png" 
+          src="/assets/logo_nobg2.png" 
           alt="Tarra Logo" 
-          width={80} 
-          height={28} 
-          className="h-6 w-auto opacity-50 hover:opacity-100 transition-opacity grayscale-0"
+          width={120} 
+          height={40} 
+          className="h-15 w-auto opacity-70 hover:opacity-100 transition-opacity"
         />
         <div className="text-sm font-bold text-white transition-colors">
           Tarra | The Official OAU Marketplace
