@@ -19,7 +19,7 @@ const Leaderboard: React.FC = async () => {
   // Sorting by referral_count (top recruiters) then by created_at (most recent joins).
   const users = await Waitlist.find({})
     .sort({ referral_count: -1, created_at: -1 })
-    .limit(100);
+    .limit(10);
 
   const sanitizedData = users.map(user => ({
     _id: user.id,

@@ -48,8 +48,8 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
       required: [true, "Phone number is required"],
       unique: true, // Database-level constraint to prevent identity duplication
       trim: true,
-      // Meaningful comment: Enforces valid Nigerian mobile format starting with approved prefixes (080, 081, 090, 070)
-      match: [/^(080|081|090|070)\d{8}$/, "Please provide a valid 11-digit Nigerian phone number"],
+      // Meaningful comment: Enforces valid Nigerian mobile format starting with approved prefixes (080, 081, 090, 091, 070)
+      match: [/^(080|081|090|091|070)\d{8}$/, "Please provide a valid 11-digit Nigerian phone number"],
     },
     interests: {
       type: [String],

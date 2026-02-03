@@ -76,7 +76,7 @@ const WaitlistForm: React.FC = () => {
     e.preventDefault();
     
     // Phone Number Validation (Nigerian Format)
-    const nigerianPhoneRegex = /^(080|081|090|070)\d{8}$/;
+    const nigerianPhoneRegex = /^(080|081|090|091|070)\d{8}$/;
     if (!nigerianPhoneRegex.test(formData.phone_number)) {
       setErrors(prev => ({ ...prev, phone_number: "invalid" }));
       setLoading(false);
@@ -257,7 +257,7 @@ const WaitlistForm: React.FC = () => {
           {errors.phone_number === "invalid" && (
             <div className="mt-2 p-2.5 bg-primary/5 border border-primary/20 rounded-md text-[11px] text-secondary leading-snug flex items-center gap-2 transition-all">
               <span className="text-primary">ℹ️</span>
-              Phone number must be 11 digits and start with 080, 081, 090, or 070.
+              Phone number must be 11 digits and start with 080, 081, 090, 091, or 070.
             </div>
           )}
         </div>

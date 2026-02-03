@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import React from "react";
 import { useRouter } from "next/navigation";
 
 interface LeaderboardItem {
@@ -17,10 +16,10 @@ interface LeaderboardClientProps {
 
 const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) => {
   const router = useRouter();
-  const [showAll, setShowAll] = useState(false);
   
-  const displayData = showAll ? initialData : initialData.slice(0, 10);
-  const hasMore = initialData.length > 10;
+  // We already limit to 10 in the server component, 
+  // but keep this slice for safety and easier future changes.
+  const displayData = initialData.slice(0, 10);
 
   return (
     <div className="w-full border border-muted/20 rounded-lg bg-dark shadow-2xl overflow-hidden transition-colors">
@@ -65,23 +64,6 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) =>
           </tbody>
         </table>
       </div>
-      
-      {hasMore && (
-        <button
-          onClick={() => setShowAll(!showAll)}
-          className="w-full py-4 bg-dark border-t border-muted/20 text-[10px] font-bold text-secondary hover:text-primary transition-colors flex items-center justify-center gap-2 uppercase tracking-widest"
-        >
-          {showAll ? (
-            <>
-              Show Less <ChevronUp className="w-3 h-3" />
-            </>
-          ) : (
-            <>
-              See More ({initialData.length - 10} more) <ChevronDown className="w-3 h-3" />
-            </>
-          )}
-        </button>
-      )}
     </div>
   );
 };
