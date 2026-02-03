@@ -15,9 +15,10 @@ import LeaderboardClient from "./LeaderboardClient";
 const Leaderboard: React.FC = async () => {
   await dbConnect();
 
-  // Unified Ranking: Fetch top performers (Ghost or Real) based strictly on referral_count
-  const users = await Waitlist.find({ referral_count: { $gt: 0 } })
-    .sort({ referral_count: -1, full_name: 1 })
+  // Unified Ranking: Fetch top performers and recent joiners. 
+  // Sorting by referral_count (top recruiters) then by created_at (most recent joins).
+  const users = await Waitlist.find({})
+    .sort({ referral_count: -1, created_at: -1 })
     .limit(100);
 
   const sanitizedData = users.map(user => ({
