@@ -12,7 +12,7 @@ export async function GET() {
     return NextResponse.json({ 
       total: count, 
       ghosts: ghostCount,
-      sample: users.map(u => ({ name: u.full_name, ghost: u.is_ghost, count: u.referral_count }))
+      sample: users
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
