@@ -96,11 +96,14 @@ export default async function LighthousePage() {
     { $sort: { referral_count: -1, full_name: 1 } },
   ]);
 
-  // Compute Metrics
-  const totalUsers = users.length;
-  const totalReferrals = users.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
+  // Compute Metrics (Excluding Ghosts for clean operational data)
+  const realUsers = users.filter((u: any) => !u.is_ghost);
+  const totalUsers = realUsers.length;
+  const totalReferrals = realUsers.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
   const avgReferrals = totalUsers > 0 ? (totalReferrals / totalUsers).toFixed(1) : "0.0";
-  const topRecruiterCount = users.length > 0 ? users[0].referral_count : 0;
+  const topRecruiterCount = realUsers.length > 0 
+    ? Math.max(...realUsers.map((u: any) => u.referral_count)) 
+    : 0;
 
   const metrics = {
     totalUsers,
