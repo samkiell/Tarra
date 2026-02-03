@@ -38,7 +38,7 @@ export default async function Home() {
   let userData = null;
   
   await dbConnect();
-  const realUserCount = await Waitlist.countDocuments();
+  const realUserCount = await Waitlist.countDocuments({ is_ghost: { $ne: true } });
   const baseCount = parseInt(process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT || "0", 10);
   const totalJoined = realUserCount + baseCount;
 
