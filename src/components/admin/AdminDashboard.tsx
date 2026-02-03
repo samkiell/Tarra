@@ -63,7 +63,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
         <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
           <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Total Waitlist</div>
           <div className="text-2xl font-black text-white">{metrics.totalUsers.toLocaleString()}</div>
@@ -88,40 +88,40 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
         </div>
 
         {/* Filter Bar */}
-        <div className="w-full p-4 border border-muted/10 rounded-lg flex flex-wrap items-end gap-4 transition-colors">
-          <div className="flex flex-col gap-1">
+        <div className="w-full p-4 border border-muted/10 rounded-lg flex flex-col sm:flex-row flex-wrap items-stretch sm:items-end gap-4 transition-colors">
+          <div className="flex flex-col gap-1 sm:w-24">
             <label className="text-[10px] uppercase font-bold text-secondary">Min Referrals</label>
             <input 
               type="number" 
               placeholder="0"
-              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm w-24 text-white focus:outline-none focus:border-primary"
+              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary w-full"
               value={filters.min_referrals}
               onChange={(e) => setFilters({...filters, min_referrals: e.target.value})}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 sm:w-40">
             <label className="text-[10px] uppercase font-bold text-secondary">Topic / Referrer Code</label>
             <input 
               type="text" 
               placeholder="Filter by code..."
-              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm w-40 text-white focus:outline-none focus:border-primary"
+              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary w-full"
               value={filters.referred_by}
               onChange={(e) => setFilters({...filters, referred_by: e.target.value})}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 flex-grow">
             <label className="text-[10px] uppercase font-bold text-secondary">Date Range</label>
             <div className="flex items-center gap-2">
               <input 
                 type="date" 
-                className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
+                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
                 value={filters.start_date}
                 onChange={(e) => setFilters({...filters, start_date: e.target.value})}
               />
               <span className="text-secondary">-</span>
               <input 
                 type="date" 
-                className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
+                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
                 value={filters.end_date}
                 onChange={(e) => setFilters({...filters, end_date: e.target.value})}
               />
@@ -129,7 +129,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
           </div>
           <button
             onClick={handleExportCSV}
-            className="flex items-center gap-2 px-4 py-1.5 bg-primary text-white text-xs font-bold uppercase tracking-wider rounded shadow-lg shadow-primary/20 hover:brightness-110 ml-auto transition-all h-9"
+            className="flex items-center justify-center gap-2 px-4 py-1.5 bg-primary text-white text-xs font-bold uppercase tracking-wider rounded shadow-lg shadow-primary/20 hover:brightness-110 sm:ml-auto transition-all h-10 w-full sm:w-auto"
           >
             <Download className="w-3 h-3" />
             Download Filtered CSV

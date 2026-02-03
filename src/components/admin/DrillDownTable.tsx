@@ -36,13 +36,13 @@ const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals
   return (
     <div className="fixed inset-0 bg-dark/80 z-50 flex items-center justify-center p-4 transition-all backdrop-blur-md">
       <div className="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col border border-muted/10 transition-colors">
-        <div className="px-6 py-6 border-b border-muted/10 flex justify-between items-center bg-dark transition-colors">
+        <div className="px-4 sm:px-6 py-4 sm:py-6 border-b border-muted/10 flex justify-between items-center bg-dark transition-colors">
           <div>
-            <h2 className="text-xl font-bold text-white">
-              Audit Record: <span className="text-primary">{referrerName}</span>
+            <h2 className="text-lg sm:text-xl font-bold text-white leading-tight">
+              Audit: <span className="text-primary">{referrerName}</span>
             </h2>
-            <p className="text-xs text-secondary mt-1">
-              Analyzing {referrals.length} referrals for suspicious patterns
+            <p className="text-[10px] sm:text-xs text-secondary mt-1">
+              Analyzing {referrals.length} referrals for patterns
             </p>
           </div>
           <button 
