@@ -17,14 +17,23 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Tarra | OAU Commerce Without the Chaos",
   description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.app"),
+  keywords: ["Tarra", "OAU", "Obafemi Awolowo University", "Campus Commerce", "Student Marketplace", "Buy and Sell OAU", "Campus Services", "Student Brands", "OAU Waitlist"],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.ng"),
+  authors: [{ name: "Tarra Team" }],
+  creator: "Tarra",
+  publisher: "Tarra",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Tarra | OAU Commerce Without the Chaos",
     description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
-    url: "/",
+    url: "https://tarra.ng",
     siteName: "Tarra",
     locale: "en_US",
     type: "website",
@@ -42,9 +51,11 @@ export const metadata: Metadata = {
     title: "Tarra | OAU Commerce Without the Chaos",
     description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
     images: ["/og-image.png"],
+    creator: "@tarra_ng",
   },
   icons: {
     icon: "/assets/favicon_nobg.png",
+    apple: "/assets/favicon_nobg.png",
   },
 };
 
@@ -92,23 +103,23 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "Organization",
-                  "@id": "https://tarra.app/#organization",
+                  "@id": "https://tarra.ng/#organization",
                   "name": "Tarra",
-                  "url": "https://tarra.app",
-                  "logo": "https://tarra.app/logo.png",
+                  "url": "https://tarra.ng",
+                  "logo": "https://tarra.ng/logo.png",
                   "description": "Campus commerce platform for OAU students"
                 },
                 {
                   "@type": "WebSite",
-                  "@id": "https://tarra.app/#website",
-                  "url": "https://tarra.app",
+                  "@id": "https://tarra.ng/#website",
+                  "url": "https://tarra.ng",
                   "name": "Tarra",
                   "publisher": {
-                    "@id": "https://tarra.app/#organization"
+                    "@id": "https://tarra.ng/#organization"
                   },
                   "potentialAction": {
                     "@type": "SearchAction",
-                    "target": "https://tarra.app/?s={search_term_string}",
+                    "target": "https://tarra.ng/?s={search_term_string}",
                     "query-input": "required name=search_term_string"
                   }
                 }
