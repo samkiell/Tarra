@@ -111,17 +111,17 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
           </div>
           <div className="flex flex-col gap-1 flex-grow">
             <label className="text-[10px] uppercase font-bold text-secondary">Date Range</label>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <input 
                 type="date" 
-                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
+                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary w-full"
                 value={filters.start_date}
                 onChange={(e) => setFilters({...filters, start_date: e.target.value})}
               />
-              <span className="text-secondary">-</span>
+              <span className="hidden sm:inline text-secondary">-</span>
               <input 
                 type="date" 
-                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary"
+                className="flex-grow px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary w-full"
                 value={filters.end_date}
                 onChange={(e) => setFilters({...filters, end_date: e.target.value})}
               />
