@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface LeaderboardItem {
   _id: string;
@@ -15,6 +16,7 @@ interface LeaderboardClientProps {
 }
 
 const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) => {
+  const router = useRouter();
   const [showAll, setShowAll] = useState(false);
   
   const displayData = showAll ? initialData : initialData.slice(0, 10);
@@ -34,7 +36,12 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) =>
           <tbody className="divide-y divide-muted/10 transition-colors">
             {displayData.length > 0 ? (
               displayData.map((item, index) => (
-                <tr key={item._id} className="hover:bg-primary/5 transition-colors animate-in fade-in slide-in-from-bottom-2 duration-300" style={{ animationDelay: `${index * 50}ms` }}>
+                <tr 
+                  key={item._id} 
+                  onClick={() => !item.isGhost && router.push(`/status/${item._id}`)}
+                  className={`transition-colors animate-in fade-in slide-in-from-bottom-2 duration-300 ${!item.isGhost ? "hover:bg-primary/5 cursor-pointer" : "cursor-default"}`} 
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
                   <td className="px-4 py-4 text-sm font-bold text-white">
                     <span className={index < 3 ? "text-primary text-base" : "text-secondary font-medium"}>
                       {String(index + 1).padStart(2, '0')}

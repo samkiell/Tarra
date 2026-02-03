@@ -39,7 +39,7 @@ export default async function StatusPage({
 
   // Fetch current user data
   let user = await Waitlist.findOne({ id: USER_ID });
-  if (!user) {
+  if (!user || user.is_ghost) {
     redirect("/");
   }
 

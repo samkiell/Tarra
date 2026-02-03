@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     // Look for the user by primary phone identity
     const user = await Waitlist.findOne({ phone_number: phone_number.trim() });
 
-    if (!user) {
+    if (!user || user.is_ghost) {
       // Decision: Return a 404 with a gentle message as per documentation.
       // This is not a "system error", it's a "user not found" state.
       return NextResponse.json(
