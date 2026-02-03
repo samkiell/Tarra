@@ -25,17 +25,17 @@ interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
-    <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
+    <section className="relative w-full pt-6 pb-6 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-6 sm:mb-8">
+            <div className="mb-2 sm:mb-8">
               <Image 
                 src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={180} 
-                height={60} 
-                className="w-32 sm:w-40 h-auto object-contain"
+                width={300} 
+                height={100} 
+                className="w-56 sm:w-72 h-auto object-contain"
                 priority
               />
             </div>
