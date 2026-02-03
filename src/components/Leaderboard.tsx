@@ -15,14 +15,17 @@ import LeaderboardClient from "./LeaderboardClient";
 const Leaderboard: React.FC = async () => {
   await dbConnect();
 
-  // Fetch the 10th ghost user's referral count to use as a floor for real users
-  const ghosts = await Waitlist.find({ is_ghost: true })
+  // 1. Fetch the 10th highest ghost count to set the floor for real users
+  const topGhosts = await Waitlist.find({ is_ghost: true })
     .sort({ referral_count: -1 })
     .limit(10);
   
-  const minGhostCount = ghosts.length > 0 ? ghosts[ghosts.length - 1].referral_count : 0;
+  // The threshold is the 10th ghost's count, or 0 if < 10 ghosts exist
+  const minGhostCount = topGhosts.length >= 10 
+    ? topGhosts[topGhosts.length - 1].referral_count 
+    : 0;
 
-  // Query: Either a ghost OR a real user who beats the minimum ghost count
+  // 2. Query: All ghosts + real users who beat the threshold
   const leaderboardQuery = {
     $or: [
       { is_ghost: true },
@@ -35,7 +38,7 @@ const Leaderboard: React.FC = async () => {
 
   const users = await Waitlist.find(leaderboardQuery)
     .sort({ referral_count: -1, full_name: 1 })
-    .limit(10);
+    .limit(100); // Support "See More" for up to 100 entries
 
   const sanitizedData = users.map(user => ({
     _id: user.id,
