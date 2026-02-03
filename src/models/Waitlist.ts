@@ -75,8 +75,11 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
   }
 );
 
-// Meaningful comment: Prevents model recompilation during HMR (Hot Module Replacement)
-const Waitlist: Model<IWaitlist> =
-  mongoose.models.Waitlist || mongoose.model<IWaitlist>("Waitlist", WaitlistSchema);
+// Force-delete model to handle HMR schema updates
+if (mongoose.models.Waitlist) {
+  delete mongoose.models.Waitlist;
+}
+
+const Waitlist: Model<IWaitlist> = mongoose.model<IWaitlist>("Waitlist", WaitlistSchema);
 
 export default Waitlist;
