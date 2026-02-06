@@ -15,8 +15,8 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
-    <header>
-      <nav className="border-b border-muted/10 py-2 sticky top-0 z-50 transition-colors">
+    <header className="sticky top-0 z-50 w-full border-b border-muted/10 bg-dark/80 backdrop-blur-md transition-all">
+      <nav className="py-2 transition-colors">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity">
             <Image 
