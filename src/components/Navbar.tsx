@@ -16,11 +16,11 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
     <header>
-      <nav className="border-b border-muted/10 py-4 sticky top-0 z-50 transition-colors">
+      <nav className="border-b border-muted/10 py-2 sticky top-0 z-50 transition-colors">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity">
             <Image 
-              src="/assets/logo_nobg2.png" 
+              src="/assets/favicon_nobg.png" 
               alt="Tarra Logo" 
               width={50} 
               height={50} 
