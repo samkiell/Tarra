@@ -35,12 +35,12 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
                 alt="Tarra Logo" 
                 width={100} 
                 height={100} 
-                className="w-64 sm:w-[150px] h-auto object-contain"
+                className="w-68 h-100 object-contain"
                 priority
               />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-3 sm:mb-4 tracking-tight transition-colors">
+            <h1 className="text-3xl mx-2 sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-3 sm:mb-4 tracking-tight transition-colors">
               OAU Commerce. Without the Chaos.
             </h1>
 
