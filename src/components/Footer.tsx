@@ -10,7 +10,7 @@ import Link from "next/link";
  */
 export const Footer: React.FC = () => {
   return (
-    <footer className="py-4 border-t border-muted/10 transition-colors">
+    <footer className="border-t border-muted/10 transition-colors">
       <div className="container px-2 text-center flex flex-col items-center gap-2">
         <Image 
           src="/assets/logo_nobg2.png" 
