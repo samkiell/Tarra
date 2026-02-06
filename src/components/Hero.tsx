@@ -25,9 +25,9 @@ interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
-    <section className="relative w-full overflow-hidden transition-colors pt-6 pb-12 sm:pt-10 sm:pb-20">
+    <section className="relative w-full overflow-hidden transition-colors pt-4 pb-6 sm:pt-6 sm:pb-10">
       <div className="container relative z-10 mx-auto px-6">
-        <div className="flex flex-col items-center gap-8 text-center">
+        <div className="flex flex-col items-center gap-6 text-center">
           <div className="flex flex-col items-center max-w-3xl">
             <div>
               <Image 
@@ -35,7 +35,7 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
                 alt="Tarra Logo" 
                 width={300} 
                 height={100} 
-                className="w-56 sm:w-72 h-auto object-contain mb-6"
+                className="w-56 sm:w-80 h-auto object-contain mb-4"
                 priority
               />
             </div>
@@ -44,11 +44,11 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
               OAU Commerce. Without the Chaos.
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-3 sm:mb-4 transition-colors">
+            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-2 sm:mb-3 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
-            <p className="text-sm sm:text-base text-secondary/80 mb-5 sm:mb-6 max-w-lg leading-relaxed transition-colors">
+            <p className="text-sm sm:text-base text-secondary/80 mb-4 sm:mb-5 max-w-lg leading-relaxed transition-colors">
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
