@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 /**
@@ -18,14 +18,18 @@ const StatusCheck: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [error, setError] = useState<{ type: 'new' | 'general', message: string } | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // Smart Listen: Auto-fill phone from WaitlistForm
     const handleAutoFill = (e: any) => {
       if (e.detail?.phone) {
         setPhone(e.detail.phone);
-        const section = document.getElementById("status-section");
+        const section = document.getElementById("status-anchor");
         section?.scrollIntoView({ behavior: "smooth" });
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 800);
       }
     };
 
@@ -70,19 +74,23 @@ const StatusCheck: React.FC = () => {
 
   return (
     <div className="w-full max-w-sm mx-auto mt-8 text-center px-4 sm:px-0">
-      <h3 className="text-xs font-bold text-stone-500 dark:text-stone-400 mb-4 uppercase tracking-widest transition-colors">
+      <h3 className="text-xs font-bold text-secondary mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="flex gap-2">
+        <div id="status-anchor" className="scroll-mt-32" />
+        <div className="flex flex-col sm:flex-row gap-2">
+          <label htmlFor="status_phone" className="sr-only">Phone Number</label>
           <input
+            id="status_phone"
+            ref={inputRef}
             type="tel"
             required
             placeholder="Phone Number"
-            className={`flex-grow h-11 px-4 text-sm border rounded-lg text-stone-900 dark:text-stone-200 bg-stone-50 dark:bg-stone-950 focus:outline-none focus:ring-1 transition-all placeholder:text-stone-400 ${
+            className={`w-full sm:flex-grow h-11 px-4 text-sm border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
               error 
-                ? "border-amber-400 focus:ring-amber-500 focus:border-amber-500" 
-                : "border-stone-200 dark:border-stone-800 focus:ring-primary focus:border-primary"
+                ? "border-primary focus:ring-primary" 
+                : "border-muted/20 focus:ring-primary focus:border-primary"
             }`}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -90,29 +98,23 @@ const StatusCheck: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="h-11 px-6 bg-primary text-white text-sm font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center shrink-0"
+            className="w-full sm:w-auto h-11 px-8 bg-primary text-white text-sm font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center shrink-0 shadow-lg shadow-primary/20"
           >
-            {loading ? "..." : "Check"}
+            {loading ? "..." : "Check Status"}
           </button>
         </div>
 
         {successMessage && (
-          <div className="p-2.5 bg-teal-50 dark:bg-teal-950/20 border border-teal-200 dark:border-teal-900/50 rounded-md text-[11px] text-teal-700 dark:text-teal-400 font-bold leading-snug flex items-center justify-center gap-2 animate-in fade-in zoom-in-95 duration-300">
+          <div className="p-2.5 bg-primary/10 border border-primary/20 rounded-md text-[11px] text-white font-bold leading-snug flex items-center justify-center gap-2 animate-in fade-in zoom-in-95 duration-300">
             <span className="text-primary">✅</span>
             {successMessage}
           </div>
         )}
 
         {error && (
-          <div className={`p-2.5 border rounded-md text-[11px] leading-snug flex flex-col gap-2 transition-all duration-300 text-left ${
-            error.type === 'new' 
-              ? "bg-teal-50 dark:bg-teal-950/20 border-teal-200 dark:border-teal-900/50 text-teal-700 dark:text-teal-400"
-              : "bg-amber-50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50 text-amber-700 dark:text-amber-400"
-          }`}>
+          <div className="p-2.5 border border-muted/20 rounded-md text-[11px] leading-snug flex flex-col gap-2 transition-all duration-300 text-left bg-dark/50 text-secondary">
             <div className="flex items-center gap-2">
-              <span className={error.type === 'new' ? 'text-primary' : 'text-amber-500'}>
-                {error.type === 'new' ? 'ℹ️' : '⚠️'}
-              </span>
+              <span className="text-primary">ℹ️</span>
               <p>{error.message}</p>
             </div>
             {error.type === 'new' && (

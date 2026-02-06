@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Global Footer Component
@@ -9,21 +10,31 @@ import Image from "next/image";
  */
 export const Footer: React.FC = () => {
   return (
-    <footer className="py-12 border-t border-stone-100 dark:border-stone-800 bg-white dark:bg-stone-950 transition-colors">
-      <div className="container mx-auto px-6 text-center flex flex-col items-center gap-4">
+    <footer className="py-12 border-t border-muted/10 transition-colors">
+      <div className="container px-2 text-center flex flex-col items-center gap-4">
         <Image 
-          src="/assets/favicon_nobg.png" 
+          src="/assets/logo_nobg2.png" 
           alt="Tarra Logo" 
-          width={80} 
-          height={28} 
-          className="h-6 w-auto opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+          width={100} 
+          height={100} 
+          className="h-24 md:h-48 lg:h-64 w-auto opacity-70 hover:opacity-100 transition-opacity"
         />
-        <div className="text-sm font-bold text-stone-900 dark:text-stone-50 transition-colors">
+        <div className="text-sm font-bold text-white transition-colors">
           Tarra | The Official OAU Marketplace
         </div>
-        <p className="text-xs text-stone-400 dark:text-stone-500 transition-colors">
+        <p className="text-xs text-secondary transition-colors">
           &copy; {new Date().getFullYear()} built for OAU. All rights reserved.
         </p>
+        <p className="text-xs text-secondary transition-colors italic">
+            Developed by 
+            <Link
+              href='https://samkiel.dev'
+              className="ml-1 text-primary hover:text-white transition-colors font-bold not-italic"
+              target="_blank"
+            >
+              SAMKIEL
+            </Link>
+        </p>  
       </div>
     </footer>
   );

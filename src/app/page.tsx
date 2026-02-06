@@ -2,7 +2,9 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Leaderboard from "@/components/Leaderboard";
 import StatusCheck from "@/components/StatusCheck";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { LogoutButton } from "@/components/LogoutButton";
+
+
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { cookies, headers } from "next/headers";
@@ -36,7 +38,7 @@ export default async function Home() {
   let userData = null;
   
   await dbConnect();
-  const realUserCount = await Waitlist.countDocuments();
+  const realUserCount = await Waitlist.countDocuments({ is_ghost: { $ne: true } });
   const baseCount = parseInt(process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT || "0", 10);
   const totalJoined = realUserCount + baseCount;
 
@@ -44,15 +46,13 @@ export default async function Home() {
     const user = await Waitlist.findOne({ id: session.value });
     
     if (user) {
-      const referralCount = await Waitlist.countDocuments({ referred_by: user.referral_code });
+      const referralCount = user.referral_count || 0;
       
-      // Calculate Rank
-      const higherReferrers = await Waitlist.aggregate([
-        { $group: { _id: "$referred_by", count: { $sum: 1 } } },
-        { $match: { _id: { $ne: null }, count: { $gt: referralCount } } },
-        { $count: "total" }
-      ]);
-      const rank = (higherReferrers[0]?.total || 0) + 1;
+      // Calculate Rank based on the numeric referral_count field across ALL users (real and ghost)
+      const higherReferrersCount = await Waitlist.countDocuments({ 
+        referral_count: { $gt: referralCount } 
+      });
+      const rank = higherReferrersCount + 1;
 
       userData = {
         firstName: user.full_name.split(" ")[0],
@@ -65,24 +65,25 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar rightContent={userData ? <LogoutButton /> : null} />
 
       {/* Main Content Sections */}
       <main className="flex-grow">
         <section id="join-section">
           <Hero userData={userData} totalJoined={totalJoined} />
         </section>
+        
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section id="leaderboard-section" className="py-20 transition-colors scroll-mt-24">
+        <section id="leaderboard-section" className="py-24 transition-colors scroll-mt-24 border-t border-muted/5">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl font-bold text-stone-900 dark:text-stone-50 mb-3 transition-colors">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold text-white mb-4 transition-colors">
                   Leaderboard
                 </h2>
-                <p className="text-stone-500 dark:text-stone-400 max-w-md mx-auto transition-colors">
+                <p className="text-secondary max-w-md mx-auto transition-colors leading-relaxed">
                   Grow the community and win up to ₦50,000. Current top performers in the referral contest.
                 </p>
               </div>
@@ -90,7 +91,7 @@ export default async function Home() {
               <Leaderboard />
               
               {/* Recovery Path for Students on Shared Devices */}
-              <div id="status-section" className="mt-20 scroll-mt-24">
+              <div id="status-section" className="mt-24 scroll-mt-24">
                 <StatusCheck />
               </div>
             </div>

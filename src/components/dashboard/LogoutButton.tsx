@@ -34,7 +34,7 @@ const LogoutButton: React.FC = () => {
     <button
       onClick={handleLogout}
       disabled={loading}
-      className="text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-50 text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
+      className="text-secondary hover:text-white text-sm font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
     >
       {loading ? (
         <Loader2 className="w-4 h-4 animate-spin" />

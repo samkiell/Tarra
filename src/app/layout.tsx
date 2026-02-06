@@ -1,30 +1,61 @@
-import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-});
+export const viewport: Viewport = {
+  themeColor: "#0F172A",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
-  title: "Tarra | The Official OAU Marketplace",
-  description: "Join the exclusive waitlist for the official OAU marketplace. Connect with verified campus vendors and discover essential services in one secure platform.",
+  title: "Tarra | OAU Commerce Without the Chaos",
+  description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+  keywords: ["Tarra", "OAU", "Obafemi Awolowo University", "Campus Commerce", "Student Marketplace", "Buy and Sell OAU", "Campus Services", "Student Brands", "OAU Waitlist", 'Samkiel'],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.ng"),
+  authors: [{ name: "SAMKIEL" }],
+  creator: "SAMKIEL",
+  publisher: "SAMKIEL",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Tarra | The Official OAU Marketplace",
-    description: "Join the exclusive waitlist for the official OAU marketplace.",
-    url: "https://tarra.app",
+    title: "Tarra | OAU Commerce Without the Chaos",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    url: "https://tarra.ng",
     siteName: "Tarra",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/favicon_nobg.png",
+        width: 1200,
+        height: 630,
+        alt: "Tarra - OAU Commerce Without the Chaos",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tarra | OAU Commerce Without the Chaos",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    images: ["/favicon_nobg.png"],
+    creator: "@tarra_ng",
   },
   icons: {
-    icon: "/assets/favicon_nobg.png",
+    icon: "/favicon_nobg.png",
+    apple: "/favicon_nobg.png",
   },
 };
 
@@ -36,14 +67,66 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
-      <body className="antialiased selection:bg-primary/10 transition-colors duration-500 font-sans">
-        {/* Global Blueprint Texture */}
-        <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute inset-0 bg-grid-plus opacity-[0.4] dark:opacity-[0.2]" />
-          <div className="absolute inset-0 bg-noise opacity-30 mix-blend-soft-light" />
-        </div>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link 
+          rel="preload" 
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" 
+          as="style" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" 
+        />
+        <link rel="preload" href="/favicon_nobg.png" as="image" />
+      </head>
+      <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans overflow-x-hidden">
+        {/* Global Brand Background Pattern */}
+        <div 
+          className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]" 
+          aria-hidden="true"
+          style={{ 
+            backgroundImage: 'url("/assets/bg.jpeg")',
+            backgroundSize: '400px 400px',
+            backgroundRepeat: 'repeat',
+            backgroundAttachment: 'fixed',
+            filter: 'blur(1px)'
+          }}
+        />
         
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://tarra.ng/#organization",
+                  "name": "Tarra",
+                  "url": "https://tarra.ng",
+                  "logo": "https://tarra.ng/favicon_nobg.png",
+                  "description": "Campus commerce platform for OAU students"
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://tarra.ng/#website",
+                  "url": "https://tarra.ng",
+                  "name": "Tarra",
+                  "publisher": {
+                    "@id": "https://tarra.ng/#organization"
+                  },
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://tarra.ng/?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                }
+              ]
+            }),
+          }}
+        />
         <div className="relative z-10 min-h-screen flex flex-col">
           <Providers>
             {children}

@@ -41,14 +41,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const cleanPhone = phone_number.trim();
+    const cleanEmail = email.toLowerCase().trim();
+
     await dbConnect();
 
     // 2. Identification logic (Email & Phone uniqueness)
+    // Check if the exact combination of email and phone exists
     const existingUser = await Waitlist.findOne({
-      $or: [
-        { email: email.toLowerCase() },
-        { phone_number: phone_number }
-      ]
+      email: cleanEmail,
+      phone_number: cleanPhone
     });
 
     const cookieStore = await cookies();
@@ -88,11 +90,19 @@ export async function POST(request: Request) {
       id: uniqueId,
       referral_code: shortRefCode,
       full_name,
-      email: email.toLowerCase(),
-      phone_number,
+      email: cleanEmail,
+      phone_number: cleanPhone,
       interests: Array.isArray(interests) ? interests : [],
       referred_by: validatedReferrer,
     });
+
+    // 5. Increment Referrer Count
+    if (validatedReferrer) {
+      await Waitlist.updateOne(
+        { referral_code: validatedReferrer },
+        { $inc: { referral_count: 1 } }
+      );
+    }
 
     cookieStore.set("tarra_session", newUser.id, cookieOptions);
 
@@ -110,7 +120,11 @@ export async function POST(request: Request) {
     
     // Check for MongoDB local unique index violations (e.g. duplicate phone number)
     if (error.code === 11000) {
-      return NextResponse.json({ error: "Email or phone number already in use" }, { status: 400 });
+      const field = Object.keys(error.keyPattern)[0];
+      const message = field === "phone_number" 
+        ? "This phone number is in use" 
+        : "This email is in use";
+      return NextResponse.json({ error: message }, { status: 400 });
     }
 
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });

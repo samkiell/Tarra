@@ -19,9 +19,6 @@ interface DrillDownTableProps {
  * 
  * Fraud Detection Intent:
  * Allows admins to inspect the specific users referred by a high-ranking recruiter.
- * Red flags to look for:
- * 1. Clusters of referrals created at the exact same timestamp.
- * 2. Patterns in phone numbers (sequential or very similar).
  */
 const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals, onClose }) => {
   // Sort by join time (newest first)
@@ -37,57 +34,57 @@ const DrillDownTable: React.FC<DrillDownTableProps> = ({ referrerName, referrals
   }, {} as Record<string, number>);
 
   return (
-    <div className="fixed inset-0 bg-stone-900/40 z-50 flex items-center justify-center p-4 transition-all backdrop-blur-sm">
-      <div className="bg-white dark:bg-stone-900 rounded-lg shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col border border-stone-200 dark:border-stone-800 transition-colors">
-        <div className="px-6 py-4 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-stone-50/50 dark:bg-stone-900/50 transition-colors">
+    <div className="fixed inset-0 bg-dark/80 z-50 flex items-center justify-center p-4 transition-all backdrop-blur-md">
+      <div className="bg-dark rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col border border-muted/10 transition-colors">
+        <div className="px-4 sm:px-6 py-4 sm:py-6 border-b border-muted/10 flex justify-between items-center bg-dark transition-colors">
           <div>
-            <h2 className="text-lg font-bold text-stone-900 dark:text-stone-50">
-              Audit Record: <span className="text-primary">{referrerName}</span>
+            <h2 className="text-lg sm:text-xl font-bold text-white leading-tight">
+              Audit: <span className="text-primary">{referrerName}</span>
             </h2>
-            <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">
+            <p className="text-[10px] sm:text-xs text-secondary mt-1">
               Analyzing {referrals.length} referrals for patterns
             </p>
           </div>
           <button 
             onClick={onClose}
-            className="p-2 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors"
+            className="p-2 hover:bg-muted/10 rounded-full transition-colors"
           >
             <span className="sr-only">Close</span>
-            <svg className="w-5 h-5 text-stone-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
         
-        <div className="overflow-x-auto p-0 flex-1">
+        <div className="overflow-x-auto p-0 flex-1 scrollbar-thin scrollbar-thumb-muted/10">
           <table className="w-full text-left border-collapse min-w-[500px]">
-            <thead className="bg-stone-50 dark:bg-stone-950 sticky top-0 z-10 shadow-sm">
+            <thead className="bg-dark sticky top-0 z-10 border-b border-muted/10 shadow-lg">
               <tr>
-                <th className="px-6 py-3 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest">Referred User</th>
-                <th className="px-6 py-3 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest text-center">Phone Pattern</th>
-                <th className="px-6 py-3 text-[10px] font-bold text-stone-500 dark:text-stone-400 uppercase tracking-widest text-right">Join Timestamp</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest">Referred User</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-center">Phone Analysis</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right">Join Frequency</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-stone-100 dark:divide-stone-800">
+            <tbody className="divide-y divide-muted/5">
               {sortedReferrals.map((ref, idx) => {
                 const prefix = ref.phone_number.substring(0, 7);
                 const isSuspiciousPattern = prefixGroups[prefix] > 2;
 
                 return (
-                  <tr key={idx} className={`group transition-colors ${isSuspiciousPattern ? 'bg-amber-50/50 dark:bg-amber-950/10 hover:bg-amber-50 dark:hover:bg-amber-950/20' : 'hover:bg-stone-50 dark:hover:bg-stone-800/50'}`}>
-                    <td className="px-6 py-3">
-                      <div className="text-sm font-medium text-stone-900 dark:text-stone-200">{ref.first_name}</div>
+                  <tr key={idx} className={`group transition-colors ${isSuspiciousPattern ? 'bg-primary/5 hover:bg-primary/10' : 'hover:bg-muted/5'}`}>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-semibold text-white/90">{ref.first_name}</div>
                     </td>
-                    <td className="px-6 py-3 text-center">
-                      <div className={`text-sm font-mono inline-block px-2 py-0.5 rounded ${isSuspiciousPattern ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 font-bold' : 'text-stone-500 dark:text-stone-400'}`}>
+                    <td className="px-6 py-4 text-center">
+                      <div className={`text-sm font-mono inline-block px-2 py-0.5 rounded border ${isSuspiciousPattern ? 'border-primary/30 text-primary font-bold bg-primary/5' : 'border-transparent text-secondary'}`}>
                         {ref.phone_number}
                       </div>
                     </td>
-                    <td className="px-6 py-3 text-right">
-                      <div className="text-sm text-stone-600 dark:text-stone-400">
+                    <td className="px-6 py-4 text-right">
+                      <div className="text-sm text-secondary/80">
                         {new Date(ref.created_at).toLocaleDateString()} 
-                        <span className="text-stone-300 dark:text-stone-600 mx-1">•</span>
-                        <span className="text-xs text-stone-400 font-mono">
+                        <span className="text-muted/10 mx-1.5">•</span>
+                        <span className="text-xs text-secondary font-mono">
                           {new Date(ref.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                         </span>
                       </div>

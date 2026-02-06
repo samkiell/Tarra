@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import WaitlistForm from "./WaitlistForm";
@@ -23,41 +25,42 @@ interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
-    <section className="relative w-full pt-16 pb-16 lg:pt-24 lg:pb-24 overflow-hidden transition-colors">
+    <section className="relative w-full overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <div className="mb-8 p-1">
+        <div className="flex flex-col items-center gap-12 text-center">
+          <div className="flex flex-col items-center max-w-3xl">
+            <div>
               <Image 
-                src="/assets/favicon_nobg.png" 
+                src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={72} 
-                height={72} 
-                className="w-16 h-16 object-contain"
+                width={300} 
+                height={100} 
+                className="w-56 sm:w-72 h-auto object-contain mb-8"
+                priority
               />
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black text-stone-900 dark:text-stone-50 leading-tight mb-6 tracking-tight transition-colors">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 sm:mb-6 tracking-tight transition-colors">
               OAU Commerce. Without the Chaos.
             </h1>
 
-            <p className="text-lg text-stone-600 dark:text-stone-300 font-medium mb-6 transition-colors">
+            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-4 sm:mb-6 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
-            <p className="text-stone-500 dark:text-stone-400 mb-8 max-w-lg leading-relaxed transition-colors">
+            <p className="text-sm sm:text-base text-secondary/80 mb-6 sm:mb-8 max-w-lg leading-relaxed transition-colors">
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             
             {!userData && (
-              <div className="flex items-center gap-3 py-2 px-4 bg-stone-50 dark:bg-stone-900 border border-stone-100 dark:border-stone-800 rounded text-stone-500 dark:text-stone-400 text-xs font-semibold uppercase tracking-wider transition-colors">
+              <div className="flex items-center gap-3 py-2 px-4 bg-dark/50 border border-muted/20 rounded text-secondary text-xs font-semibold uppercase tracking-wider transition-colors mb-4">
                 <span className="w-2 h-2 rounded-full bg-primary" />
                 Over {totalJoined.toLocaleString()} students joined
               </div>
             )}
           </div>
 
-          <div className="lg:w-1/2 w-full flex justify-center">
+          <div className="w-full max-w-xl flex justify-center">
             {userData ? (
               <WelcomeBackCard {...userData} />
             ) : (

@@ -15,41 +15,17 @@ import LeaderboardClient from "./LeaderboardClient";
 const Leaderboard: React.FC = async () => {
   await dbConnect();
 
-  const data = await Waitlist.aggregate([
-    {
-      $match: {
-        referred_by: { $ne: null },
-      },
-    },
-    {
-      $group: {
-        _id: "$referred_by",
-        count: { $sum: 1 },
-      },
-    },
-    {
-      $lookup: {
-        from: "waitlists",
-        localField: "_id",
-        foreignField: "referral_code",
-        as: "referrer",
-      },
-    },
-    { $unwind: "$referrer" },
-    {
-      $project: {
-        firstName: { $arrayElemAt: [{ $split: ["$referrer.full_name", " "] }, 0] },
-        count: 1,
-      },
-    },
-    { $sort: { count: -1, firstName: 1 } },
-    { $limit: 100 }, // Fetch up to 100 to support "See More"
-  ]);
+  // Unified Ranking: Fetch top performers and recent joiners. 
+  // Sorting by referral_count (top recruiters) then by created_at (most recent joins).
+  const users = await Waitlist.find({})
+    .sort({ referral_count: -1, created_at: -1 })
+    .limit(10);
 
-  // Convert mongoose _id to string for the client component
-  const sanitizedData = data.map(item => ({
-    ...item,
-    _id: item._id.toString()
+  const sanitizedData = users.map(user => ({
+    _id: user.id,
+    firstName: user.full_name.split(" ")[0],
+    count: user.referral_count,
+    isGhost: user.is_ghost || false,
   }));
 
   return <LeaderboardClient initialData={sanitizedData} />;

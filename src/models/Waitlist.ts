@@ -10,6 +10,8 @@ export interface IWaitlist extends Document {
   phone_number: string; 
   interests: string[]; 
   referred_by: string | null; 
+  referral_count: number;
+  is_ghost: boolean;
   created_at: Date; 
 }
 
@@ -46,8 +48,8 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
       required: [true, "Phone number is required"],
       unique: true, // Database-level constraint to prevent identity duplication
       trim: true,
-      // Meaningful comment: Enforces valid Nigerian mobile format starting with approved prefixes (080, 081, 090, 070)
-      match: [/^(080|081|090|070)\d{8}$/, "Please provide a valid 11-digit Nigerian phone number"],
+      // Meaningful comment: Enforces valid Nigerian mobile format starting with approved prefixes (080, 081, 090, 091, 070)
+      match: [/^(080|081|090|091|070)\d{8}$/, "Please provide a valid 11-digit Nigerian phone number"],
     },
     interests: {
       type: [String],
@@ -57,6 +59,14 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
       type: String,
       default: null,
     },
+    referral_count: {
+      type: Number,
+      default: 0,
+    },
+    is_ghost: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     // Meaningful comment: Automates registration timestamping for conversion auditing
@@ -65,8 +75,11 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
   }
 );
 
-// Meaningful comment: Prevents model recompilation during HMR (Hot Module Replacement)
-const Waitlist: Model<IWaitlist> =
-  mongoose.models.Waitlist || mongoose.model<IWaitlist>("Waitlist", WaitlistSchema);
+// Force-delete model to handle HMR schema updates
+if (mongoose.models.Waitlist) {
+  delete mongoose.models.Waitlist;
+}
+
+const Waitlist: Model<IWaitlist> = mongoose.model<IWaitlist>("Waitlist", WaitlistSchema);
 
 export default Waitlist;

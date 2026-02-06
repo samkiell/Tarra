@@ -8,7 +8,7 @@ import { Footer } from "@/components/Footer";
 export const dynamic = "force-dynamic";
 
 import LogoutButton from "@/components/dashboard/LogoutButton";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+
 
 /**
  * Admin Panel Page
@@ -44,18 +44,30 @@ export default async function LighthousePage() {
         email: 1,
         phone_number: 1,
         referral_code: 1,
-        referral_count: { $size: "$referral_details" },
+        is_ghost: 1,
+        created_at: 1,
+        // For real users, count actual children. For ghosts, use hardcoded count.
+        referral_count: {
+          $cond: {
+            if: { $eq: ["$is_ghost", true] },
+            then: { $ifNull: ["$referral_count", 0] },
+            else: { $size: "$referral_details" }
+          }
+        },
         // Fraud Detection Logic (Computed)
-        // 1. Velocity: If >5 referrals created on same day
-        // 2. Self-Referral: If referrer name matches any referral name (approx)
         isFlagged: {
           $cond: {
             if: {
-              $or: [
-                { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
-                { 
-                   // Check for self-referral attempts (Name similarity check)
-                   $in: [ "$full_name", "$referral_details.full_name" ] 
+              $and: [
+                { $ne: ["$is_ghost", true] }, // Don't flag ghosts
+                {
+                  $or: [
+                    { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
+                    { 
+                       // Check for self-referral attempts (Name similarity check)
+                       $in: [ "$full_name", "$referral_details.full_name" ] 
+                    }
+                  ]
                 }
               ]
             },
@@ -64,27 +76,35 @@ export default async function LighthousePage() {
           }
         },
         referrals: {
-          $map: {
-            input: "$referral_details",
-            as: "r",
-            in: {
-              first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
-              phone_number: "$$r.phone_number",
-              created_at: "$$r.created_at",
-            },
-          },
+          $cond: {
+            if: { $eq: ["$is_ghost", true] },
+            then: [], // Ghosts have no actual referral records
+            else: {
+              $map: {
+                input: "$referral_details",
+                as: "r",
+                in: {
+                  first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
+                  phone_number: "$$r.phone_number",
+                  created_at: "$$r.created_at",
+                },
+              }
+            }
+          }
         },
       },
     },
     { $sort: { referral_count: -1, full_name: 1 } },
   ]);
 
-  // Compute Lightweight Metrics (Read-only, Server-side)
-  // Operational Intent: Simplicity > Dashboards. Just the numbers that matter for daily checks.
-  const totalUsers = users.length;
-  const totalReferrals = users.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
+  // Compute Metrics (Excluding Ghosts for clean operational data)
+  const realUsers = users.filter((u: any) => !u.is_ghost);
+  const totalUsers = realUsers.length;
+  const totalReferrals = realUsers.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
   const avgReferrals = totalUsers > 0 ? (totalReferrals / totalUsers).toFixed(1) : "0.0";
-  const topRecruiterCount = users.length > 0 ? users[0].referral_count : 0;
+  const topRecruiterCount = realUsers.length > 0 
+    ? Math.max(...realUsers.map((u: any) => u.referral_count)) 
+    : 0;
 
   const metrics = {
     totalUsers,
@@ -94,22 +114,22 @@ export default async function LighthousePage() {
   };
 
   return (
-    <main className="min-h-screen bg-stone-50 dark:bg-stone-950 py-12 px-6 transition-colors duration-300">
+    <main className="min-h-screen py-12 px-6 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-10 overflow-x-auto gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 gap-6">
           <div>
-            <h1 className="text-3xl font-black text-stone-900 dark:text-stone-50 tracking-tighter uppercase whitespace-nowrap">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tighter uppercase">
               Tarra Admin
             </h1>
-            <p className="text-stone-500 dark:text-stone-400 font-medium whitespace-nowrap">
+            <p className="text-sm sm:text-base text-secondary font-medium">
               Real-time Waitlist & Referral Monitoring
             </p>
           </div>
-          <div className="flex items-center gap-6">
-            <div className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-black rounded-full border border-green-200 dark:border-green-800 whitespace-nowrap uppercase">
+          <div className="flex items-center gap-4 sm:gap-6 w-full sm:w-auto justify-between sm:justify-end">
+            <div className="px-3 py-1 bg-primary/10 text-primary text-[10px] font-black rounded-full border border-primary/20 uppercase whitespace-nowrap">
               Admin Panel
             </div>
-            <ThemeSwitcher />
+
             <LogoutButton />
           </div>
         </div>
