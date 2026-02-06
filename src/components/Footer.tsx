@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { Link } from "next/link";
 
 /**
  * Global Footer Component
@@ -23,6 +24,14 @@ export const Footer: React.FC = () => {
         </div>
         <p className="text-xs text-secondary transition-colors">
           &copy; {new Date().getFullYear()} built for OAU. All rights reserved.
+        </p>
+        <p className="text-x text-tertiary transition-colors">
+            Developed by 
+            <Link
+            href='https://samkiel.dev'
+            >
+            SAMKIEL
+            </Link>
         </p>
       </div>
     </footer>

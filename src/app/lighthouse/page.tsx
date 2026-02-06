@@ -45,6 +45,7 @@ export default async function LighthousePage() {
         phone_number: 1,
         referral_code: 1,
         is_ghost: 1,
+        created_at: 1,
         // For real users, count actual children. For ghosts, use hardcoded count.
         referral_count: {
           $cond: {

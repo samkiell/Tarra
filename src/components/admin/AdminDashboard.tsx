@@ -11,6 +11,7 @@ interface AdminUser {
   phone_number: string;
   referral_code: string;
   referral_count: number;
+  created_at: string;
   referrals: Array<{
     first_name: string;
     phone_number: string;
@@ -42,6 +43,15 @@ interface AdminDashboardProps {
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   
+  // Sorting state
+  const [sortConfig, setSortConfig] = useState<{
+    key: 'created_at' | 'referral_count';
+    direction: 'asc' | 'desc';
+  }>({
+    key: 'referral_count',
+    direction: 'desc'
+  });
+  
   // State for optional filters (no complex UI controls)
   const [filters, setFilters] = useState({
     min_referrals: "",
@@ -60,6 +70,26 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
     
     window.location.href = `/api/admin/export-csv?${params.toString()}`;
   };
+
+  const handleSort = (key: 'created_at' | 'referral_count') => {
+    let direction: 'asc' | 'desc' = 'desc';
+    if (sortConfig.key === key && sortConfig.direction === 'desc') {
+      direction = 'asc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedUsers = [...users].sort((a, b) => {
+    if (sortConfig.key === 'created_at') {
+      const dateA = new Date(a.created_at).getTime();
+      const dateB = new Date(b.created_at).getTime();
+      return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA;
+    } else {
+      return sortConfig.direction === 'asc' 
+        ? a.referral_count - b.referral_count 
+        : b.referral_count - a.referral_count;
+    }
+  });
 
   return (
     <div className="w-full">
@@ -142,13 +172,33 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
           <table className="w-full text-left border-collapse min-w-[600px]">
             <thead className="bg-dark border-b border-muted/10">
               <tr>
-                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">User Identity</th>
+                <th 
+                  className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors cursor-pointer hover:text-white"
+                  onClick={() => handleSort('created_at')}
+                >
+                  <div className="flex items-center gap-1">
+                    User Identity
+                    {sortConfig.key === 'created_at' && (
+                      <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                    )}
+                  </div>
+                </th>
                 <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">Contact Details</th>
-                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right transition-colors">Referral Growth</th>
+                <th 
+                  className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right transition-colors cursor-pointer hover:text-white"
+                  onClick={() => handleSort('referral_count')}
+                >
+                  <div className="flex items-center justify-end gap-1">
+                    {sortConfig.key === 'referral_count' && (
+                      <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
+                    )}
+                    Referral Growth
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-muted/5">
-              {users.map((user) => (
+              {sortedUsers.map((user) => (
                 <tr key={user.id} className="hover:bg-primary/5 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
@@ -162,6 +212,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
                     <div className="flex flex-wrap gap-2 mt-1">
                       <span className="text-[10px] text-secondary/50 font-mono transition-colors uppercase">ID: {user.id.slice(0, 8)}...</span>
                       <span className="text-[10px] text-primary font-black tracking-tighter uppercase">Code: {user.referral_code}</span>
+                      <span className="text-[10px] text-secondary font-medium uppercase tracking-tighter">Joined: {new Date(user.created_at).toLocaleDateString()} {new Date(user.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
