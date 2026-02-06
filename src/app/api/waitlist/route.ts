@@ -47,11 +47,10 @@ export async function POST(request: Request) {
     await dbConnect();
 
     // 2. Identification logic (Email & Phone uniqueness)
+    // Check if the exact combination of email and phone exists
     const existingUser = await Waitlist.findOne({
-      $or: [
-        { email: cleanEmail },
-        { phone_number: cleanPhone }
-      ]
+      email: cleanEmail,
+      phone_number: cleanPhone
     });
 
     const cookieStore = await cookies();
@@ -123,8 +122,8 @@ export async function POST(request: Request) {
     if (error.code === 11000) {
       const field = Object.keys(error.keyPattern)[0];
       const message = field === "phone_number" 
-        ? "This phone number is already registered" 
-        : "This email is already registered";
+        ? "This phone number is in use" 
+        : "This email is in use";
       return NextResponse.json({ error: message }, { status: 400 });
     }
 
