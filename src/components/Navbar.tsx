@@ -16,7 +16,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-muted/10 bg-dark/80 backdrop-blur-md transition-all">
-      <nav className="py-2 transition-colors">
+      <nav className="py-1 transition-colors">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity">
             <Image 
@@ -24,7 +24,7 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
               alt="Tarra Logo" 
               width={50} 
               height={50} 
-              className=" pt-0 h-29 w-auto"
+              className="h-8 w-auto"
               priority
             />
           </Link>
