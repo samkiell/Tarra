@@ -15,9 +15,9 @@ export const Footer: React.FC = () => {
         <Image 
           src="/assets/logo_nobg2.png" 
           alt="Tarra Logo" 
-          width={300} 
-          height={100} 
-          className="h-20 w-auto opacity-70 hover:opacity-100 transition-opacity"
+          width={400} 
+          height={150} 
+          className="h-20 md:h-28 lg:h-32 w-auto opacity-70 hover:opacity-100 transition-opacity"
         />
         <div className="text-sm font-bold text-white transition-colors">
           Tarra | The Official OAU Marketplace
