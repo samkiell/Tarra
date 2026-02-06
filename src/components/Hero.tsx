@@ -33,9 +33,9 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
               <Image 
                 src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={300} 
-                height={100} 
-                className="w-56 sm:w-80 h-auto object-contain mb-4"
+                width={600} 
+                height={200} 
+                className="w-64 sm:w-[450px] h-auto object-contain mb-2"
                 priority
               />
             </div>

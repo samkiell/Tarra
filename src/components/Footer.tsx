@@ -11,13 +11,13 @@ import Link from "next/link";
 export const Footer: React.FC = () => {
   return (
     <footer className="py-4 border-t border-muted/10 transition-colors">
-      <div className="container px-2 text-center flex flex-col items-center gap-4">
+      <div className="container px-2 text-center flex flex-col items-center gap-2">
         <Image 
           src="/assets/logo_nobg2.png" 
           alt="Tarra Logo" 
-          width={100} 
-          height={100} 
-          className="h-20 sm:h-24 w-auto opacity-70 hover:opacity-100 transition-opacity"
+          width={400} 
+          height={200} 
+          className="h-40 sm:h-56 w-auto opacity-70 hover:opacity-100 transition-opacity"
         />
         <div className="text-sm font-bold text-white transition-colors">
           Tarra | The Official OAU Marketplace
