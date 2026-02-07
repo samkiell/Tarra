@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 
 export const dynamic = "force-dynamic";
 
-import LogoutButton from "@/components/dashboard/LogoutButton";
+import { LogoutButton } from "@/components/LogoutButton";
 
 
 /**
