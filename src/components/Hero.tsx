@@ -26,29 +26,29 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
     <section className="relative w-full overflow-hidden transition-colors">
-      <div className="container relative z-10 mx-auto px-6">
-        <div className="flex flex-col items-center gap-12 text-center">
+      <div className="container relative z-10 mx-auto">
+        <div className="flex flex-col items-center gap-6 text-center">
           <div className="flex flex-col items-center max-w-3xl">
             <div>
               <Image 
                 src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={300} 
+                width={100} 
                 height={100} 
-                className="w-56 sm:w-72 h-auto object-contain mb-8"
+                className="w-68 h-100 object-contain"
                 priority
               />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 sm:mb-6 tracking-tight transition-colors">
+            <h1 className="text-3xl mx-2 sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-3 sm:mb-4 tracking-tight transition-colors">
               OAU Commerce. Without the Chaos.
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-4 sm:mb-6 transition-colors">
+            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-2 sm:mb-3 transition-colors">
               Buy and sell products, discover campus brands, and book essential services.
             </p>
 
-            <p className="text-sm sm:text-base text-secondary/80 mb-6 sm:mb-8 max-w-lg leading-relaxed transition-colors">
+            <p className="text-sm sm:text-base text-secondary/80 mb-4 sm:mb-5 max-w-lg leading-relaxed transition-colors">
               Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
             </p>
             

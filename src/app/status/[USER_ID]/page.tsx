@@ -2,7 +2,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import dbConnect from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
-import LogoutButton from "@/components/dashboard/LogoutButton";
+import { LogoutButton } from "@/components/LogoutButton";
 import CopyLinkButton from "@/components/dashboard/CopyLinkButton";
 import Leaderboard from "@/components/Leaderboard";
 import { Footer } from "@/components/Footer";
@@ -80,9 +80,9 @@ export default async function StatusPage({
         {/* Header Section */}
         <header className="flex justify-between items-start mb-12">
           <div>
-            <h1 className="text-3xl font-black tracking-tight text-white flex items-center gap-2">
+            <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
               Hello, {firstName} 👋
-              <CheckCircle2 className="w-6 h-6 text-primary" strokeWidth={2.5} />
+              <CheckCircle2 className="w-5 h-5 text-primary" strokeWidth={2.5} />
             </h1>
           </div>
         </header>
@@ -91,7 +91,7 @@ export default async function StatusPage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           <div className="p-6 border border-muted/10 rounded-lg shadow-xl transition-colors">
             <h3 className="text-sm font-medium text-secondary mb-3">Referral Count</h3>
-            <p className="text-3xl font-bold tracking-tight text-white transition-colors">
+            <p className="text-4xl font-black tracking-tight text-white transition-colors">
               You have referred <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
             </p>
           </div>

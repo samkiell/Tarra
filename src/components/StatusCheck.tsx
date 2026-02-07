@@ -73,7 +73,7 @@ const StatusCheck: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto mt-8 text-center px-4 sm:px-0">
+    <div className="w-full max-w-sm mx-auto mt-4 text-center px-4 sm:px-0">
       <h3 className="text-xs font-bold text-secondary mb-4 uppercase tracking-widest transition-colors">
         Check Status
       </h3>

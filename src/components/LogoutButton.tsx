@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { LogOut, Loader2 } from "lucide-react";
 
 export const LogoutButton: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
@@ -27,9 +28,15 @@ export const LogoutButton: React.FC = () => {
     <button
       onClick={handleLogout}
       disabled={loading}
-      className="text-xs font-bold text-primary hover:text-primary/80 transition-colors px-3 py-1.5 rounded-full border border-primary/20 hover:border-primary/40 bg-primary/5 active:scale-95 disabled:opacity-50"
+      className="text-xs font-bold text-primary hover:text-white transition-all px-4 py-2 rounded-full border border-primary/20 hover:border-primary/40 bg-primary/5 hover:bg-primary/10 active:scale-95 disabled:opacity-50 flex items-center gap-2 group"
     >
+      {loading ? (
+        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+      ) : (
+        <LogOut className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+      )}
       {loading ? "..." : "Logout"}
     </button>
   );
 };
+
