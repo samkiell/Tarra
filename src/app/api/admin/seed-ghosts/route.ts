@@ -37,18 +37,18 @@ export async function POST(request: Request) {
       "Musa Q.", "Ifunanya G.", "Kayode H.", "Amaka N.", "Yusuf X."
     ];
 
+    const counts: number[] = [];
+    for (let i = 0; i < 10; i++) {
+        counts.push(Math.floor(Math.random() * (69 - 22 + 1)) + 22);
+    }
+    for (let i = 0; i < 10; i++) {
+        counts.push(Math.floor(Math.random() * (21 - 7 + 1)) + 7);
+    }
+    counts.sort((a, b) => b - a);
+
     const ghosts = [];
 
     for (let i = 0; i < ghostNames.length; i++) {
-      let referral_count = 0;
-      if (i < 10) {
-        // Top 10: 40-60
-        referral_count = Math.floor(Math.random() * (60 - 40 + 1)) + 40;
-      } else {
-        // Bottom 10: 15-30
-        referral_count = Math.floor(Math.random() * (30 - 15 + 1)) + 15;
-      }
-
       ghosts.push({
         id: uuidv4(),
         referral_code: `GHOST${i}`,
@@ -56,7 +56,7 @@ export async function POST(request: Request) {
         email: `ghost${i}@student.oauife.edu.ng`,
         phone_number: `080${Math.floor(Math.random() * 90000000 + 10000000)}`,
         interests: ["Buyer", "Seller"],
-        referral_count,
+        referral_count: counts[i],
         is_ghost: true,
       });
     }
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
       message: `Successfully seeded 20 ghost users.`,
       summary: {
         total: 20,
-        ranges: ["10 users (40-60)", "10 users (15-30)"]
+        ranges: ["10 users (22-69)", "10 users (7-21)"]
       }
     });
 
