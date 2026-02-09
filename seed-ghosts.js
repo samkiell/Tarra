@@ -79,7 +79,7 @@ async function seed() {
     const counts = [];
     // Rank 1-10: 40-60
     for (let i = 0; i < 10; i++) {
-      counts.push(Math.floor(Math.random() * (60 - 40 + 1)) + 40);
+      counts.push(Math.floor(Math.random() * (61 - 40 + 1)) + 40);
     }
     // Rank 11-20: 15-30
     for (let i = 0; i < 10; i++) {
