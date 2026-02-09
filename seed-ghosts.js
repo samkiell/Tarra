@@ -77,13 +77,13 @@ async function seed() {
 
     // Generate referral counts
     const counts = [];
-    // Rank 1-10: 22-69
+    // Rank 1-10: 40-60
     for (let i = 0; i < 10; i++) {
-      counts.push(Math.floor(Math.random() * (69 - 22 + 1)) + 22);
+      counts.push(Math.floor(Math.random() * (60 - 40 + 1)) + 40);
     }
-    // Rank 11-20: 7-21
+    // Rank 11-20: 15-30
     for (let i = 0; i < 10; i++) {
-      counts.push(Math.floor(Math.random() * (21 - 7 + 1)) + 7);
+      counts.push(Math.floor(Math.random() * (30 - 15 + 1)) + 15);
     }
     // Ensure descending order for rank alignment
     counts.sort((a, b) => b - a);
@@ -109,8 +109,8 @@ async function seed() {
     console.log("✅ SEEDING COMPLETE");
     console.log(`- Total Ghost Users: ${ghosts.length}`);
     console.log("- Distribution:");
-    console.log(`  Top 10 : 22-69 referrals`);
-    console.log(`  Next 10: 7-21 referrals`);
+    console.log(`  Top 10 : 40-60 referrals`);
+    console.log(`  Next 10: 15-30 referrals`);
     console.log("-----------------------------------------");
 
     process.exit(0);

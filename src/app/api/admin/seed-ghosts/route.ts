@@ -39,10 +39,10 @@ export async function POST(request: Request) {
 
     const counts: number[] = [];
     for (let i = 0; i < 10; i++) {
-        counts.push(Math.floor(Math.random() * (69 - 22 + 1)) + 22);
+      counts.push(Math.floor(Math.random() * (60 - 40 + 1)) + 40);
     }
     for (let i = 0; i < 10; i++) {
-        counts.push(Math.floor(Math.random() * (21 - 7 + 1)) + 7);
+      counts.push(Math.floor(Math.random() * (30 - 15 + 1)) + 15);
     }
     counts.sort((a, b) => b - a);
 
