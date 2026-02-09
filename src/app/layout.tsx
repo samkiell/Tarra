@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Tarra | OAU Commerce Without the Chaos",
-  description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+  description: "Buy, sell, and discover trusted student brands and services in OAU. Join the Tarra waitlist and climb the referral leaderboard.",
   keywords: ["Tarra", "OAU", "Obafemi Awolowo University", "Campus Commerce", "Student Marketplace", "Buy and Sell OAU", "Campus Services", "Student Brands", "OAU Waitlist", 'Samkiel'],
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://tarra.ng"),
   authors: [{ name: "SAMKIEL" }],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Tarra | OAU Commerce Without the Chaos",
-    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the Tarra waitlist and climb the referral leaderboard.",
     url: "https://tarra.ng",
     siteName: "Tarra",
     locale: "en_US",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Tarra | OAU Commerce Without the Chaos",
-    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the official Tarra waitlist and climb the referral leaderboard.",
+    description: "Buy, sell, and discover trusted student brands and services in OAU. Join the Tarra waitlist and climb the referral leaderboard.",
     images: ["/favicon_nobg.png"],
     creator: "@tarra_ng",
   },

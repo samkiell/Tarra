@@ -84,7 +84,7 @@ export default async function Home() {
                   Leaderboard
                 </h2>
                 <p className="text-secondary max-w-md mx-auto transition-colors leading-relaxed">
-                  Grow the community and win up to ₦50,000. Current top performers in the referral contest.
+                  Top Referrers competing for the ₦50,000 Prize Pool.
                 </p>
               </div>
               
