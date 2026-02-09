@@ -25,6 +25,9 @@ export const Footer: React.FC = () => {
         <p className="text-xs text-secondary transition-colors">
           &copy; {new Date().getFullYear()} built for OAU. All rights reserved.
         </p>
+        <p className="text-[10px] text-secondary/60 transition-colors uppercase font-bold tracking-tighter mt-1">
+          Winners paid April (Post-Launch Verification).
+        </p>
 
       </div>
     </footer>

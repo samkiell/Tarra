@@ -102,7 +102,7 @@ export default async function StatusPage({
           <h2 className="text-lg font-bold text-white mb-4">Your Referral Link</h2>
           <CopyLinkButton referralUrl={referralUrl} />
           <p className="mt-3 text-sm text-secondary transition-colors leading-relaxed">
-            Share this link to move up the leaderboard and win ₦50,000.
+            Share this link to move up the leaderboard and win <span className="text-primary font-bold">₦300,000 CASH PRIZE POOL</span>.
           </p>
         </section>
 

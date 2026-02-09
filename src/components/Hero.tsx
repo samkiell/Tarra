@@ -45,8 +45,35 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
             </h1>
 
             <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-4 sm:mb-5 transition-colors">
-              The verified marketplace. Join the waitlist to win ₦50,000.
+              The verified marketplace. Join the waitlist for the <span className="text-primary font-bold">₦300,000 CASH PRIZE POOL</span>.
             </p>
+            
+            {/* Prize Breakdown Section */}
+            <div className="w-full bg-dark/40 border border-muted/10 rounded-xl p-4 sm:p-5 mb-6 text-left transition-colors">
+              <h3 className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Prize Breakdown</h3>
+              <div className="grid grid-cols-1 gap-2">
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white font-medium">🥇 1st Place</span>
+                  <span className="text-primary font-black">₦100,000</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white font-medium">🥈 2nd Place</span>
+                  <span className="text-primary font-black">₦70,000</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white font-medium">🥉 3rd Place</span>
+                  <span className="text-primary font-black">₦40,000</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white font-medium">🏅 4th–10th</span>
+                  <span className="text-secondary font-bold">₦10,000 each</span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-white font-medium">🎖 11th–20th</span>
+                  <span className="text-secondary font-bold">₦2,000 each</span>
+                </div>
+              </div>
+            </div>
             
             {!userData && (
               <div className="flex items-center gap-3 py-2 px-4 bg-dark/50 border border-muted/20 rounded text-secondary text-xs font-semibold uppercase tracking-wider transition-colors mb-4">
