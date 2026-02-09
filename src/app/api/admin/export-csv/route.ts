@@ -66,16 +66,31 @@ export async function GET(request: Request) {
     }
   }
 
-  // Fetch filtered users
-  const users = await Waitlist.find(query).sort({ created_at: -1 }).lean();
+  // 3. User & Referrer Retrieval (Optimized with Lookup)
+  const usersWithReferrers = await Waitlist.aggregate([
+    { $match: query },
+    {
+      $lookup: {
+        from: "waitlists",
+        localField: "referred_by",
+        foreignField: "referral_code",
+        as: "referrer_data"
+      }
+    },
+    {
+      $addFields: {
+        referrer_email: { $arrayElemAt: ["$referrer_data.email", 0] }
+      }
+    },
+    { $sort: { created_at: -1 } }
+  ]);
 
-  // 3. CSV Generation
-  const headers = ["full_name,email,phone_number,referral_count,referred_by,created_at"];
+  // 4. CSV Generation
+  const headers = ["full_name,email,phone_number,referral_count,referred_by_code,referrer_email,created_at"];
   
   const csvRows: string[] = [];
 
-  for (const user of users) {
-    // Application-side Filtering for computed values
+  for (const user of usersWithReferrers) {
     const count = countMap.get(user.referral_code) || 0;
     
     if (count < minReferrals) {
@@ -83,27 +98,26 @@ export async function GET(request: Request) {
     }
 
     const cleanName = user.full_name?.replace(/"/g, '""') || "";
-    const cleanEmail = user.email || "";
+    const referredEmail = user.email || "";
     const cleanPhone = user.phone_number || ""; 
-    const referredBy = user.referred_by || "";
+    const referredByCode = user.referred_by || "";
+    const referrerEmail = user.referrer_email || "DIRECT";
     const createdAt = user.created_at ? new Date(user.created_at).toISOString() : "";
 
     csvRows.push(
-      `"${cleanName}","${cleanEmail}","${cleanPhone}",${count},"${referredBy}","${createdAt}"`
+      `"${cleanName}","${referredEmail}","${cleanPhone}",${count},"${referredByCode}","${referrerEmail}","${createdAt}"`
     );
   }
 
   const csvContent = headers.concat(csvRows).join("\n");
   
-  // Add Byte Order Mark (BOM) for Excel UTF-8 compatibility
-  // This tells Excel to interpret the file as UTF-8 immediately
   const bom = "\uFEFF";
   const finalCsv = bom + csvContent;
 
   return new NextResponse(finalCsv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="tarra_waitlist_export_${new Date().toISOString().split('T')[0]}.csv"`,
+      "Content-Disposition": `attachment; filename="tarra_audit_export_${new Date().toISOString().split('T')[0]}.csv"`,
     },
   });
 }
