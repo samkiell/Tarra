@@ -7,11 +7,16 @@ const path = require("path");
 // Reading .env.local manually for the standalone script
 const envLocalPath = path.join(__dirname, ".env.local");
 const envLocalContent = fs.readFileSync(envLocalPath, "utf8");
-const MONGODB_URI = envLocalContent
-  .split("\n")
-  .find((line) => line.startsWith("MONGODB_URI="))
-  ?.split("=")[1]
+const lines = envLocalContent.split("\n");
+let MONGODB_URI = lines
+  .find((line) => line.trim().startsWith("MONGODB_URI="))
   ?.trim();
+
+if (MONGODB_URI) {
+  MONGODB_URI = MONGODB_URI.substring(MONGODB_URI.indexOf("=") + 1)
+    .replace(/["']/g, "")
+    .trim();
+}
 
 if (!MONGODB_URI) {
   console.error("Error: MONGODB_URI not found in .env.local");
