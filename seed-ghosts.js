@@ -57,7 +57,7 @@ async function seed() {
       "Chidi O.",
       "Fatima B.",
       "Adebayo S.",
-      "Ezekiel M.",
+      "Ayomide M.",
       "Blessing J.",
       "Ibrahim K.",
       "Zainab T.",
