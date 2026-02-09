@@ -88,13 +88,25 @@ export default async function StatusPage({
         </header>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="p-6 border border-muted/10 rounded-lg shadow-xl transition-colors">
-            <h3 className="text-sm font-medium text-secondary mb-3">Referral Count</h3>
+            <h3 className="text-sm font-medium text-secondary mb-3">Total Invites</h3>
             <p className="text-4xl font-black tracking-tight text-white transition-colors">
-              You have referred <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
+              <span className="text-primary">{referralCount}</span> {referralCount === 1 ? "person" : "people"}.
             </p>
           </div>
+          <div className="p-6 border border-muted/10 rounded-lg shadow-xl transition-colors">
+            <h3 className="text-sm font-medium text-secondary mb-3">Verified Users</h3>
+            <p className="text-4xl font-black tracking-tight text-white transition-colors">
+              <span className="text-primary">0</span> people.
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full p-4 bg-primary/5 border border-primary/20 rounded-lg mb-12">
+          <p className="text-xs leading-relaxed text-secondary font-medium text-center italic">
+            “Your referrals become ‘Verified’ when they download the app during Welcome Week (April 6–13).”
+          </p>
         </div>
 
         {/* Referral Link Section */}
@@ -109,7 +121,7 @@ export default async function StatusPage({
         {/* Leaderboard Section */}
         <section>
           <h2 className="text-lg font-bold text-white mb-6">Top 10 recruiters</h2>
-          <Leaderboard />
+          <Leaderboard userRank={referralCount > 0 || true ? (await Waitlist.countDocuments({ referral_count: { $gt: referralCount } })) + 1 : undefined} />
         </section>
       </div>
     </main>

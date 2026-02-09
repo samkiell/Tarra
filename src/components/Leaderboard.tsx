@@ -12,14 +12,18 @@ import LeaderboardClient from "./LeaderboardClient";
  * 3. Sanitization: Splits the full name to show only the first name for privacy.
  * 4. Optimization: Single-pass aggregation avoids N+1 query patterns.
  */
-const Leaderboard: React.FC = async () => {
+interface LeaderboardProps {
+  userRank?: number;
+}
+
+const Leaderboard: React.FC<LeaderboardProps> = async ({ userRank }) => {
   await dbConnect();
 
   // Unified Ranking: Fetch top performers and recent joiners. 
   // Sorting by referral_count (top recruiters) then by created_at (most recent joins).
   const users = await Waitlist.find({})
     .sort({ referral_count: -1, created_at: -1 })
-    .limit(10);
+    .limit(20);
 
   const sanitizedData = users.map(user => ({
     _id: user.id,
@@ -28,7 +32,7 @@ const Leaderboard: React.FC = async () => {
     isGhost: user.is_ghost || false,
   }));
 
-  return <LeaderboardClient initialData={sanitizedData} />;
+  return <LeaderboardClient initialData={sanitizedData} userRank={userRank} />;
 };
 
 export default Leaderboard;

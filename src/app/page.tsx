@@ -38,9 +38,15 @@ export default async function Home() {
   let userData = null;
   
   await dbConnect();
+  
+  const ghostStats = await Waitlist.aggregate([
+    { $match: { is_ghost: true } },
+    { $group: { _id: null, totalRef: { $sum: "$referral_count" } } }
+  ]);
+  
   const realUserCount = await Waitlist.countDocuments({ is_ghost: { $ne: true } });
-  const baseCount = parseInt(process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT || "0", 10);
-  const totalJoined = realUserCount + baseCount;
+  const baseCount = ghostStats[0]?.totalRef || 0;
+  const totalJoined = Math.round(realUserCount + baseCount);
 
   if (session) {
     const user = await Waitlist.findOne({ id: session.value });
@@ -88,7 +94,7 @@ export default async function Home() {
                 </p>
               </div>
               
-              <Leaderboard />
+              <Leaderboard userRank={userData?.rank} />
               
               {/* Recovery Path for Students on Shared Devices */}
               <div id="status-section" className="mt-8 sm:mt-12 scroll-mt-24">

@@ -31,14 +31,30 @@ const WelcomeBackCard: React.FC<WelcomeBackCardProps> = ({
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="p-4 bg-dark/50 border border-muted/20 rounded-lg text-center transition-colors">
           <div className="flex justify-center mb-2">
             <Users className="w-4 h-4 text-primary" />
           </div>
           <div className="text-2xl font-black text-white">{referralCount}</div>
-          <div className="text-[10px] uppercase font-bold text-secondary tracking-widest mt-1">Referrals</div>
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-widest mt-1">Total Invites</div>
         </div>
+        <div className="p-4 bg-dark/50 border border-muted/20 rounded-lg text-center transition-colors">
+          <div className="flex justify-center mb-2">
+            <CheckCircle2 className="w-4 h-4 text-primary" />
+          </div>
+          <div className="text-2xl font-black text-white">0</div>
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-widest mt-1">Verified Users</div>
+        </div>
+      </div>
+
+      <div className="px-4 py-3 bg-primary/5 border border-primary/20 rounded-lg mb-6">
+        <p className="text-[10px] leading-relaxed text-secondary font-medium text-center">
+          “Your referrals become ‘Verified’ when they download the app during Welcome Week (April 6–13).”
+        </p>
+      </div>
+
+      <div className="mb-8">
         <div className="p-4 bg-dark/50 border border-muted/20 rounded-lg text-center transition-colors">
           <div className="flex justify-center mb-2">
             <Trophy className="w-4 h-4 text-primary" />

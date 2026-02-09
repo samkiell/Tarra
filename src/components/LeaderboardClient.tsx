@@ -12,14 +12,15 @@ interface LeaderboardItem {
 
 interface LeaderboardClientProps {
   initialData: LeaderboardItem[];
+  userRank?: number;
 }
 
-const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) => {
+const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, userRank }) => {
   const router = useRouter();
+  const [showAll, setShowAll] = React.useState(false);
   
-  // We already limit to 10 in the server component, 
-  // but keep this slice for safety and easier future changes.
-  const displayData = initialData.slice(0, 10);
+  // Default view is Rank 1-10, expanded view is Rank 11-20
+  const displayData = showAll ? initialData.slice(0, 20) : initialData.slice(0, 10);
 
   return (
     <div className="w-full border border-muted/20 rounded-lg bg-dark shadow-2xl overflow-hidden transition-colors">
@@ -64,6 +65,25 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData }) =>
           </tbody>
         </table>
       </div>
+      
+      {!showAll && initialData.length > 10 && (
+        <div className="p-4 border-t border-muted/10 text-center bg-dark/30">
+          <button 
+            onClick={() => setShowAll(true)}
+            className="text-xs font-bold text-primary hover:underline underline-offset-4 uppercase tracking-widest transition-all"
+          >
+            View More
+          </button>
+        </div>
+      )}
+
+      {userRank && (
+        <div className="p-4 border-t border-muted/20 bg-primary/5 text-center">
+          <p className="text-sm font-bold text-white uppercase tracking-wider">
+            You are currently <span className="text-primary font-black">#{userRank}</span>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
