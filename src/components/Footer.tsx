@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
           className="h-40 sm:h-56 w-auto opacity-70 hover:opacity-100 transition-opacity"
         />
         <div className="text-sm font-bold text-white transition-colors">
-          Tarra | The Official OAU Marketplace
+          Tarra | The Verified Marketplace for OAU
         </div>
         <p className="text-xs text-secondary transition-colors">
           &copy; {new Date().getFullYear()} built for OAU. All rights reserved.

@@ -19,7 +19,7 @@ interface HeroProps {
  * Hero Component
  * 
  * Logic:
- * 1. Visual Anchor: Uses the official Tarra logo from assets.
+ * 1. Visual Anchor: Uses the Tarra logo from assets.
  * 2. Conversion: Houses the WaitlistForm for immediate student capture.
  * 3. Persistence: Displays WelcomeBackCard for returning users with valid sessions.
  */
@@ -44,12 +44,8 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
               OAU Commerce. Without the Chaos.
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-2 sm:mb-3 transition-colors">
-              Buy and sell products, discover campus brands, and book essential services.
-            </p>
-
-            <p className="text-sm sm:text-base text-secondary/80 mb-4 sm:mb-5 max-w-lg leading-relaxed transition-colors">
-              Official Marketplace for OAU students. Join the waitlist today to get exclusive early access and win N50,000.
+            <p className="text-base sm:text-lg md:text-xl text-secondary font-medium mb-4 sm:mb-5 transition-colors">
+              The verified marketplace. Join the waitlist to win ₦50,000.
             </p>
             
             {!userData && (
