@@ -40,8 +40,8 @@ const WaitlistSchema: Schema = new Schema<IWaitlist>(
       unique: true, // Database-level constraint to prevent multiple signups from the same student
       lowercase: true,
       trim: true,
-      // Meaningful comment: Restricts entry to official OAU student accounts as per project mandate
-      match: [/@student\.oauife\.edu\.ng$/, "Please use your official @student.oauife.edu.ng email"],
+      // Meaningful comment: Restricts entry to OAU student accounts as per project mandate
+      match: [/@student\.oauife\.edu\.ng$/, "Please use your @student.oauife.edu.ng email"],
     },
     phone_number: {
       type: String,
