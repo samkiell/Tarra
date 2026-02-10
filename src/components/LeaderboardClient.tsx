@@ -23,14 +23,14 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, user
   const displayData = showAll ? initialData.slice(0, 20) : initialData.slice(0, 10);
 
   return (
-    <div className="w-full border border-muted/10 rounded-2xl bg-dark/40 backdrop-blur-md shadow-2xl overflow-hidden transition-colors">
+    <div className="w-full max-w-2xl mx-auto border border-muted/10 rounded-2xl bg-dark/40 backdrop-blur-md shadow-2xl overflow-hidden transition-colors">
       <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-muted/20">
         <table className="w-full text-left border-collapse min-w-[320px]">
           <thead className="bg-dark/80 border-b border-muted/10 transition-colors">
             <tr>
-              <th className="px-6 py-5 text-[10px] font-black text-primary uppercase tracking-[0.3em] w-20">Rank</th>
-              <th className="px-6 py-5 text-[10px] font-black text-secondary uppercase tracking-[0.3em]">Student Name</th>
-              <th className="px-6 py-5 text-[10px] font-black text-secondary uppercase tracking-[0.3em] text-right">Referrals</th>
+              <th className="px-4 py-4 text-[10px] font-black text-primary uppercase tracking-[0.3em] w-20">Rank</th>
+              <th className="px-4 py-4 text-[10px] font-black text-secondary uppercase tracking-[0.3em]">Student Name</th>
+              <th className="px-4 py-4 text-[10px] font-black text-secondary uppercase tracking-[0.3em] text-right">Referrals</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-muted/5 transition-colors">
@@ -42,16 +42,16 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, user
                   className={`transition-all animate-in fade-in slide-in-from-bottom-2 duration-500 ${!item.isGhost ? "hover:bg-primary/[0.03] cursor-pointer" : "cursor-default"}`} 
                   style={{ animationDelay: `${index * 40}ms` }}
                 >
-                  <td className="px-6 py-5 text-sm font-bold text-white">
-                    <span className={index < 3 ? "text-primary text-lg font-black" : "text-secondary font-semibold"}>
+                  <td className="px-4 py-3 text-xs font-bold text-white">
+                    <span className={index < 3 ? "text-primary text-base font-black" : "text-secondary font-semibold"}>
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </td>
-                  <td className="px-6 py-5 text-base font-bold text-white/90">
+                  <td className="px-4 py-3 text-sm font-bold text-white/90">
                     {item.firstName}
-                    {index < 3 && <span className="ml-2 inline-block">✨</span>}
+                    {index < 3 && <span className="ml-2 inline-block text-xs">✨</span>}
                   </td>
-                  <td className="px-6 py-5 text-base font-black text-primary text-right tabular-nums">
+                  <td className="px-4 py-3 text-sm font-black text-primary text-right tabular-nums">
                     {item.count}
                   </td>
                 </tr>
