@@ -33,9 +33,9 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
               <Image 
                 src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
-                width={100} 
-              height={100} 
-              className="h-20 w-auto object-contain brightness-110"
+                width={128} 
+                height={128} 
+                className="w-32 h-32 object-contain brightness-110"
                 priority
               />
             </div>

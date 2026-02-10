@@ -22,9 +22,9 @@ export const Navbar: React.FC<NavbarProps> = ({ rightContent }) => {
             <Image 
               src="/assets/favicon_nobg.png" 
               alt="Tarra Logo" 
-              width={80} 
-              height={80} 
-              className="h-16 w-auto"
+              width={100} 
+              height={100} 
+              className="h-20 w-auto"
               priority
             />
           </Link>
