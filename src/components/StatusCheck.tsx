@@ -87,7 +87,7 @@ const StatusCheck: React.FC = () => {
             type="tel"
             required
             placeholder="Phone Number"
-            className={`w-full sm:flex-grow h-11 px-4 text-sm border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
+            className={`w-full sm:flex-grow h-10 px-4 text-xs border rounded-lg text-white bg-dark/50 focus:outline-none focus:ring-1 transition-all placeholder:text-secondary/50 ${
               error 
                 ? "border-primary focus:ring-primary" 
                 : "border-muted/20 focus:ring-primary focus:border-primary"
@@ -98,7 +98,7 @@ const StatusCheck: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto h-11 px-8 bg-primary text-white text-sm font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center shrink-0 shadow-lg shadow-primary/20"
+            className="w-full sm:w-auto h-10 px-6 bg-primary text-white text-xs font-bold rounded-lg hover:brightness-110 active:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center shrink-0 shadow-lg shadow-primary/20"
           >
             {loading ? "..." : "Check Status"}
           </button>
