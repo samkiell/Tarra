@@ -27,7 +27,7 @@ const Features: React.FC = () => {
   ];
 
   return (
-    <section className="pt-10 pb-20 sm:pt-16 sm:pb-32 transition-colors border-t border-muted/5">
+    <section className="pt-10 pb-10 sm:pt-16 sm:pb-16 transition-colors border-t border-muted/5">
       <div className="container mx-auto px-6">
         <h2 className="sr-only">Our Core Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">

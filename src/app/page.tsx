@@ -79,7 +79,7 @@ export default async function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section id="leaderboard-section" className="py-20 sm:py-32 transition-colors scroll-mt-24 border-t border-muted/5">
+        <section id="leaderboard-section" className="pt-10 pb-20 sm:pt-16 sm:pb-32 transition-colors scroll-mt-24 border-t border-muted/5">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-12 sm:mb-16">
