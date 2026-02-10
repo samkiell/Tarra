@@ -29,6 +29,7 @@ export default async function LighthousePage() {
   await dbConnect();
 
   const users = await Waitlist.aggregate([
+    { $match: { is_ghost: { $ne: true } } },
     {
       $lookup: {
         from: "waitlists",
@@ -46,28 +47,16 @@ export default async function LighthousePage() {
         referral_code: 1,
         is_ghost: 1,
         created_at: 1,
-        // For real users, count actual children. For ghosts, use hardcoded count.
-        referral_count: {
-          $cond: {
-            if: { $eq: ["$is_ghost", true] },
-            then: { $ifNull: ["$referral_count", 0] },
-            else: { $size: "$referral_details" }
-          }
-        },
+        referral_count: { $size: "$referral_details" },
         // Fraud Detection Logic (Computed)
         isFlagged: {
           $cond: {
             if: {
-              $and: [
-                { $ne: ["$is_ghost", true] }, // Don't flag ghosts
-                {
-                  $or: [
-                    { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
-                    { 
-                       // Check for self-referral attempts (Name similarity check)
-                       $in: [ "$full_name", "$referral_details.full_name" ] 
-                    }
-                  ]
+              $or: [
+                { $gt: [{ $size: "$referral_details" }, 20] }, // Volume threshold
+                { 
+                   // Check for self-referral attempts (Name similarity check)
+                   $in: [ "$full_name", "$referral_details.full_name" ] 
                 }
               ]
             },
@@ -76,20 +65,14 @@ export default async function LighthousePage() {
           }
         },
         referrals: {
-          $cond: {
-            if: { $eq: ["$is_ghost", true] },
-            then: [], // Ghosts have no actual referral records
-            else: {
-              $map: {
-                input: "$referral_details",
-                as: "r",
-                in: {
-                  first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
-                  phone_number: "$$r.phone_number",
-                  created_at: "$$r.created_at",
-                },
-              }
-            }
+          $map: {
+            input: "$referral_details",
+            as: "r",
+            in: {
+              first_name: { $arrayElemAt: [{ $split: ["$$r.full_name", " "] }, 0] },
+              phone_number: "$$r.phone_number",
+              created_at: "$$r.created_at",
+            },
           }
         },
       },

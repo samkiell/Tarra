@@ -41,7 +41,7 @@ export async function GET(request: Request) {
   // for VIP onboarding or analyzing specific influencer campaigns (referred_by filter).
   
   const referralCounts = await Waitlist.aggregate([
-    { $match: { referred_by: { $ne: null } } },
+    { $match: { referred_by: { $ne: null }, is_ghost: { $ne: true } } },
     { $group: { _id: "$referred_by", count: { $sum: 1 } } }
   ]);
 
@@ -68,7 +68,7 @@ export async function GET(request: Request) {
 
   // 3. User & Referrer Retrieval (Optimized with Lookup)
   const usersWithReferrers = await Waitlist.aggregate([
-    { $match: query },
+    { $match: { ...query, is_ghost: { $ne: true } } },
     {
       $lookup: {
         from: "waitlists",

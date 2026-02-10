@@ -39,14 +39,11 @@ export default async function Home() {
   
   await dbConnect();
   
-  const ghostStats = await Waitlist.aggregate([
-    { $match: { is_ghost: true } },
-    { $group: { _id: null, totalRef: { $sum: "$referral_count" } } }
-  ]);
-  
+  // Global "Users Joined" Counter Logic:
+  // 1. Initial Social Proof Base: 500 (Hardcoded)
+  // 2. Incremental Growth: Only count real (non-ghost) users from the database.
   const realUserCount = await Waitlist.countDocuments({ is_ghost: { $ne: true } });
-  const baseCount = ghostStats[0]?.totalRef || 0;
-  const totalJoined = Math.round(realUserCount + baseCount);
+  const totalJoined = 500 + realUserCount;
 
   if (session) {
     const user = await Waitlist.findOne({ id: session.value });

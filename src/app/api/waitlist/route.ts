@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     // Check if the referred_by code actually exists in the DB
     let validatedReferrer = null;
     if (incomingRefCode && incomingRefCode.length === 5) {
-      const referrer = await Waitlist.findOne({ referral_code: incomingRefCode });
+      const referrer = await Waitlist.findOne({ referral_code: incomingRefCode, is_ghost: { $ne: true } });
       if (referrer) {
         validatedReferrer = incomingRefCode;
       }
