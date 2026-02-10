@@ -10,7 +10,7 @@ import Image from "next/image";
  */
 export const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-muted/10 transition-colors py-12 sm:py-16">
+    <footer className="border-t border-muted/10 transition-colors py-8 sm:py-10">
       <div className="container mx-auto px-3 text-center flex flex-col items-center gap-4">
         <Image 
           src="/assets/logo_nobg2.png" 
