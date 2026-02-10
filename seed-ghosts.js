@@ -53,7 +53,7 @@ async function seed() {
     await Waitlist.deleteMany({ is_ghost: true });
 
     const ghostNames = [
-      "Oluwaseun A.",
+      "Tunde A.",
       "Chidi O.",
       "Fatima B.",
       "Adebayo S.",
@@ -61,7 +61,7 @@ async function seed() {
       "Blessing J.",
       "Ibrahim K.",
       "Zainab T.",
-      "Tunde R.",
+      "Oluwaseun R.",
       "Ngozi E.",
       "Ayo D.",
       "Bisi L.",
