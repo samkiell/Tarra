@@ -27,7 +27,7 @@ const WelcomeBackCard: React.FC<WelcomeBackCardProps> = ({
           Welcome Back, {firstName}!
         </h2>
         <p className="text-secondary text-sm font-medium">
-          You&apos;re already on the list. Keep sharing to climb higher!
+          You are currently ranked <span className="text-primary font-bold">#{rank}</span>
         </p>
       </div>
 
@@ -54,15 +54,7 @@ const WelcomeBackCard: React.FC<WelcomeBackCardProps> = ({
         </p>
       </div>
 
-      <div className="mb-8">
-        <div className="p-4 bg-dark/50 border border-muted/20 rounded-lg text-center transition-colors">
-          <div className="flex justify-center mb-2">
-            <Trophy className="w-4 h-4 text-primary" />
-          </div>
-          <div className="text-2xl font-black text-white">#{rank}</div>
-          <div className="text-[10px] uppercase font-bold text-secondary tracking-widest mt-1">Current Rank</div>
-        </div>
-      </div>
+
 
       <div className="space-y-4">
         <div className="text-xs font-bold text-secondary uppercase tracking-widest text-center">

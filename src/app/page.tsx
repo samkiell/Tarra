@@ -82,22 +82,22 @@ export default async function Home() {
         <Features />
         
         {/* Leaderboard and Status Recovery Section */}
-        <section id="leaderboard-section" className="py-6 sm:py-10 transition-colors scroll-mt-24 border-t border-muted/5">
+        <section id="leaderboard-section" className="py-20 sm:py-32 transition-colors scroll-mt-24 border-t border-muted/5">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-6 sm:mb-8">
-                <h2 className="text-3xl font-bold text-white mb-4 transition-colors">
+              <div className="text-center mb-12 sm:mb-16">
+                <h2 className="text-4xl sm:text-5xl font-black text-white mb-6 transition-colors tracking-tight">
                   Leaderboard
                 </h2>
-                <p className="text-secondary max-w-md mx-auto transition-colors leading-relaxed">
-                  Top Referrers competing for the ₦300,000 CASH PRIZE POOL.
+                <p className="text-lg text-secondary max-w-2xl mx-auto transition-colors leading-relaxed">
+                  The top referrers competing for the <span className="text-primary font-bold">₦300,000 CASH PRIZE POOL</span>. Every verified referral brings you closer to the top.
                 </p>
               </div>
               
               <Leaderboard userRank={userData?.rank} />
               
               {/* Recovery Path for Students on Shared Devices */}
-              <div id="status-section" className="mt-8 sm:mt-12 scroll-mt-24">
+              <div id="status-section" className="mt-20 sm:mt-24 scroll-mt-24">
                 <StatusCheck />
               </div>
             </div>

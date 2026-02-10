@@ -66,13 +66,13 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, user
         </table>
       </div>
       
-      {!showAll && initialData.length > 10 && (
+      {initialData.length > 10 && (
         <div className="p-4 border-t border-muted/10 text-center bg-dark/30">
           <button 
-            onClick={() => setShowAll(true)}
+            onClick={() => setShowAll(!showAll)}
             className="text-xs font-bold text-primary hover:underline underline-offset-4 uppercase tracking-widest transition-all"
           >
-            View More
+            {showAll ? "View Less" : "View More"}
           </button>
         </div>
       )}

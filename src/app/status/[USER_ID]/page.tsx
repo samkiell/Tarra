@@ -72,19 +72,25 @@ export default async function StatusPage({
     
   const referralUrl = `${baseUrl}?ref=${user.referral_code}`;
 
+  // Calculate Rank
+  const userRank = (await Waitlist.countDocuments({ 
+    referral_count: { $gt: referralCount } 
+  })) + 1;
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar rightContent={<LogoutButton />} />
       <main className="flex-grow px-6 py-12 flex flex-col items-center transition-colors duration-300">
       <div className="w-full max-w-2xl">
         {/* Header Section */}
-        <header className="flex justify-between items-start mb-12">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight text-white flex items-center gap-2">
-              Hello, {firstName} 👋
-              <CheckCircle2 className="w-5 h-5 text-primary" strokeWidth={2.5} />
-            </h1>
-          </div>
+        <header className="flex flex-col mb-12">
+          <h1 className="text-2xl font-black tracking-tight text-white flex items-center gap-2 mb-2">
+            Hello, {firstName} 👋
+            <CheckCircle2 className="w-6 h-6 text-primary" strokeWidth={2.5} />
+          </h1>
+          <p className="text-lg font-bold text-secondary">
+            You are currently ranked <span className="text-primary font-black">#{userRank}</span>
+          </p>
         </header>
 
         {/* Stats Grid */}
@@ -120,8 +126,8 @@ export default async function StatusPage({
 
         {/* Leaderboard Section */}
         <section>
-          <h2 className="text-lg font-bold text-white mb-6">Top 10 recruiters</h2>
-          <Leaderboard userRank={referralCount > 0 || true ? (await Waitlist.countDocuments({ referral_count: { $gt: referralCount } })) + 1 : undefined} />
+          <h2 className="text-lg font-bold text-white mb-6">Top recruiters</h2>
+          <Leaderboard userRank={userRank} />
         </section>
       </div>
     </main>
