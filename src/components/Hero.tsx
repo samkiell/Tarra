@@ -25,7 +25,7 @@ interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
-    <section className="relative w-full overflow-hidden transition-colors pt-12 pb-20 sm:pt-20 sm:pb-32">
+    <section className="relative w-full overflow-hidden transition-colors pt-12 pb-10 sm:pt-20 sm:pb-16">
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col items-center gap-10 md:gap-16 text-center">
           <div className="flex flex-col items-center max-w-4xl w-full">
@@ -57,26 +57,26 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
                 {/* Prize Breakdown Section */}
                 <div className="w-full max-w-2xl bg-dark/40 border border-muted/10 rounded-2xl p-6 sm:p-8 mb-12 text-left transition-colors backdrop-blur-sm shadow-2xl">
                   <h3 className="text-sm font-black text-primary uppercase tracking-[0.2em] mb-6 border-b border-muted/10 pb-4">Prize Pool Distribution</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4">
-                    <div className="flex justify-between items-center text-base border-b border-muted/5 pb-2">
-                      <span className="text-white font-semibold">🥇 1st Place</span>
-                      <span className="text-primary font-black">₦100,000</span>
+                  <div className="flex flex-col gap-y-4 max-w-sm">
+                    <div className="flex items-center text-base border-b border-muted/5 pb-2">
+                      <span className="text-white font-semibold w-36 shrink-0">🥇 1st Place</span>
+                      <span className="text-primary font-black whitespace-nowrap">₦100,000</span>
                     </div>
-                    <div className="flex justify-between items-center text-base border-b border-muted/5 pb-2">
-                      <span className="text-white font-semibold">🥈 2nd Place</span>
-                      <span className="text-primary font-black">₦70,000</span>
+                    <div className="flex items-center text-base border-b border-muted/5 pb-2">
+                      <span className="text-white font-semibold w-36 shrink-0">🥈 2nd Place</span>
+                      <span className="text-primary font-black whitespace-nowrap">₦70,000</span>
                     </div>
-                    <div className="flex justify-between items-center text-base border-b border-muted/5 pb-2">
-                      <span className="text-white font-semibold">🥉 3rd Place</span>
-                      <span className="text-primary font-black">₦40,000</span>
+                    <div className="flex items-center text-base border-b border-muted/5 pb-2">
+                      <span className="text-white font-semibold w-36 shrink-0">🥉 3rd Place</span>
+                      <span className="text-primary font-black whitespace-nowrap">₦40,000</span>
                     </div>
-                    <div className="flex justify-between items-center text-base border-b border-muted/5 pb-2">
-                      <span className="text-white font-semibold">🏅 4th–10th</span>
-                      <span className="text-secondary font-black text-sm">₦10,000 ea.</span>
+                    <div className="flex items-center text-base border-b border-muted/5 pb-2">
+                      <span className="text-white font-semibold w-36 shrink-0">🏅 4th–10th</span>
+                      <span className="text-secondary font-black text-sm whitespace-nowrap">₦10,000 each</span>
                     </div>
-                    <div className="flex justify-between items-center text-base border-b border-muted/5 pb-2 sm:col-span-2">
-                      <span className="text-white font-semibold">🎖 11th–20th</span>
-                      <span className="text-secondary font-black text-sm">₦2,000 each</span>
+                    <div className="flex items-center text-base border-b border-muted/5 pb-2">
+                      <span className="text-white font-semibold w-36 shrink-0">🎖 11th–20th</span>
+                      <span className="text-secondary font-black text-sm whitespace-nowrap">₦2,000 each</span>
                     </div>
                   </div>
                 </div>

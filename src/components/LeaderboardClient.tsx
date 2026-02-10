@@ -29,7 +29,7 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, user
           <thead className="bg-dark/80 border-b border-muted/10 transition-colors">
             <tr>
               <th className="px-4 py-4 text-[10px] font-black text-primary uppercase tracking-[0.3em] w-20">Rank</th>
-              <th className="px-4 py-4 text-[10px] font-black text-secondary uppercase tracking-[0.3em]">Student Name</th>
+              <th className="px-4 py-4 text-[10px] font-black text-secondary uppercase tracking-[0.3em]">Name</th>
               <th className="px-4 py-4 text-[10px] font-black text-secondary uppercase tracking-[0.3em] text-right">Referrals</th>
             </tr>
           </thead>
@@ -49,7 +49,6 @@ const LeaderboardClient: React.FC<LeaderboardClientProps> = ({ initialData, user
                   </td>
                   <td className="px-4 py-3 text-sm font-bold text-white/90">
                     {item.firstName}
-                    {index < 3 && <span className="ml-2 inline-block text-xs">✨</span>}
                   </td>
                   <td className="px-4 py-3 text-sm font-black text-primary text-right tabular-nums">
                     {item.count}

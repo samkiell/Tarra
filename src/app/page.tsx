@@ -87,7 +87,7 @@ export default async function Home() {
                   Leaderboard
                 </h2>
                 <p className="text-lg text-secondary max-w-2xl mx-auto transition-colors leading-relaxed">
-                  The top referrers competing for the <span className="text-primary font-bold">₦300,000 CASH PRIZE POOL</span>. Every verified referral brings you closer to the top.
+                  The top referrers competing for the prize.
                 </p>
               </div>
               
