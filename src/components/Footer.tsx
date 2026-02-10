@@ -10,25 +10,26 @@ import Image from "next/image";
  */
 export const Footer: React.FC = () => {
   return (
-    <footer className="border-t border-muted/10 transition-colors mb-2">
-      <div className="container px-2 text-center flex flex-col items-center gap-2">
+    <footer className="border-t border-muted/10 transition-colors py-12 sm:py-16">
+      <div className="container mx-auto px-6 text-center flex flex-col items-center gap-4">
         <Image 
           src="/assets/logo_nobg2.png" 
           alt="Tarra Logo" 
-          width={400} 
-          height={200} 
-          className="h-40 sm:h-56 w-auto opacity-70 hover:opacity-100 transition-opacity"
+          width={60} 
+          height={60} 
+          className="w-12 h-12 object-contain opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
         />
-        <div className="text-sm font-bold text-white transition-colors">
-          Tarra | The Verified Marketplace for OAU
+        <div className="text-sm font-black text-white uppercase tracking-widest transition-colors">
+          Tarra | OAU&apos;s Verified Marketplace
         </div>
-        <p className="text-xs text-secondary transition-colors">
-          &copy; {new Date().getFullYear()} built for OAU. All rights reserved.
-        </p>
-        <p className="text-[10px] text-secondary/60 transition-colors uppercase font-bold tracking-tighter mt-1">
-          Winners paid April (Post-Launch Verification).
-        </p>
-
+        <div className="flex flex-col gap-2">
+          <p className="text-xs text-secondary font-medium transition-colors">
+            &copy; {new Date().getFullYear()} Built for OAU. All rights reserved.
+          </p>
+          <p className="text-[10px] text-primary/80 transition-colors uppercase font-black tracking-[0.15em] mt-1">
+            Winners paid April (Post-Launch Verification).
+          </p>
+        </div>
       </div>
     </footer>
   );
