@@ -50,7 +50,7 @@ const WelcomeBackCard: React.FC<WelcomeBackCardProps> = ({
 
       <div className="px-4 py-3 bg-primary/5 border border-primary/20 rounded-lg mb-6">
         <p className="text-[10px] leading-relaxed text-secondary font-medium text-center">
-          “Your referrals become ‘Verified’ when they download the app during Welcome Week (April 6–13).”
+          “Your referrals become ‘Verified’ when they download the app during Welcome Month (April).”
         </p>
       </div>
 
