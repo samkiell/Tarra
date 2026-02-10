@@ -25,11 +25,11 @@ interface HeroProps {
  */
 const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
   return (
-    <section className="relative w-full overflow-hidden transition-colors pt-12 pb-10 sm:pt-20 sm:pb-16">
+    <section className="relative w-full overflow-hidden transition-colors">
       <div className="container relative z-10 mx-auto px-6">
         <div className="flex flex-col items-center gap-10 md:gap-16 text-center">
           <div className="flex flex-col items-center max-w-4xl w-full">
-            <div className="mb-8">
+            <div className="mb-1">
               <Image 
                 src="/assets/logo_nobg2.png" 
                 alt="Tarra Logo" 
