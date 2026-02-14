@@ -43,7 +43,7 @@ export default async function Home() {
   // 1. Initial Social Proof Base: 500 (Hardcoded)
   // 2. Incremental Growth: Only count real (non-ghost) users from the database.
   const realUserCount = await Waitlist.countDocuments({ is_ghost: { $ne: true } });
-  const totalJoined = 500 + realUserCount;
+  const totalJoined = process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT ? parseInt(process.env.NEXT_PUBLIC_WAITLIST_BASE_COUNT) + realUserCount : realUserCount;
 
   if (session) {
     const user = await Waitlist.findOne({ id: session.value });
