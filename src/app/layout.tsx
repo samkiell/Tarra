@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/favicon_nobg.png",
+        url: "/assets/favicon_nobg.png",
         width: 1200,
         height: 630,
         alt: "Tarra - OAU Commerce Without the Chaos",
@@ -50,12 +50,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tarra | OAU Commerce Without the Chaos",
     description: "Buy, sell, and discover trusted student brands and services in OAU. Join the Tarra waitlist and climb the referral leaderboard.",
-    images: ["/favicon_nobg.png"],
+    images: ["/assets/favicon_nobg.png"],
     creator: "@tarra_ng",
   },
   icons: {
-    icon: "/favicon_nobg.png",
-    apple: "/favicon_nobg.png",
+    icon: "/assets/favicon_nobg.png",
+    apple: "/assets/favicon_nobg.png",
   },
 };
 
@@ -79,7 +79,7 @@ export default function RootLayout({
           rel="stylesheet" 
           href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" 
         />
-        <link rel="preload" href="/favicon_nobg.png" as="image" />
+        <link rel="preload" href="/assets/favicon_nobg.png" as="image" />
       </head>
       <body className="antialiased selection:bg-primary/30 transition-colors duration-200 font-sans overflow-x-hidden">
         {/* Global Brand Background Pattern */}
@@ -106,7 +106,7 @@ export default function RootLayout({
                   "@id": "https://tarra.ng/#organization",
                   "name": "Tarra",
                   "url": "https://tarra.ng",
-                  "logo": "https://tarra.ng/favicon_nobg.png",
+                  "logo": "https://tarra.ng/assets/favicon_nobg.png",
                   "description": "Campus commerce platform for OAU students"
                 },
                 {
