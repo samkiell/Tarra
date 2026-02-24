@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Download } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Download, ArrowUpDown } from "lucide-react";
 import DrillDownTable from "./DrillDownTable";
 
 interface AdminUser {
@@ -31,6 +32,7 @@ interface DashboardMetrics {
 interface AdminDashboardProps {
   users: AdminUser[];
   metrics: DashboardMetrics;
+  currentSort: string;
 }
 
 /**
@@ -40,17 +42,16 @@ interface AdminDashboardProps {
  * 1. Ranking: High referral counts are surfaced immediately for audit.
  * 2. Drill-down: Clicking the count allows manual verification of referral quality.
  */
-const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
+const SORT_LABELS: Record<string, string> = {
+  referrals_desc: "Highest Referrals",
+  referrals_asc:  "Lowest Referrals",
+  date_desc:      "Newest First",
+  date_asc:       "Oldest First",
+};
+
+const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics, currentSort }) => {
+  const router = useRouter();
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
-  
-  // Sorting state
-  const [sortConfig, setSortConfig] = useState<{
-    key: 'created_at' | 'referral_count';
-    direction: 'asc' | 'desc';
-  }>({
-    key: 'referral_count',
-    direction: 'desc'
-  });
   
   // State for optional filters (no complex UI controls)
   const [filters, setFilters] = useState({
@@ -71,25 +72,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
     window.location.href = `/api/admin/export-csv?${params.toString()}`;
   };
 
-  const handleSort = (key: 'created_at' | 'referral_count') => {
-    let direction: 'asc' | 'desc' = 'desc';
-    if (sortConfig.key === key && sortConfig.direction === 'desc') {
-      direction = 'asc';
-    }
-    setSortConfig({ key, direction });
+  const handleSortChange = (value: string) => {
+    router.push(`/lighthouse?sort=${value}`);
   };
-
-  const sortedUsers = [...users].sort((a, b) => {
-    if (sortConfig.key === 'created_at') {
-      const dateA = new Date(a.created_at).getTime();
-      const dateB = new Date(b.created_at).getTime();
-      return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA;
-    } else {
-      return sortConfig.direction === 'asc' 
-        ? a.referral_count - b.referral_count 
-        : b.referral_count - a.referral_count;
-    }
-  });
 
   return (
     <div className="w-full">
@@ -115,6 +100,21 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
       <div className="mb-8 flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h2 className="text-xl font-bold text-white transition-colors">Waitlist Master List</h2>
+          <div className="flex items-center gap-2">
+            <ArrowUpDown className="w-3.5 h-3.5 text-secondary" />
+            <select
+              value={currentSort}
+              onChange={(e) => handleSortChange(e.target.value)}
+              className="px-3 py-1.5 bg-dark border border-muted/20 rounded text-sm text-white focus:outline-none focus:border-primary appearance-none cursor-pointer pr-8"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 8px center' }}
+            >
+              {Object.entries(SORT_LABELS).map(([value, label]) => (
+                <option key={value} value={value} className="bg-dark text-white">
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Filter Bar */}
@@ -172,33 +172,13 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics }) => {
           <table className="w-full text-left border-collapse min-w-[600px]">
             <thead className="bg-dark border-b border-muted/10">
               <tr>
-                <th 
-                  className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors cursor-pointer hover:text-white"
-                  onClick={() => handleSort('created_at')}
-                >
-                  <div className="flex items-center gap-1">
-                    User Identity
-                    {sortConfig.key === 'created_at' && (
-                      <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
-                    )}
-                  </div>
-                </th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">User Identity</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest transition-colors">Contact Details</th>
-                <th 
-                  className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right transition-colors cursor-pointer hover:text-white"
-                  onClick={() => handleSort('referral_count')}
-                >
-                  <div className="flex items-center justify-end gap-1">
-                    {sortConfig.key === 'referral_count' && (
-                      <span className="text-primary">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>
-                    )}
-                    Referral Growth
-                  </div>
-                </th>
+                <th className="px-6 py-4 text-[10px] font-bold text-secondary uppercase tracking-widest text-right transition-colors">Referral Growth</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-muted/5">
-              {sortedUsers.map((user) => (
+              {users.map((user) => (
                 <tr key={user.id} className="hover:bg-primary/5 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
