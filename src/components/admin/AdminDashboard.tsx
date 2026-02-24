@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Download, ArrowUpDown, Search } from "lucide-react";
+import { Download, ArrowUpDown, Search, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import DrillDownTable from "./DrillDownTable";
 
 interface AdminUser {
@@ -26,8 +26,10 @@ interface AdminUser {
 interface DashboardMetrics {
   totalUsers: number;
   totalReferrals: number;
-  avgReferrals: string;
-  topRecruiterCount: number;
+  signupsToday: number;
+  signupsPrev: number;
+  referralsToday: number;
+  referralsPrev: number;
 }
 
 interface AdminDashboardProps {
@@ -92,12 +94,30 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics, current
           <div className="text-2xl font-black text-primary">{metrics.totalReferrals.toLocaleString()}</div>
         </div>
         <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
-          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Avg. Referrals</div>
-          <div className="text-2xl font-black text-white">{metrics.avgReferrals}</div>
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Signups Today</div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-black text-white">{metrics.signupsToday}</span>
+            {metrics.signupsToday > metrics.signupsPrev ? (
+              <TrendingUp className="w-4 h-4 text-primary" />
+            ) : metrics.signupsToday < metrics.signupsPrev ? (
+              <TrendingDown className="w-4 h-4 text-secondary" />
+            ) : (
+              <Minus className="w-4 h-4 text-secondary/50" />
+            )}
+          </div>
         </div>
         <div className="p-4 border border-muted/10 rounded-lg shadow-xl">
-          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Top Recruiter</div>
-          <div className="text-2xl font-black text-white">{metrics.topRecruiterCount}</div>
+          <div className="text-[10px] uppercase font-bold text-secondary tracking-wider mb-1">Referrals Today</div>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-black text-primary">{metrics.referralsToday}</span>
+            {metrics.referralsToday > metrics.referralsPrev ? (
+              <TrendingUp className="w-4 h-4 text-primary" />
+            ) : metrics.referralsToday < metrics.referralsPrev ? (
+              <TrendingDown className="w-4 h-4 text-secondary" />
+            ) : (
+              <Minus className="w-4 h-4 text-secondary/50" />
+            )}
+          </div>
         </div>
       </div>
 

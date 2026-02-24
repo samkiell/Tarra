@@ -104,16 +104,31 @@ export default async function LighthousePage({
   const realUsers = users.filter((u: any) => !u.is_ghost);
   const totalUsers = realUsers.length;
   const totalReferrals = realUsers.reduce((acc: number, curr: any) => acc + (curr.referral_count || 0), 0);
-  const avgReferrals = totalUsers > 0 ? (totalReferrals / totalUsers).toFixed(1) : "0.0";
-  const topRecruiterCount = realUsers.length > 0 
-    ? Math.max(...realUsers.map((u: any) => u.referral_count)) 
-    : 0;
+
+  // Time-window metrics (efficient countDocuments — uses created_at index)
+  const now = new Date();
+  const twentyFourHoursAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  const fortyEightHoursAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
+
+  // Today's signups (last 24h) and previous window (24–48h ago)
+  const [signupsToday, signupsPrev] = await Promise.all([
+    Waitlist.countDocuments({ is_ghost: { $ne: true }, created_at: { $gte: twentyFourHoursAgo } }),
+    Waitlist.countDocuments({ is_ghost: { $ne: true }, created_at: { $gte: fortyEightHoursAgo, $lt: twentyFourHoursAgo } }),
+  ]);
+
+  // Today's referrals (referred users who joined in last 24h)
+  const [referralsToday, referralsPrev] = await Promise.all([
+    Waitlist.countDocuments({ referred_by: { $ne: null }, created_at: { $gte: twentyFourHoursAgo } }),
+    Waitlist.countDocuments({ referred_by: { $ne: null }, created_at: { $gte: fortyEightHoursAgo, $lt: twentyFourHoursAgo } }),
+  ]);
 
   const metrics = {
     totalUsers,
     totalReferrals,
-    avgReferrals,
-    topRecruiterCount
+    signupsToday,
+    signupsPrev,
+    referralsToday,
+    referralsPrev,
   };
 
   return (
