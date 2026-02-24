@@ -39,16 +39,18 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/favicon_nobg.png",
+        url: "https://tarra.ng/assets/favicon_nobg.png",
+        width: 512,
+        height: 512,
         alt: "Tarra - OAU Commerce Without the Chaos",
       },
     ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Tarra | OAU Commerce Without the Chaos",
     description: "Buy, sell, and discover trusted student brands and services in OAU. Join the Tarra waitlist and climb the referral leaderboard.",
-    images: ["/assets/favicon_nobg.png"],
+    images: ["https://tarra.ng/assets/favicon_nobg.png"],
     creator: "@tarra_ng",
   },
   icons: {
