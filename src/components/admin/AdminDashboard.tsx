@@ -11,6 +11,7 @@ interface AdminUser {
   email: string;
   phone_number: string;
   referral_code: string;
+  referred_by: string | null;
   referral_count: number;
   created_at: string;
   referrals: Array<{
@@ -215,7 +216,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ users, metrics, current
                        )}
                     </div>
                     <div className="flex flex-wrap gap-2 mt-1">
-                      <span className="text-[10px] text-secondary/50 font-mono transition-colors uppercase">ID: {user.id.slice(0, 8)}...</span>
+                      {user.referred_by && (
+                        <span className="text-[10px] text-secondary/50 font-mono transition-colors uppercase">Ref’d by: {user.referred_by}</span>
+                      )}
                       <span className="text-[10px] text-primary font-black tracking-tighter uppercase">Code: {user.referral_code}</span>
                       <span className="text-[10px] text-secondary font-medium uppercase tracking-tighter">Joined: {new Date(user.created_at).toLocaleDateString()} {new Date(user.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>

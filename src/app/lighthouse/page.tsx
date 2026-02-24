@@ -64,6 +64,7 @@ export default async function LighthousePage({
         email: 1,
         phone_number: 1,
         referral_code: 1,
+        referred_by: 1,
         is_ghost: 1,
         created_at: 1,
         referral_count: { $size: "$referral_details" },
