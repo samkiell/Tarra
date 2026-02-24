@@ -17,7 +17,19 @@ import { LogoutButton } from "@/components/LogoutButton";
  * 1. Gateway: Checks for a valid "lighthouse_session" cookie.
  * 2. Audit Station: If authorized, renders the full AdminDashboard.
  */
-export default async function LighthousePage() {
+// Sort param mapping for server-side aggregation sorting
+const SORT_OPTIONS: Record<string, Record<string, 1 | -1>> = {
+  referrals_desc: { referral_count: -1, full_name: 1 },
+  referrals_asc:  { referral_count: 1, full_name: 1 },
+  date_desc:      { created_at: -1 },
+  date_asc:       { created_at: 1 },
+};
+
+export default async function LighthousePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ sort?: string }>;
+}) {
   const cookieStore = await cookies();
   const session = cookieStore.get("lighthouse_session");
 
@@ -25,6 +37,13 @@ export default async function LighthousePage() {
   if (!session || session.value !== "authorized") {
     return <PinGate />;
   }
+
+  // Read sort param from URL, default to highest referrals
+  const params = await searchParams;
+  const currentSort = (params.sort && params.sort in SORT_OPTIONS)
+    ? params.sort
+    : "referrals_desc";
+  const sortStage = SORT_OPTIONS[currentSort];
 
   await dbConnect();
 
@@ -77,7 +96,7 @@ export default async function LighthousePage() {
         },
       },
     },
-    { $sort: { referral_count: -1, full_name: 1 } },
+    { $sort: sortStage },
   ]);
 
   // Compute Metrics (Excluding Ghosts for clean operational data)
@@ -117,7 +136,7 @@ export default async function LighthousePage() {
           </div>
         </div>
         
-        <AdminDashboard users={JSON.parse(JSON.stringify(users))} metrics={metrics} />
+        <AdminDashboard users={JSON.parse(JSON.stringify(users))} metrics={metrics} currentSort={currentSort} />
       </div>
       <div className="w-full mt-auto">
         <Footer />
