@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Leaderboard from "@/components/Leaderboard";
+import RulesSection from "@/components/RulesSection";
 import StatusCheck from "@/components/StatusCheck";
 import { LogoutButton } from "@/components/LogoutButton";
 
@@ -100,6 +101,8 @@ export default async function Home() {
             </div>
           </div>
         </section>
+
+        <RulesSection />
       </main>
 
       <Footer />
