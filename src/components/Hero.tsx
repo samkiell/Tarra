@@ -86,8 +86,14 @@ const Hero: React.FC<HeroProps> = ({ userData, totalJoined }) => {
                   Over {totalJoined.toLocaleString()} students joined
                 </div>
 
-                <div className="w-full max-w-xl flex justify-center mt-10">
+                <div className="w-full max-w-xl flex flex-col items-center mt-10 gap-4">
                   <WaitlistForm />
+                  <a
+                    href="#official-rules"
+                    className="text-secondary hover:text-primary text-xs font-semibold uppercase tracking-wider transition-colors"
+                  >
+                    View Official Rules ↓
+                  </a>
                 </div>
               </>
             )}
